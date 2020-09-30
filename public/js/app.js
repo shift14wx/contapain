@@ -3044,7 +3044,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -25892,7 +25891,7 @@ var render = function() {
                   { staticClass: "ml-3 relative" },
                   [
                     _c("jet-dropdown", {
-                      attrs: { align: "right", width: "48" },
+                      attrs: { width: "48" },
                       scopedSlots: _vm._u([
                         {
                           key: "trigger",
