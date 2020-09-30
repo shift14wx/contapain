@@ -20,9 +20,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment=":sparkles: proyecto libre de problemas">
+      <change afterPath="$PROJECT_DIR$/public/css/tivo/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/tivo/fontawesome-all.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/tivo/magnific-popup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/tivo/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/tivo/swiper.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-brands-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-brands-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-brands-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-brands-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-brands-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-regular-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-regular-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-regular-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-regular-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-regular-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-solid-900.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-solid-900.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-solid-900.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-solid-900.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/webfonts/fa-solid-900.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/article-details-large.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/article-details-small.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/customer-logo-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/customer-logo-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/customer-logo-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/customer-logo-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/customer-logo-5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/customer-logo-6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/description-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/description-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/description-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/details-lightbox.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/details.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/down-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/features-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/features-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/features-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/header-software-app.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/testimonial-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/testimonial-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/testimonial-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/testimonial-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/up-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tivo/video-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/jquery.easing.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/jquery.magnific-popup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/scripts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/swiper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/tivo/validator.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dumpthingsthatcanbeused/dropdown.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dumpthingsthatcanbeused/video.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/artisan" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +93,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -189,15 +245,24 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/css" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\css" />
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\images\tivo" />
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\js\tivo" />
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\css\tivo" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\images\tivo" />
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\css" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\documentos\baseDeDatos" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\documentos" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\database\migrations" />
@@ -222,7 +287,7 @@
       <workItem from="1601438534986" duration="2272000" />
       <workItem from="1601445967660" duration="1443000" />
       <workItem from="1601482792892" duration="818000" />
-      <workItem from="1601485909975" duration="677000" />
+      <workItem from="1601485909975" duration="4963000" />
     </task>
     <task id="LOCAL-00001" summary=":sparkles: proyecto libre de problemas">
       <created>1601483136518</created>
