@@ -20,15 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment=":sparkles: proyecto libre de problemas">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000000_create_Asiento_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000001_create_Rubros_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000002_create_sub_rubros_padre_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000003_create_registro_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000004_create_sub_rubros_hijo_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000005_create_categorias_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000006_create_sub_categorias_padre_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Asiento.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Categoria.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/FailedJob.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/PasswordReset.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/PersonalAccessToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Registro.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Rubro.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Session.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/SubCategoriasPadre.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/SubRubrosHijo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/SubRubrosPadre.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/TeamUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/artisan" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +184,7 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/reliese/laravel" />
     </include_path>
   </component>
   <component name="ProjectId" id="1iCtFHwZyshWlMul6n7bOT6Wn3n" />
