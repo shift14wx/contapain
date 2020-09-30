@@ -20,12 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment=":sparkles: proyecto libre de problemas">
-      <change afterPath="$PROJECT_DIR$/database/factories/RubroFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/RubroTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Rubro.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rubro.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentos/baseDeDatos/baseDeDatosContaPain.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/artisan" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,6 +196,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\documentos\baseDeDatos" />
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\documentos" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\database\migrations" />
     </key>
   </component>
