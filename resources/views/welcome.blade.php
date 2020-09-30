@@ -757,22 +757,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-container">
-                    <div class="above-heading">NEWSLETTER</div>
-                    <h2>Stay Updated With The Latest News To Get More Qualified Leads</h2>
+                    <div class="above-heading">CONTACTO</div>
+                    <h2>¿Necesitas mas información acerca de ContaPainLess T?</h2>
 
                     <!-- Newsletter Form -->
                     <form id="newsletterForm" data-toggle="validator" data-focus="false">
                         <div class="form-group">
-                            <input type="email" class="form-control-input" id="nemail" required>
-                            <label class="label-control" for="nemail">Email</label>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group checkbox">
-                            <input type="checkbox" id="nterms" value="Agreed-to-Terms" required>I've read and agree to Tivo's written <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms Conditions</a>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">SUBSCRIBE</button>
+                            <button type="submit" class="form-control-submit-button">Contactar</button>
                         </div>
                         <div class="form-message">
                             <div id="nmsgSubmit" class="h3 text-center hidden"></div>
@@ -787,31 +778,31 @@
             <div class="col-lg-12">
                 <div class="icon-container">
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-facebook-f fa-stack-1x"></i>
                             </a>
                         </span>
                     <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-twitter fa-stack-1x"></i>
                             </a>
                         </span>
                     <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-pinterest-p fa-stack-1x"></i>
                             </a>
                         </span>
                     <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-instagram fa-stack-1x"></i>
                             </a>
                         </span>
                     <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-linkedin-in fa-stack-1x"></i>
                             </a>
@@ -831,36 +822,34 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="footer-col first">
-                    <h4>About Tivo</h4>
-                    <p class="p-small">We're passionate about designing and developing one of the best marketing apps in the market</p>
+                    <h4>Acerca de ContaPainLess T</h4>
+                    <p class="p-small">Somos unos seres sobreexplotados por Diego Córtez, CEO de ContaPainLess</p>
                 </div>
             </div> <!-- end of col -->
             <div class="col-md-4">
                 <div class="footer-col middle">
-                    <h4>Important Links</h4>
+                    <h4>Enlaces de importancia</h4>
                     <ul class="list-unstyled li-space-lg p-small">
                         <li class="media">
                             <i class="fas fa-square"></i>
-                            <div class="media-body">Our business partners <a class="white" href="#your-link">startupguide.com</a></div>
+                            <div class="media-body">Si desea donar ya que nuestro compañero <a class="white"
+                                                                                          href="https://www.facebook
+                                                                                          .com/raul.penate
+                                                                                          .39108">Raul Peñate</a>
+                                Sufrio de un derrame de vesicula cuando se encontraba laborando, Diego Cortez
+                                nuestro CEO no quizo pagarle la quincena debido a que mancho equipo de la empresa</div>
                         </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i>
-                            <div class="media-body">Read our <a class="white" href="terms-conditions.html">Terms & Conditions</a>, <a class="white" href="privacy-policy.html">Privacy Policy</a></div>
-                        </li>
+
                     </ul>
                 </div>
             </div> <!-- end of col -->
             <div class="col-md-4">
                 <div class="footer-col last">
-                    <h4>Contact</h4>
+                    <h4>Contacto</h4>
                     <ul class="list-unstyled li-space-lg p-small">
                         <li class="media">
                             <i class="fas fa-map-marker-alt"></i>
-                            <div class="media-body">22 Innovative, San Francisco, CA 94043, US</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-envelope"></i>
-                            <div class="media-body"><a class="white" href="mailto:contact@tivo.com">contact@tivo.com</a> <i class="fas fa-globe"></i><a class="white" href="#your-link">www.tivo.com</a></div>
+                            <div class="media-body">Col las amarguras</div>
                         </li>
                     </ul>
                 </div>
@@ -876,7 +865,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Template by Inovatik</a></p>
+                <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Somos Diego Cortez</a></p>
             </div> <!-- end of col -->
         </div> <!-- enf of row -->
     </div> <!-- end of container -->
