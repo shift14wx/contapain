@@ -429,7 +429,7 @@
                         <i class="fas fa-square"></i><div class="media-body">Fast email checking</div>
                     </li>
                 </ul>
-                <a class="btn-solid-reg mfp-close" href="sign-up.html">SIGN UP</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
+                <a class="btn-solid-reg " href="{{ route('register') }}">CREA UNA CUENTA AHORA!</a>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of container -->
@@ -471,8 +471,7 @@
                         <i class="fas fa-square"></i><div class="media-body">Fast email checking</div>
                     </li>
                 </ul>
-                <a class="btn-solid-reg mfp-close" href="sign-up.html">SIGN UP</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
-            </div> <!-- end of col -->
+                <a class="btn-solid-reg " href="{{ route('register') }}">CREA UNA CUENTA AHORA!</a></div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of container -->
 </div> <!-- end of lightbox-basic -->
@@ -513,7 +512,7 @@
                         <i class="fas fa-square"></i><div class="media-body">Fast email checking</div>
                     </li>
                 </ul>
-                <a class="btn-solid-reg mfp-close" href="sign-up.html">SIGN UP</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
+                <a class="btn-solid-reg " href="{{ route('register') }}">CREA UNA CUENTA AHORA!</a>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of container -->
@@ -627,7 +626,7 @@
                             </li>
                         </ul>
                         <div class="button-wrapper">
-                            <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
+                            <a class="btn-solid-lg page-scroll" href="{{ route('register') }}">CREAR CUENTA</a>
                         </div>
                     </div>
                 </div> <!-- end of card -->
@@ -661,7 +660,7 @@
                             </li>
                         </ul>
                         <div class="button-wrapper">
-                            <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
+                            <a class="btn-solid-lg page-scroll" href="{{ route('register') }}">CREAR CUENTA</a>
                         </div>
                     </div>
                 </div> <!-- end of card -->

@@ -22,4 +22,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::resource('cartoons', App\Http\Controllers\CartoonController::class);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
+    return Inertia\Inertia::render('Contapain/Asientos');
+})->name('/contapain/asientos');
