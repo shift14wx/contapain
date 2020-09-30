@@ -3044,6 +3044,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -25874,6 +25877,21 @@ var render = function() {
                     [
                       _vm._v(
                         "\n                            Dashboard\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "jet-nav-link",
+                    {
+                      attrs: {
+                        href: "/cartoons",
+                        active: _vm.$page.currentRouteName == "cartoons"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Cartoons\n                        "
                       )
                     ]
                   )

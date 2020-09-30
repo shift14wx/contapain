@@ -20,28 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/CartoonController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CreateCartoonRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateCartoonRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/cartoon.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/CartoonRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/CartoonFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_005154_create_cartoons_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/CartoonSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cartoons/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cartoons/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cartoons/fields.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cartoons/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cartoons/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cartoons/show_fields.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cartoons/table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/emails/password.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/datatables_css.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/datatables_js.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/menu.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/infyom/laravel_generator.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/infyom/laravel_generator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_30_005154_create_cartoons_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_005154_create_cartoons_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/CartoonSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/CartoonSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Layouts/AppLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Layouts/AppLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cartoons/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cartoons/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -222,7 +218,7 @@
       <option name="presentableId" value="Default" />
       <updated>1601423301411</updated>
       <workItem from="1601423302960" duration="946000" />
-      <workItem from="1601424419852" duration="5274000" />
+      <workItem from="1601424419852" duration="8648000" />
     </task>
     <servers />
   </component>
@@ -248,13 +244,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="5" key="#Plugins/0.0.1366.728@0.0.1366.728" timestamp="1601424294161" />
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1601432158409">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1601432158409" />
     <state x="158" y="6" key="SettingsEditor" timestamp="1601425804499">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="158" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601425804499" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601428530557">
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601430000157">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601428530557" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1601430000157" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601431957463">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601431957463" />
   </component>
 </project>

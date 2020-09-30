@@ -18,6 +18,7 @@ class CreateCartoonsTable extends Migration
             $table->timestamps();
             $table->string("name")->nullable();
             $table->boolean("avalible")->default(false);
+            $table->softDeletes();
         });
     }
 

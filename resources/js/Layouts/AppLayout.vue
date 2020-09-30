@@ -17,6 +17,9 @@
                             <jet-nav-link href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
                                 Dashboard
                             </jet-nav-link>
+                            <jet-nav-link href="/cartoons" :active="$page.currentRouteName == 'cartoons'">
+                                Cartoons
+                            </jet-nav-link>
                         </div>
                     </div>
                     <!-- Settings Dropdown -->

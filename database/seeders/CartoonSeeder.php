@@ -24,6 +24,7 @@ class CartoonSeeder extends Seeder
 
         cartoon::factory()->times(3)->create([
             "name" => $this->faker->firstNameMale,
+            "avalible" => true
         ]);
     }
 }
