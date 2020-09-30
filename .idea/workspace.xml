@@ -19,13 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment="">
+    <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment=":sparkles: proyecto libre de problemas">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000000_create_Asiento_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000001_create_Rubros_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000002_create_sub_rubros_padre_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000003_create_registro_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000004_create_sub_rubros_hijo_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000005_create_categorias_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_000006_create_sub_categorias_padre_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartoonController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/cartoon.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/CartoonRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/artisan" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_30_005154_create_cartoons_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +200,11 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\database\migrations" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
@@ -215,8 +223,16 @@
       <workItem from="1601424419852" duration="9301000" />
       <workItem from="1601438534986" duration="2272000" />
       <workItem from="1601445967660" duration="1443000" />
-      <workItem from="1601482792892" duration="233000" />
+      <workItem from="1601482792892" duration="818000" />
     </task>
+    <task id="LOCAL-00001" summary=":sparkles: proyecto libre de problemas">
+      <created>1601483136518</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601483136519</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,6 +252,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value=":sparkles: proyecto libre de problemas" />
+    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: proyecto libre de problemas" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="5" key="#Plugins" timestamp="1601424294161">
