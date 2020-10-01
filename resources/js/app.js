@@ -1,7 +1,8 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-
+import vuetify from './plugins/vuetify' // path to vuetify export
+import 'vuetify/dist/vuetify.min.css'
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
@@ -20,4 +21,5 @@ new Vue({
                 resolveComponent: (name) => require(`./Pages/${name}`).default,
             },
         }),
+    vuetify,
 }).$mount(app);
