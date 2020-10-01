@@ -3526,6 +3526,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["Asientos"],
   name: "Asientos",
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -3533,22 +3534,19 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       focus: '',
-      tracked: {
-        '2020-09-09': [23, 45, 10],
-        '2020-09-08': [10],
-        '2020-09-07': [0, 78, 5],
-        '2020-09-06': [0, 0, 50],
-        '2020-09-05': [0, 10, 23],
-        '2020-09-04': [2, 90],
-        '2020-09-03': [10, 32],
-        '2020-09-02': [80, 10, 10],
-        '2020-09-01': [20, 25, 10]
-      },
+      AsientosObjectos: null,
       colors: ['#1867c0', '#fb8c00', '#000000'],
       category: ['Development', 'Meetings', 'Slacking']
     };
   },
   methods: {
+    existAsiento: function existAsiento(date) {
+      var exist = this.AsientosObjectos.findIndex(function (asiento) {
+        return asiento["fecha_inicio"] === date;
+      });
+      console.log("fecha: ", date, "exist: ", exist);
+      return exist;
+    },
     viewDay: function viewDay(_ref) {
       var date = _ref.date;
       this.focus = date;
@@ -3575,6 +3573,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    console.log(this.Asientos);
+    this.AsientosObjectos = this.Asientos;
     this.focus = moment().format("YYYY-MM-DD");
   }
 });
@@ -28059,155 +28059,187 @@ var render = function() {
                   _c(
                     "v-row",
                     [
-                      _c(
-                        "v-col",
-                        [
-                          _c(
-                            "v-sheet",
-                            { attrs: { height: "64" } },
+                      _vm.AsientosObjectos
+                        ? _c(
+                            "v-col",
                             [
                               _c(
-                                "v-toolbar",
-                                { attrs: { flat: "" } },
+                                "v-sheet",
+                                { attrs: { height: "64" } },
                                 [
                                   _c(
-                                    "v-btn",
-                                    {
-                                      staticClass: "mr-4",
-                                      attrs: {
-                                        outlined: "",
-                                        color: "grey darken-2"
-                                      },
-                                      on: { click: _vm.setToday }
-                                    },
+                                    "v-toolbar",
+                                    { attrs: { flat: "" } },
                                     [
-                                      _vm._v(
-                                        "\n                                        AHORA\n                                    "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        fab: "",
-                                        text: "",
-                                        small: "",
-                                        color: "grey darken-2"
-                                      },
-                                      on: { click: _vm.prev }
-                                    },
-                                    [
-                                      _c("v-icon", { attrs: { small: "" } }, [
-                                        _vm._v(
-                                          "\n                                            mdi-chevron-left\n                                        "
-                                        )
-                                      ])
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass: "mr-4",
+                                          attrs: {
+                                            outlined: "",
+                                            color: "grey darken-2"
+                                          },
+                                          on: { click: _vm.setToday }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                        AHORA\n                                    "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            fab: "",
+                                            text: "",
+                                            small: "",
+                                            color: "grey darken-2"
+                                          },
+                                          on: { click: _vm.prev }
+                                        },
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            { attrs: { small: "" } },
+                                            [
+                                              _vm._v(
+                                                "\n                                            mdi-chevron-left\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            fab: "",
+                                            text: "",
+                                            small: "",
+                                            color: "grey darken-2"
+                                          },
+                                          on: { click: _vm.next }
+                                        },
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            { attrs: { small: "" } },
+                                            [
+                                              _vm._v(
+                                                "\n                                            mdi-chevron-right\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.$refs.calendar
+                                        ? _c("v-toolbar-title", [
+                                            _vm._v(
+                                              "\n                                        " +
+                                                _vm._s(
+                                                  _vm.$refs.calendar.title
+                                                ) +
+                                                "\n                                    "
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c("v-spacer")
                                     ],
                                     1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        fab: "",
-                                        text: "",
-                                        small: "",
-                                        color: "grey darken-2"
-                                      },
-                                      on: { click: _vm.next }
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-sheet",
+                                { attrs: { height: "500" } },
+                                [
+                                  _c("v-calendar", {
+                                    ref: "calendar",
+                                    attrs: { color: "primary" },
+                                    on: {
+                                      change: _vm.updateRange,
+                                      "click:date": _vm.viewDay
                                     },
-                                    [
-                                      _c("v-icon", { attrs: { small: "" } }, [
-                                        _vm._v(
-                                          "\n                                            mdi-chevron-right\n                                        "
-                                        )
-                                      ])
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.$refs.calendar
-                                    ? _c("v-toolbar-title", [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(_vm.$refs.calendar.title) +
-                                            "\n                                    "
-                                        )
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c("v-spacer")
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "day",
+                                          fn: function(ref) {
+                                            var present = ref.present
+                                            var past = ref.past
+                                            var date = ref.date
+                                            return [
+                                              _c(
+                                                "v-row",
+                                                { staticClass: "fill-height" },
+                                                [
+                                                  past &&
+                                                  parseInt(
+                                                    _vm.existAsiento(date)
+                                                  ) + 1
+                                                    ? [
+                                                        _c(
+                                                          "v-sheet",
+                                                          {
+                                                            attrs: {
+                                                              title:
+                                                                _vm
+                                                                  .AsientosObjectos[
+                                                                  _vm.existAsiento(
+                                                                    date
+                                                                  )
+                                                                ]
+                                                                  .concepto_general,
+                                                              color:
+                                                                _vm.colors[0],
+                                                              width: "100%",
+                                                              height: "100%",
+                                                              tile: ""
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                    WORKS LIKE A CHARM\n                                                "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    : _vm._e()
+                                                ],
+                                                2
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      null,
+                                      false,
+                                      2197384231
+                                    ),
+                                    model: {
+                                      value: _vm.focus,
+                                      callback: function($$v) {
+                                        _vm.focus = $$v
+                                      },
+                                      expression: "focus"
+                                    }
+                                  })
                                 ],
                                 1
                               )
                             ],
                             1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-sheet",
-                            { attrs: { height: "500" } },
-                            [
-                              _c("v-calendar", {
-                                ref: "calendar",
-                                attrs: { color: "primary" },
-                                on: {
-                                  change: _vm.updateRange,
-                                  "click:date": _vm.viewDay
-                                },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "day",
-                                    fn: function(ref) {
-                                      var present = ref.present
-                                      var past = ref.past
-                                      var date = ref.date
-                                      return [
-                                        _c(
-                                          "v-row",
-                                          { staticClass: "fill-height" },
-                                          [
-                                            past && _vm.tracked[date]
-                                              ? _vm._l(
-                                                  _vm.tracked[date],
-                                                  function(percent, i) {
-                                                    return _c("v-sheet", {
-                                                      key: i,
-                                                      attrs: {
-                                                        title: _vm.category[i],
-                                                        color: _vm.colors[i],
-                                                        width: "100%",
-                                                        height: "100%",
-                                                        tile: ""
-                                                      }
-                                                    })
-                                                  }
-                                                )
-                                              : _vm._e()
-                                          ],
-                                          2
-                                        )
-                                      ]
-                                    }
-                                  }
-                                ]),
-                                model: {
-                                  value: _vm.focus,
-                                  callback: function($$v) {
-                                    _vm.focus = $$v
-                                  },
-                                  expression: "focus"
-                                }
-                              })
-                            ],
-                            1
                           )
-                        ],
-                        1
-                      )
+                        : _vm._e()
                     ],
                     1
                   )

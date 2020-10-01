@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsientosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
-    return Inertia\Inertia::render('Contapain/Asientos');
-})->name('/contapain/asientos');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/contapain/asientos',[AsientosController::class,"show"])
+    ->name('/contapain/asientos');

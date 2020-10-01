@@ -13,7 +13,7 @@
                         <v-app>
 
                             <v-row>
-                                <v-col>
+                                <v-col v-if="AsientosObjectos">
 
                                     <!-- HEADER CALENDAR -->
                                     <v-sheet height="64">
@@ -69,16 +69,16 @@
                                                 <v-row
                                                     class="fill-height"
                                                 >
-                                                    <template v-if="past && tracked[date]">
+                                                    <template v-if="past && ( parseInt( existAsiento(date) )+1 )">
                                                         <v-sheet
-                                                            v-for="(percent, i) in tracked[date]"
-                                                            :key="i"
-                                                            :title="category[i]"
-                                                            :color="colors[i]"
+                                                            :title="AsientosObjectos[ existAsiento(date) ].concepto_general"
+                                                            :color="colors[0]"
                                                             :width="`100%`"
                                                             height="100%"
                                                             tile
-                                                        ></v-sheet>
+                                                        >
+                                                            WORKS LIKE A CHARM
+                                                        </v-sheet>
                                                     </template>
                                                 </v-row>
                                             </template>
@@ -100,27 +100,23 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 export default {
+    props:["Asientos"],
     name:"Asientos",
     components:{
         AppLayout
     },
     data: () => ({
         focus: '',
-        tracked: {
-            '2020-09-09': [23, 45, 10],
-            '2020-09-08': [10],
-            '2020-09-07': [0, 78, 5],
-            '2020-09-06': [0, 0, 50],
-            '2020-09-05': [0, 10, 23],
-            '2020-09-04': [2, 90],
-            '2020-09-03': [10, 32],
-            '2020-09-02': [80, 10, 10],
-            '2020-09-01': [20, 25, 10],
-        },
+        AsientosObjectos: null,
         colors: ['#1867c0', '#fb8c00', '#000000'],
         category: ['Development', 'Meetings', 'Slacking'],
     }),
     methods: {
+        existAsiento( date ){
+            let exist = this.AsientosObjectos.findIndex( asiento => asiento["fecha_inicio"] === date );
+            console.log("fecha: ", date, "exist: ", exist);
+            return exist;
+        },
         viewDay ({ date }) {
             this.focus = date
             alert(date);
@@ -146,6 +142,8 @@ export default {
         },
     },
     mounted() {
+        console.log(this.Asientos);
+        this.AsientosObjectos = this.Asientos;
         this.focus = moment().format("YYYY-MM-DD");
     }
 }
