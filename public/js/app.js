@@ -3524,65 +3524,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Asientos",
@@ -3592,29 +3533,26 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       focus: '',
-      type: 'month',
-      typeToLabel: {
-        month: 'Month',
-        week: 'Week',
-        day: 'Day',
-        '4day': '4 Days'
+      tracked: {
+        '2020-09-09': [23, 45, 10],
+        '2020-09-08': [10],
+        '2020-09-07': [0, 78, 5],
+        '2020-09-06': [0, 0, 50],
+        '2020-09-05': [0, 10, 23],
+        '2020-09-04': [2, 90],
+        '2020-09-03': [10, 32],
+        '2020-09-02': [80, 10, 10],
+        '2020-09-01': [20, 25, 10]
       },
-      selectedEvent: {},
-      selectedElement: null,
-      selectedOpen: false,
-      events: [],
-      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-      names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party']
+      colors: ['#1867c0', '#fb8c00', '#000000'],
+      category: ['Development', 'Meetings', 'Slacking']
     };
-  },
-  mounted: function mounted() {
-    this.$refs.calendar.checkChange();
   },
   methods: {
     viewDay: function viewDay(_ref) {
       var date = _ref.date;
       this.focus = date;
-      this.type = 'day';
+      alert(date); //this.type = 'day'
     },
     getEventColor: function getEventColor(event) {
       return event.color;
@@ -3628,58 +3566,16 @@ __webpack_require__.r(__webpack_exports__);
     next: function next() {
       this.$refs.calendar.next();
     },
-    showEvent: function showEvent(_ref2) {
-      var _this = this;
-
-      var nativeEvent = _ref2.nativeEvent,
-          event = _ref2.event;
-
-      var open = function open() {
-        _this.selectedEvent = event;
-        _this.selectedElement = nativeEvent.target;
-        setTimeout(function () {
-          _this.selectedOpen = true;
-        }, 10);
-      };
-
-      if (this.selectedOpen) {
-        this.selectedOpen = false;
-        setTimeout(open, 10);
-      } else {
-        open();
-      }
-
-      nativeEvent.stopPropagation();
-    },
-    updateRange: function updateRange(_ref3) {
-      var start = _ref3.start,
-          end = _ref3.end;
-      var events = [];
-      var min = new Date("".concat(start.date, "T00:00:00"));
-      var max = new Date("".concat(end.date, "T23:59:59"));
-      var days = (max.getTime() - min.getTime()) / 86400000;
-      var eventCount = this.rnd(days, days + 20);
-
-      for (var i = 0; i < eventCount; i++) {
-        var allDay = this.rnd(0, 3) === 0;
-        var firstTimestamp = this.rnd(min.getTime(), max.getTime());
-        var first = new Date(firstTimestamp - firstTimestamp % 900000);
-        var secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-        var second = new Date(first.getTime() + secondTimestamp);
-        events.push({
-          name: this.names[this.rnd(0, this.names.length - 1)],
-          start: first,
-          end: second,
-          color: this.colors[this.rnd(0, this.colors.length - 1)],
-          timed: !allDay
-        });
-      }
-
-      this.events = events;
+    updateRange: function updateRange(_ref2) {
+      var start = _ref2.start,
+          end = _ref2.end;
     },
     rnd: function rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a;
     }
+  },
+  mounted: function mounted() {
+    this.focus = moment().format("YYYY-MM-DD");
   }
 });
 
@@ -28162,7 +28058,6 @@ var render = function() {
                 [
                   _c(
                     "v-row",
-                    { staticClass: "fill-height" },
                     [
                       _c(
                         "v-col",
@@ -28187,7 +28082,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        Today\n                                    "
+                                        "\n                                        AHORA\n                                    "
                                       )
                                     ]
                                   ),
@@ -28244,141 +28139,7 @@ var render = function() {
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-menu",
-                                    {
-                                      attrs: { bottom: "", right: "" },
-                                      scopedSlots: _vm._u([
-                                        {
-                                          key: "activator",
-                                          fn: function(ref) {
-                                            var on = ref.on
-                                            var attrs = ref.attrs
-                                            return [
-                                              _c(
-                                                "v-btn",
-                                                _vm._g(
-                                                  _vm._b(
-                                                    {
-                                                      attrs: {
-                                                        outlined: "",
-                                                        color: "grey darken-2"
-                                                      }
-                                                    },
-                                                    "v-btn",
-                                                    attrs,
-                                                    false
-                                                  ),
-                                                  on
-                                                ),
-                                                [
-                                                  _c("span", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        _vm.typeToLabel[
-                                                          _vm.type
-                                                        ]
-                                                      )
-                                                    )
-                                                  ]),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-icon",
-                                                    { attrs: { right: "" } },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                    mdi-menu-down\n                                                "
-                                                      )
-                                                    ]
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
-                                          }
-                                        }
-                                      ])
-                                    },
-                                    [
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list",
-                                        [
-                                          _c(
-                                            "v-list-item",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.type = "day"
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("v-list-item-title", [
-                                                _vm._v("Day")
-                                              ])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-list-item",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.type = "week"
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("v-list-item-title", [
-                                                _vm._v("Week")
-                                              ])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-list-item",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.type = "month"
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("v-list-item-title", [
-                                                _vm._v("Month")
-                                              ])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-list-item",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.type = "4day"
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("v-list-item-title", [
-                                                _vm._v("4 days")
-                                              ])
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
+                                  _c("v-spacer")
                                 ],
                                 1
                               )
@@ -28388,22 +28149,51 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "v-sheet",
-                            { attrs: { height: "600" } },
+                            { attrs: { height: "500" } },
                             [
                               _c("v-calendar", {
                                 ref: "calendar",
-                                attrs: {
-                                  color: "primary",
-                                  events: _vm.events,
-                                  "event-color": _vm.getEventColor,
-                                  type: _vm.type
-                                },
+                                attrs: { color: "primary" },
                                 on: {
-                                  "click:event": _vm.showEvent,
-                                  "click:more": _vm.viewDay,
-                                  "click:date": _vm.viewDay,
-                                  change: _vm.updateRange
+                                  change: _vm.updateRange,
+                                  "click:date": _vm.viewDay
                                 },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "day",
+                                    fn: function(ref) {
+                                      var present = ref.present
+                                      var past = ref.past
+                                      var date = ref.date
+                                      return [
+                                        _c(
+                                          "v-row",
+                                          { staticClass: "fill-height" },
+                                          [
+                                            past && _vm.tracked[date]
+                                              ? _vm._l(
+                                                  _vm.tracked[date],
+                                                  function(percent, i) {
+                                                    return _c("v-sheet", {
+                                                      key: i,
+                                                      attrs: {
+                                                        title: _vm.category[i],
+                                                        color: _vm.colors[i],
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        tile: ""
+                                                      }
+                                                    })
+                                                  }
+                                                )
+                                              : _vm._e()
+                                          ],
+                                          2
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ]),
                                 model: {
                                   value: _vm.focus,
                                   callback: function($$v) {
@@ -28411,131 +28201,7 @@ var render = function() {
                                   },
                                   expression: "focus"
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "v-menu",
-                                {
-                                  attrs: {
-                                    "close-on-content-click": false,
-                                    activator: _vm.selectedElement,
-                                    "offset-x": ""
-                                  },
-                                  model: {
-                                    value: _vm.selectedOpen,
-                                    callback: function($$v) {
-                                      _vm.selectedOpen = $$v
-                                    },
-                                    expression: "selectedOpen"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "v-card",
-                                    {
-                                      attrs: {
-                                        color: "grey lighten-4",
-                                        "min-width": "350px",
-                                        flat: ""
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "v-toolbar",
-                                        {
-                                          attrs: {
-                                            color: _vm.selectedEvent.color,
-                                            dark: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            { attrs: { icon: "" } },
-                                            [
-                                              _c("v-icon", [
-                                                _vm._v("mdi-pencil")
-                                              ])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c("v-toolbar-title", {
-                                            domProps: {
-                                              innerHTML: _vm._s(
-                                                _vm.selectedEvent.name
-                                              )
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("v-spacer"),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-btn",
-                                            { attrs: { icon: "" } },
-                                            [
-                                              _c("v-icon", [
-                                                _vm._v("mdi-heart")
-                                              ])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-btn",
-                                            { attrs: { icon: "" } },
-                                            [
-                                              _c("v-icon", [
-                                                _vm._v("mdi-dots-vertical")
-                                              ])
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c("v-card-text", [
-                                        _c("span", {
-                                          domProps: {
-                                            innerHTML: _vm._s(
-                                              _vm.selectedEvent.details
-                                            )
-                                          }
-                                        })
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-card-actions",
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: {
-                                                text: "",
-                                                color: "secondary"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.selectedOpen = false
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                Cancel\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
+                              })
                             ],
                             1
                           )

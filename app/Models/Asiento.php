@@ -8,12 +8,13 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Asiento
- * 
+ *
  * @property int $id_asiento
  * @property Carbon|null $fecha_inicio
  * @property Carbon|null $fecha_cerrado
@@ -22,22 +23,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $deleted_at
  * @property timestamp without time zone|null $created_at
  * @property timestamp without time zone|null $updated_at
- * 
+ *
  * @property Collection|Registro[] $registros
  *
  * @package App\Models
  */
 class Asiento extends Model
 {
+    use HasFactory;
 	use SoftDeletes;
 	protected $table = 'Asiento';
 	protected $primaryKey = 'id_asiento';
 
 	protected $casts = [
-		'concepto_general' => 'character varying',
 		'saldo' => 'float',
-		'created_at' => 'timestamp without time zone',
-		'updated_at' => 'timestamp without time zone'
 	];
 
 	protected $dates = [
