@@ -72,12 +72,12 @@
                                                     <template v-if="past && ( parseInt( existAsiento(date) )+1 )">
                                                         <v-sheet
                                                             :title="AsientosObjectos[ existAsiento(date) ].concepto_general"
-                                                            :color="colors[0]"
+                                                            :color="getColor( existAsiento(date) )"
                                                             :width="`100%`"
                                                             height="100%"
                                                             tile
                                                         >
-                                                            WORKS LIKE A CHARM
+                                                            <h1 class="text-center">Saldo: $ {{ AsientosObjectos[ existAsiento(date) ].saldo }} </h1>
                                                         </v-sheet>
                                                     </template>
                                                 </v-row>
@@ -108,7 +108,7 @@ export default {
     data: () => ({
         focus: '',
         AsientosObjectos: null,
-        colors: ['#1867c0', '#fb8c00', '#000000'],
+        colors: ['#ffc107', '#fb8c00', '#000000'],
         category: ['Development', 'Meetings', 'Slacking'],
     }),
     methods: {
@@ -136,6 +136,9 @@ export default {
         },
         updateRange ({ start, end }) {
 
+        },
+        getColor( index ){
+            return this.AsientosObjectos[ index ].saldo != null ? this.colors[1] : this.colors[0];
         },
         rnd (a, b) {
             return Math.floor((b - a + 1) * Math.random()) + a

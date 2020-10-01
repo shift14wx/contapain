@@ -3535,7 +3535,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       focus: '',
       AsientosObjectos: null,
-      colors: ['#1867c0', '#fb8c00', '#000000'],
+      colors: ['#ffc107', '#fb8c00', '#000000'],
       category: ['Development', 'Meetings', 'Slacking']
     };
   },
@@ -3567,6 +3567,9 @@ __webpack_require__.r(__webpack_exports__);
     updateRange: function updateRange(_ref2) {
       var start = _ref2.start,
           end = _ref2.end;
+    },
+    getColor: function getColor(index) {
+      return this.AsientosObjectos[index].saldo != null ? this.colors[1] : this.colors[0];
     },
     rnd: function rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a;
@@ -28199,16 +28202,37 @@ var render = function() {
                                                                   )
                                                                 ]
                                                                   .concepto_general,
-                                                              color:
-                                                                _vm.colors[0],
+                                                              color: _vm.getColor(
+                                                                _vm.existAsiento(
+                                                                  date
+                                                                )
+                                                              ),
                                                               width: "100%",
                                                               height: "100%",
                                                               tile: ""
                                                             }
                                                           },
                                                           [
-                                                            _vm._v(
-                                                              "\n                                                    WORKS LIKE A CHARM\n                                                "
+                                                            _c(
+                                                              "h1",
+                                                              {
+                                                                staticClass:
+                                                                  "text-center"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Saldo: $ " +
+                                                                    _vm._s(
+                                                                      _vm
+                                                                        .AsientosObjectos[
+                                                                        _vm.existAsiento(
+                                                                          date
+                                                                        )
+                                                                      ].saldo
+                                                                    ) +
+                                                                    " "
+                                                                )
+                                                              ]
                                                             )
                                                           ]
                                                         )
@@ -28223,7 +28247,7 @@ var render = function() {
                                       ],
                                       null,
                                       false,
-                                      2197384231
+                                      3444289089
                                     ),
                                     model: {
                                       value: _vm.focus,

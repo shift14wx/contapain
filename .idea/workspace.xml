@@ -23,13 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment=":sparkles: proyecto libre de problemas">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AsientosController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Asiento.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Asiento.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Pages/Contapain/Asientos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Contapain/Asientos.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +240,7 @@
       <workItem from="1601485909975" duration="9528000" />
       <workItem from="1601514614182" duration="2721000" />
       <workItem from="1601518501705" duration="582000" />
-      <workItem from="1601519128475" duration="7527000" />
+      <workItem from="1601519128475" duration="8144000" />
     </task>
     <task id="LOCAL-00001" summary=":sparkles: proyecto libre de problemas">
       <created>1601483136518</created>
