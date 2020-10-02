@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 $DATABASE_URL=parse_url(getenv("DATABASE_URL"));
-
+dd($DATABASE_URL);
 return [
 
     /*
