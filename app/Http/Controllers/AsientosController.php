@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asiento;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -37,7 +38,12 @@ class AsientosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd("jajaja");
+        $asientoNuevo = $request->all();
+        $asientoNuevo["id_user"] = Auth::user()->getAuthIdentifier();
+        $asiento = new Asiento();
+        $createdAsiento = $asiento->save( $asientoNuevo );
+        dd($createdAsiento);
     }
 
     /**

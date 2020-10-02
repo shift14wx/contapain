@@ -18,7 +18,7 @@
                                 Dashboard
                             </jet-nav-link>
                             <jet-nav-link href="/contapain/asientos" :active="$page.currentRouteName == 'contapain.asientos'">
-                                asientos
+                                Asientos
                             </jet-nav-link>
                         </div>
                     </div>

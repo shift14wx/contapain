@@ -35,9 +35,12 @@ class Asiento extends Model
 	protected $table = 'Asiento';
 	protected $primaryKey = 'id_asiento';
 
+	protected $guarded = [];
+
 	protected $casts = [
 		'saldo' => 'float',
-        'fecha_inicio' => 'datetime:Y-m-d'
+        'created_at' => "datetime:Y-m-d",
+        "updated_at" => "datetime:Y-m-d"
 	];
 
 	protected $dates = [

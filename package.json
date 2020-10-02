@@ -29,5 +29,9 @@
         "vue-template-compiler": "^2.6.10",
         "vuetify": "^2.3.12",
         "vuetifyjs-mix-extension": "0.0.14"
+    },
+    "dependencies": {
+        "cookie": "^0.4.1",
+        "vue-resource": "^1.5.1"
     }
 }

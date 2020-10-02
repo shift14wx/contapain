@@ -93,33 +93,69 @@
                     </div>
                 </div>
             </div>
+
+            <!--FULL SCREEN DIALOG-->
+            <dialog-fullscreen v-model="showDialog" >
+                <template v-slot:title>
+                    <p>Asiento {{ selectedAsiento|| 'nuevo' }}</p>
+                </template>Asiento
+                <template v-slot:content>
+                    <form-asiento></form-asiento>
+                </template>
+            </dialog-fullscreen>
+
         </app-layout>
 
 </template>
 
 <script>
 import AppLayout from "../../Layouts/AppLayout";
+import dialogFullscreen from "../../Components/dialogfullscreen";
+import formAsiento from "./Asientos/formAsiento";
+import axios from "axios";
 export default {
+    http: {
+        headers: {
+            'X-CSRF-TOKEN': axios.defaults.headers.common['X-XSRF-TOKEN']
+        }
+    },
     props:["Asientos"],
     name:"Asientos",
     components:{
-        AppLayout
+        AppLayout,
+        dialogFullscreen,
+        formAsiento
     },
     data: () => ({
+        showDialog:false,
         focus: '',
         AsientosObjectos: null,
         colors: ['#ffc107', '#fb8c00', '#000000'],
         category: ['Development', 'Meetings', 'Slacking'],
+        showFormularioAgregar : false,
+        selectedAsiento: ""
     }),
     methods: {
         existAsiento( date ){
             let exist = this.AsientosObjectos.findIndex( asiento => asiento["fecha_inicio"] === date );
-            console.log("fecha: ", date, "exist: ", exist);
             return exist;
         },
         viewDay ({ date }) {
+
+            let index = this.existAsiento(date);
+            console.log(index);
+            if( index >= 0 ){
+                // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
+                // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
+                this.selectedAsiento = moment(this.AsientosObjectos[ index ].created_at).format() ;
+                let exitsSaldo = this.AsientosObjectos[ index ].saldo != null;
+            }else{
+                // si no se encuentra entonces en ese dia no se ha agregado un asiento
+                // se presentara el formulario
+                this.showFormularioAgregar = true;
+            }
             this.focus = date
-            alert(date);
+            this.showDialog = true;
             //this.type = 'day'
         },
         getEventColor (event) {
