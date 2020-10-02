@@ -4,8 +4,6 @@ use Illuminate\Support\Str;
 
 $DATABASE_URL=parse_url(getenv("DATABASE_URL"));
 
-dd( env('DB_HOST', $DATABASE_URL["host"]) . " ". env('DB_HOST', $DATABASE_URL["path"]) );
-
 return [
 
     /*
