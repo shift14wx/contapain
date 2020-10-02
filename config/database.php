@@ -3,7 +3,9 @@
 use Illuminate\Support\Str;
 
 $DATABASE_URL=parse_url(getenv("DATABASE_URL"));
-dd(ltrim( $DATABASE_URL["path"], "/" ));
+
+dd( env('DB_HOST', $DATABASE_URL["host"]) . " ". env('DB_HOST', $DATABASE_URL["path"]) );
+
 return [
 
     /*
