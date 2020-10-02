@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\registroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +27,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
     return Inertia\Inertia::render('Contapain/Asientos');
 })->name('/contapain/asientos');
+
+
+/* Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
+    return Inertia\Inertia::render('Contapain/Asientos');
+})->name('/contapain/asientos'); */
+
+// Route::get('/contapain/registro', [registroController::class, 'index']);
+
+// Route::get('/contapain/registro/create', [registroController::class, 'create']);
+
+Route::resource('registros', App\Http\Controllers\registroController::class);

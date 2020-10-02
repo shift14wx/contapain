@@ -1,66 +1,94 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Registro
- * 
- * @property int $id_registro
- * @property int|null $id_detalle_concepto
- * @property float|null $debe
- * @property float|null $haber
- * @property character varying|null $concepto_detallado
- * @property int $id_rubro
- * @property int $id_asiento
- * @property timestamp without time zone|null $created_at
- * @property timestamp without time zone|null $updated_at
- * @property string|null $deleted_at
- * 
- * @property Rubro $rubro
- * @property Asiento $asiento
- *
+ * Class registro
  * @package App\Models
+ * @version October 1, 2020, 5:17 am UTC
+ *
+ * @property \App\Models\Rubro $idRubro
+ * @property \App\Models\Asiento $idAsiento
+ * @property integer $id_detalle_concepto
+ * @property number $debe
+ * @property number $haber
+ * @property string $concepto_detallado
+ * @property integer $id_rubro
+ * @property integer $id_asiento
  */
-class Registro extends Model
+class registro extends Model
 {
-	use SoftDeletes;
-	protected $table = 'registro';
-	protected $primaryKey = 'id_registro';
+    use SoftDeletes;
 
-	protected $casts = [
-		'id_detalle_concepto' => 'int',
-		'debe' => 'float',
-		'haber' => 'float',
-		'concepto_detallado' => 'character varying',
-		'id_rubro' => 'int',
-		'id_asiento' => 'int',
-		'created_at' => 'timestamp without time zone',
-		'updated_at' => 'timestamp without time zone'
-	];
+    public $table = 'registro';
+    
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 
-	protected $fillable = [
-		'id_detalle_concepto',
-		'debe',
-		'haber',
-		'concepto_detallado',
-		'id_rubro',
-		'id_asiento'
-	];
 
-	public function rubro()
-	{
-		return $this->belongsTo(Rubro::class, 'id_rubro');
-	}
+    protected $dates = ['deleted_at'];
 
-	public function asiento()
-	{
-		return $this->belongsTo(Asiento::class, 'id_asiento');
-	}
+
+    protected $primaryKey = 'id_registro';
+    
+    public $fillable = [
+        'id_detalle_concepto',
+        'debe',
+        'haber',
+        'concepto_detallado',
+        'id_rubro',
+        'id_asiento'
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id_registro' => 'integer',
+        'id_detalle_concepto' => 'integer',
+        'debe' => 'decimal:2',
+        'haber' => 'decimal:2',
+        'concepto_detallado' => 'string',
+        'id_rubro' => 'integer',
+        'id_asiento' => 'integer'
+    ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'id_detalle_concepto' => 'nullable|integer',
+        'debe' => 'nullable|numeric',
+        'haber' => 'nullable|numeric',
+        'concepto_detallado' => 'nullable|string|max:45',
+        'id_rubro' => 'required|integer',
+        'id_asiento' => 'required|integer',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function idRubro()
+    {
+        return $this->belongsTo(\App\Models\Rubro::class, 'id_rubro');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function idAsiento()
+    {
+        return $this->belongsTo(\App\Models\Asiento::class, 'id_asiento');
+    }
 }
+?>
