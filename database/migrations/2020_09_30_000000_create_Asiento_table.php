@@ -27,6 +27,17 @@ class CreateAsientoTable extends Migration
             $table->date('fecha_cerrado')->nullable();
             $table->string('concepto_general')->nullable();
             $table->decimal('saldo')->nullable();
+
+
+            $table->integer('id_user');
+
+            $table->index(["id_user"], 'fk_asiento_usuario_idx');
+
+            $table->foreign('id_user', 'fk_asiento_usuario_idx')
+                ->references('id')->on('users')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+
             $table->softDeletes();
             $table->timestamps();
         });

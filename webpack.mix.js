@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+require('vuetifyjs-mix-extension');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -15,4 +15,4 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
-    ]);
+    ]).vuetify();
