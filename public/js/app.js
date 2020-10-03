@@ -3640,7 +3640,8 @@ __webpack_require__.r(__webpack_exports__);
       colors: ['#ffc107', '#fb8c00', '#000000'],
       category: ['Development', 'Meetings', 'Slacking'],
       showFormularioAgregar: false,
-      selectedAsiento: ""
+      selectedAsiento: "",
+      fecha_inicio_selected: moment().format("YYYY-MM-DD")
     };
   },
   methods: {
@@ -3652,13 +3653,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     viewDay: function viewDay(_ref) {
       var date = _ref.date;
+      this.fecha_inicio_selected = date;
       var index = this.existAsiento(date);
-      console.log(index);
 
       if (index >= 0) {
         // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
         // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
-        this.selectedAsiento = moment(this.AsientosObjectos[index].created_at).format();
+        this.selectedAsiento = moment(this.AsientosObjectos[index].fecha_inicio);
         var exitsSaldo = this.AsientosObjectos[index].saldo != null;
       } else {
         // si no se encuentra entonces en ese dia no se ha agregado un asiento
@@ -3693,7 +3694,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log(this.Asientos);
     this.AsientosObjectos = this.Asientos;
     this.focus = moment().format("YYYY-MM-DD");
   }
@@ -3766,9 +3766,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["selected_fecha_inicio"],
   components: {
     Input: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -3790,6 +3797,9 @@ __webpack_require__.r(__webpack_exports__);
     reset: function reset() {
       this.$refs.form.reset();
     }
+  },
+  mounted: function mounted() {
+    console.log(this.selected_fecha_inicio);
   }
 });
 
@@ -3804,6 +3814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 //
 //
 //
@@ -3815,15 +3826,110 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Registros",
-  props: ["id_asiento", "registros", "catalogo_cuentas"],
+  props: ["id_asiento", "selectedRegistros", "catalogo_cuentas", "selectedAsiento"],
   data: function data() {
     return {
       "idAsiento": this.id_asiento,
-      "localregistros": this.registros,
-      "catalogoCuentas": this.catalogo_cuentas
+      "registros": this.selectedRegistros,
+      "catalogoCuentas": this.catalogo_cuentas,
+      "asiento": this.selectedAsiento
     };
+  },
+  computed: {
+    computedDate: function computedDate() {
+      return moment(this.asiento.fecha_inicio).locale("es").format("DD dddd MMMM YYYY");
+    }
+  },
+  methods: {
+    momentSetLocale: function momentSetLocale() {
+      moment.locale('es', {
+        months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+        monthsShort: 'Ene._Feb._Mar_Abr._May_Jun_Jul._Agost_Sept._Oct._Nov._Dec.'.split('_'),
+        monthsParseExact: true,
+        weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
+        weekdaysShort: 'Dom._Lun._Mar._Mir._Jue._Vie._Sab.'.split('_'),
+        weekdaysMin: 'Di_Lu_Ma_Mi_Ju_Vi_Sa'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+          LT: 'HH:mm',
+          LTS: 'HH:mm:ss',
+          L: 'DD/MM/YYYY',
+          LL: 'D MMMM YYYY',
+          LLL: 'D MMMM YYYY HH:mm',
+          LLLL: 'dddd D MMMM YYYY HH:mm'
+        },
+        calendar: {
+          sameDay: '[Aujourd’hui à] LT',
+          nextDay: '[Demain à] LT',
+          nextWeek: 'dddd [à] LT',
+          lastDay: '[Hier à] LT',
+          lastWeek: 'dddd [dernier à] LT',
+          sameElse: 'L'
+        },
+        relativeTime: {
+          future: 'dans %s',
+          past: 'il y a %s',
+          s: 'quelques secondes',
+          m: 'une minute',
+          mm: '%d minutes',
+          h: 'une heure',
+          hh: '%d heures',
+          d: 'un jour',
+          dd: '%d jours',
+          M: 'un mois',
+          MM: '%d mois',
+          y: 'un an',
+          yy: '%d ans'
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
+        ordinal: function ordinal(number) {
+          return number + (number === 1 ? 'er' : 'e');
+        },
+        meridiemParse: /PD|MD/,
+        isPM: function isPM(input) {
+          return input.charAt(0) === 'M';
+        },
+        // In case the meridiem units are not separated around 12, then implement
+        // this function (look at locale/id.js for an example).
+        // meridiemHour : function (hour, meridiem) {
+        //     return /* 0-23 hour, given meridiem token and hour 1-12 */ ;
+        // },
+        meridiem: function meridiem(hours, minutes, isLower) {
+          return hours < 12 ? 'PD' : 'MD';
+        },
+        week: {
+          dow: 1,
+          // Monday is the first day of the week.
+          doy: 4 // Used to determine first week of the year.
+
+        }
+      });
+    }
+  },
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  created: function created() {
+    this.momentSetLocale();
+    moment.locale("es");
   }
 });
 
@@ -28857,7 +28963,11 @@ var render = function() {
             {
               key: "content",
               fn: function() {
-                return [_c("form-asiento")]
+                return [
+                  _c("form-asiento", {
+                    attrs: { selected_fecha_inicio: _vm.fecha_inicio_selected }
+                  })
+                ]
               },
               proxy: true
             }
@@ -28930,6 +29040,11 @@ var render = function() {
                   _c("input", {
                     attrs: { type: "hidden", name: "_token" },
                     domProps: { value: _vm.csrf_token }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "fecha_inicio" },
+                    domProps: { value: _vm.selected_fecha_inicio }
                   }),
                   _vm._v(" "),
                   _c("v-text-field", {
@@ -29007,11 +29122,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-app", [
-    _c("h1", [_vm._v("REGISTROS XDXD")]),
-    _vm._v(" "),
-    _c("div", [_vm._v("\n        " + _vm._s(_vm.catalogoCuentas) + "\n    ")])
-  ])
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _vm._v(
+                    "\n            REGISTROS DEL ASIENTO CORRESPONDIENTE A " +
+                      _vm._s(_vm.computedDate) +
+                      "\n        "
+                  )
+                ]
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c("div", { staticClass: "py-12" }, [
+        _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+          _c(
+            "div",
+            {
+              staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg",
+              attrs: { "data-app": "" }
+            },
+            [
+              _c("v-app", [
+                _c("h1", [_vm._v("REGISTROS XDXD")]),
+                _vm._v(" "),
+                _c("div", [
+                  _vm._v("\n        " + _vm._s(_vm.catalogoCuentas) + "\n    ")
+                ])
+              ])
+            ],
+            1
+          )
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

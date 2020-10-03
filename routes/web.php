@@ -47,6 +47,9 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->post('/contapain/asientos/agregar',[AsientosController::class,"store"])
     ->name('/contapain/asientos/agregar');
 
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('contapain/asientos/{id_asiento}/registros',[AsientosController::class,"showRegistros"]);
+
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/contapain/asientos/agregar',[AsientosController::class,"store"])

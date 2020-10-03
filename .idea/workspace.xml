@@ -23,26 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment=":sparkles: proyecto libre de problemas">
-      <change afterPath="$PROJECT_DIR$/database/factories/CategoriaFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/SubCategoriasPadreFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/SubRubrosHijoFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/SubRubrosPadreFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/CategoriasTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/SubCategoriasPadreTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/SubRubrosHijoTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/SubRubrosPadreTableSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AsientosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AsientosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Categoria.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Categoria.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Rubro.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rubro.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/SubCategoriasPadre.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SubCategoriasPadre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/SubRubrosHijo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SubRubrosHijo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/SubRubrosPadre.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SubRubrosPadre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/AsientoFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/AsientoFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/RubroFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/RubroFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/RubroTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RubroTableSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Contapain/Asientos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Contapain/Asientos.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Contapain/Asientos/formAsiento.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Contapain/Asientos/formAsiento.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Pages/Contapain/Registros.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Contapain/Registros.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -263,7 +248,7 @@
       <workItem from="1601596285938" duration="10087000" />
       <workItem from="1601676079355" duration="15093000" />
       <workItem from="1601702237630" duration="3391000" />
-      <workItem from="1601752029459" duration="7003000" />
+      <workItem from="1601752029459" duration="14128000" />
     </task>
     <task id="LOCAL-00001" summary=":sparkles: proyecto libre de problemas">
       <created>1601483136518</created>
@@ -328,9 +313,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601526376988" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601760465411">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601766587343">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601760465411" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601766587343" />
   </component>
 </project>

@@ -16,7 +16,13 @@
         name="_token"
         :value="csrf_token"
         >
+        </input>
 
+        <input
+            type="hidden"
+            name="fecha_inicio"
+            :value="selected_fecha_inicio"
+        >
         </input>
 
         <v-text-field
@@ -55,6 +61,7 @@
 import axios from "axios";
 import Input from "../../../Jetstream/Input";
 export default {
+    props: ["selected_fecha_inicio"],
     components: {Input},
     data: () => ({
         valid: true,
@@ -74,6 +81,9 @@ export default {
             this.$refs.form.reset()
         },
     },
+    mounted() {
+        console.log(this.selected_fecha_inicio);
+    }
 }
 </script>
 

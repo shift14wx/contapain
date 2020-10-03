@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asiento;
+use App\Models\Registro;
 use App\Models\Rubro;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -41,36 +42,33 @@ class AsientosController extends Controller
     {
         $asientoNuevo = $request->validate(
             [
-                "concepto_general" => "required|string"
+                "concepto_general" => "required|string",
+                "fecha_inicio" => "required|date"
             ]
         );
         $asientoNuevo["id_user"] = Auth::user()->getAuthIdentifier();
-        //dd($asientoNuevo);
         $asiento = new Asiento($asientoNuevo);
         $asiento->save();
+        $id_asiento =$asiento->id_asiento;
+        return redirect("contapain/asientos/$id_asiento/registros");
+    }
+
+    public function showRegistros( $id_asiento )
+    {
+
         $rubros = Rubro::all()->toArray();
         $rubrosParseados = [];
 
         $this->parseRubros($rubros,$rubrosParseados);
-
-             return \Inertia\Inertia::render('Contapain/Registros',[
-                 "id_asiento" => $asiento->id_asiento,
-                 "catalogo_cuentas" => $rubrosParseados,
-                 "statusCode" => JsonResponse::HTTP_CREATED
-             ]);
-    }
-
-    public function parseRubros( $rubros, &$parsedRubros )
-    {
-        foreach ($rubros as $key => $rubro)
-        {
-            if( array_key_exists( "sub", $rubro ) && count( $rubro["sub"] ) >= 1 ) {
-                $this->parseRubros( $rubro["sub"], $parsedRubros );
-            }
-            unset($rubro["sub"]);
-            array_push( $parsedRubros, $rubro );
-        }
-        $parsedRubros = array_unique( $parsedRubros, SORT_REGULAR );
+        $asiento = Asiento::find( $id_asiento )->toArray();
+        $registros = Registro::where("id_asiento","=",$id_asiento)->get()->toArray();
+        return \Inertia\Inertia::render('Contapain/Registros',[
+            "id_asiento" => $id_asiento,
+            "selectedRegistros" => $registros,
+            "selectedAsiento" => $asiento,
+            "catalogo_cuentas" => $rubrosParseados,
+            "statusCode" => JsonResponse::HTTP_OK
+        ]);
     }
 
     /**
@@ -121,4 +119,20 @@ class AsientosController extends Controller
     {
         //
     }
+
+
+
+    public function parseRubros( $rubros, &$parsedRubros )
+    {
+        foreach ($rubros as $key => $rubro)
+        {
+            if( array_key_exists( "sub", $rubro ) && count( $rubro["sub"] ) >= 1 ) {
+                $this->parseRubros( $rubro["sub"], $parsedRubros );
+            }
+            unset($rubro["sub"]);
+            array_push( $parsedRubros, $rubro );
+        }
+        $parsedRubros = array_unique( $parsedRubros, SORT_REGULAR );
+    }
+
 }

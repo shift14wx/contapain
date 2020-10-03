@@ -100,7 +100,7 @@
                     <p>Asiento {{ selectedAsiento|| 'nuevo' }}</p>
                 </template>Asiento
                 <template v-slot:content>
-                    <form-asiento></form-asiento>
+                    <form-asiento :selected_fecha_inicio="fecha_inicio_selected"></form-asiento>
                 </template>
             </dialog-fullscreen>
 
@@ -133,7 +133,8 @@ export default {
         colors: ['#ffc107', '#fb8c00', '#000000'],
         category: ['Development', 'Meetings', 'Slacking'],
         showFormularioAgregar : false,
-        selectedAsiento: ""
+        selectedAsiento: "",
+        fecha_inicio_selected: moment().format("YYYY-MM-DD")
     }),
     methods: {
         existAsiento( date ){
@@ -141,13 +142,12 @@ export default {
             return exist;
         },
         viewDay ({ date }) {
-
+            this.fecha_inicio_selected = date;
             let index = this.existAsiento(date);
-            console.log(index);
             if( index >= 0 ){
                 // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
                 // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
-                this.selectedAsiento = moment(this.AsientosObjectos[ index ].created_at).format() ;
+                this.selectedAsiento = moment(this.AsientosObjectos[ index ].fecha_inicio) ;
                 let exitsSaldo = this.AsientosObjectos[ index ].saldo != null;
             }else{
                 // si no se encuentra entonces en ese dia no se ha agregado un asiento
@@ -181,7 +181,6 @@ export default {
         },
     },
     mounted() {
-        console.log(this.Asientos);
         this.AsientosObjectos = this.Asientos;
         this.focus = moment().format("YYYY-MM-DD");
     }
