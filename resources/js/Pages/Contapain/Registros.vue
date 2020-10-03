@@ -1,7 +1,10 @@
 <template>
 
     <v-app>
-
+            <h1>REGISTROS XDXD</h1>
+        <div>
+            {{catalogoCuentas}}
+        </div>
     </v-app>
 
 </template>
@@ -13,7 +16,7 @@ export default {
     data(){
         return {
             "idAsiento" : this.id_asiento,
-            "registros" : this.registros,
+            "localregistros" : this.registros,
             "catalogoCuentas" : this.catalogo_cuentas
         };
     }

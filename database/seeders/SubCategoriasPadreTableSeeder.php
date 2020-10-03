@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Rubro;
+use App\Models\SubCategoriasPadre;
 use Illuminate\Database\Seeder;
 
-class RubroTableSeeder extends Seeder
+class SubCategoriasPadreTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class RubroTableSeeder extends Seeder
      */
     public function run()
     {
-        Rubro::factory(3)->create();
+        SubCategoriasPadre::factory(3)->create();
     }
 }

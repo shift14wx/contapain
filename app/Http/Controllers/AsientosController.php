@@ -48,12 +48,29 @@ class AsientosController extends Controller
         //dd($asientoNuevo);
         $asiento = new Asiento($asientoNuevo);
         $asiento->save();
-            dd( Rubro::all()->toArray() );
+        $rubros = Rubro::all()->toArray();
+        $rubrosParseados = [];
+
+        $this->parseRubros($rubros,$rubrosParseados);
+
              return \Inertia\Inertia::render('Contapain/Registros',[
                  "id_asiento" => $asiento->id_asiento,
-                 "catalogo_cuentas" => "",
+                 "catalogo_cuentas" => $rubrosParseados,
                  "statusCode" => JsonResponse::HTTP_CREATED
              ]);
+    }
+
+    public function parseRubros( $rubros, &$parsedRubros )
+    {
+        foreach ($rubros as $key => $rubro)
+        {
+            if( array_key_exists( "sub", $rubro ) && count( $rubro["sub"] ) >= 1 ) {
+                $this->parseRubros( $rubro["sub"], $parsedRubros );
+            }
+            unset($rubro["sub"]);
+            array_push( $parsedRubros, $rubro );
+        }
+        $parsedRubros = array_unique( $parsedRubros, SORT_REGULAR );
     }
 
     /**

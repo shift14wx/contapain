@@ -2,22 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Rubro;
-use Faker\Generator;
+use App\Models\SubCategoriasPadre;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator as Faker;
 
-class RubroFactory extends Factory
+class SubCategoriasPadreFactory extends Factory
 {
-
-    private Faker $_faker;
-
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Rubro::class;
+    protected $model = SubCategoriasPadre::class;
 
     /**
      * Define the model's default state.
@@ -28,8 +23,7 @@ class RubroFactory extends Factory
     {
         return [
             "titulo" => $this->faker->firstNameMale,
-            "debe" =>  $this->faker->randomElement([false,true]),
-            "haber" => $this->faker->randomElement([true,false]),
+            "id_categoria" => $this->faker->numberBetween($min = 1, $max = 3),
         ];
     }
 }

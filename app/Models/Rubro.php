@@ -38,7 +38,7 @@ class Rubro extends Model
         'created_at' => 'datetime:Y-m-d',
         'updated_at' =>  'datetime:Y-m-d',
     ];
-    protected $appends= [ "sub", "id" ];
+    protected $appends= [ "sub", "id", "tabla" ];
 
 
 
@@ -52,7 +52,10 @@ class Rubro extends Model
         return $this->attributes['sub'] = $this->sub_rubros_padres()->get()->toArray();
     }
 
-
+    public function getTablaAttribute()
+    {
+        return $this->attributes['tabla'] = "rubro";
+    }
 
 	public function sub_rubros_padres()
 	{

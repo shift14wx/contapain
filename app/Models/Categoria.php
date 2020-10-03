@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Categoria extends Model
 {
+    use HasFactory;
 	use SoftDeletes;
 	protected $table = 'categorias';
 	protected $primaryKey = 'id_categorias';
@@ -35,7 +37,7 @@ class Categoria extends Model
         'created_at' => 'datetime:Y-m-d',
         'updated_at' =>  'datetime:Y-m-d',
     ];
-    protected $appends= [ "sub", "id" ];
+    protected $appends= [ "sub", "id", "tabla" ];
 
     public function getIdAttribute()
     {
@@ -45,6 +47,11 @@ class Categoria extends Model
     public function getSubAttribute()
     {
         return $this->attributes['sub'] = $this->sub_categorias_padres()->get()->toArray();
+    }
+
+    public function getTablaAttribute()
+    {
+        return $this->attributes['tabla'] = "categoria";
     }
 
 	public function sub_rubros_hijo()

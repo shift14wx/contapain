@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class SubRubrosHijo extends Model
 {
+    use HasFactory;
 	use SoftDeletes;
 	protected $table = 'sub_rubros_hijo';
 	protected $primaryKey = 'id_sub_rubro_hijo';
@@ -36,7 +38,7 @@ class SubRubrosHijo extends Model
         'updated_at' =>  'datetime:Y-m-d',
     ];
 
-    protected $appends = ["sub", "id"];
+    protected $appends = ["sub", "id", "tabla" ];
 
     public function getIdAttribute()
     {
@@ -53,8 +55,13 @@ class SubRubrosHijo extends Model
 		return $this->belongsTo(SubRubrosPadre::class, 'id_sub_rubro_padre');
 	}
 
+    public function getTablaAttribute()
+    {
+        return $this->attributes['tabla'] = "sub_rubro_hijo";
+    }
 
-	public function categorias()
+
+    public function categorias()
 	{
 		return $this->hasMany(Categoria::class, 'id_sub_rubro_hijo');
 	}

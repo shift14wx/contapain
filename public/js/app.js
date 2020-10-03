@@ -3812,13 +3812,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Registros",
   props: ["id_asiento", "registros", "catalogo_cuentas"],
   data: function data() {
     return {
       "idAsiento": this.id_asiento,
-      "registros": this.registros,
+      "localregistros": this.registros,
       "catalogoCuentas": this.catalogo_cuentas
     };
   }
@@ -29004,7 +29007,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-app")
+  return _c("v-app", [
+    _c("h1", [_vm._v("REGISTROS XDXD")]),
+    _vm._v(" "),
+    _c("div", [_vm._v("\n        " + _vm._s(_vm.catalogoCuentas) + "\n    ")])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Rubro;
+use App\Models\SubRubrosHijo;
 use Illuminate\Database\Seeder;
 
-class RubroTableSeeder extends Seeder
+class SubRubrosHijoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class RubroTableSeeder extends Seeder
      */
     public function run()
     {
-        Rubro::factory(3)->create();
+        SubRubrosHijo::factory(3)->create();
     }
 }

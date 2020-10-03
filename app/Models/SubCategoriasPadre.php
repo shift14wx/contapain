@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class SubCategoriasPadre extends Model
 {
+    use HasFactory;
 	use SoftDeletes;
 	protected $table = 'sub_categorias_padre';
 	protected $primaryKey = 'is_sub_categoria_padre';
@@ -34,7 +36,7 @@ class SubCategoriasPadre extends Model
         'updated_at' =>  'datetime:Y-m-d',
     ];
 
-    protected $appends = ["id"];
+    protected $appends = [ "id", "tabla" ];
 
     public function getIdAttribute()
     {
@@ -45,4 +47,10 @@ class SubCategoriasPadre extends Model
 	{
 		return $this->belongsTo(Categoria::class, 'id_categoria');
 	}
+
+    public function getTablaAttribute()
+    {
+        return $this->attributes['tabla'] = "sub_categoria_padre";
+    }
+
 }

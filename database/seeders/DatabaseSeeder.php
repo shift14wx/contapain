@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         $this->call([
             RubroTableSeeder::class,
-           // AsientoTableSeeder::class
+            SubRubrosPadreTableSeeder::class,
+            SubRubrosHijoTableSeeder::class,
+            CategoriasTableSeeder::class,
+            SubCategoriasPadreTableSeeder::class,
+            AsientoTableSeeder::class,
         ]);
     }
 }
