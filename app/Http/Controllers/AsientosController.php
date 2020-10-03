@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asiento;
+use App\Models\Rubro;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,12 +39,21 @@ class AsientosController extends Controller
      */
     public function store(Request $request)
     {
-        dd("jajaja");
-        $asientoNuevo = $request->all();
+        $asientoNuevo = $request->validate(
+            [
+                "concepto_general" => "required|string"
+            ]
+        );
         $asientoNuevo["id_user"] = Auth::user()->getAuthIdentifier();
-        $asiento = new Asiento();
-        $createdAsiento = $asiento->save( $asientoNuevo );
-        dd($createdAsiento);
+        //dd($asientoNuevo);
+        $asiento = new Asiento($asientoNuevo);
+        $asiento->save();
+            dd( Rubro::all()->toArray() );
+             return \Inertia\Inertia::render('Contapain/Registros',[
+                 "id_asiento" => $asiento->id_asiento,
+                 "catalogo_cuentas" => "",
+                 "statusCode" => JsonResponse::HTTP_CREATED
+             ]);
     }
 
     /**

@@ -34,20 +34,25 @@ class Rubro extends Model
 	protected $table = 'Rubros';
 	protected $primaryKey = 'id_rubro';
 
-//
-//	protected $casts = [
-//		'titulo' => 'character varying',
-//		'debe' => 'int',
-//		'haber' => 'int',
-//		'created_at' => 'timestamp without time zone',
-//		'updated_at' => 'timestamp without time zone'
-//	];
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' =>  'datetime:Y-m-d',
+    ];
+    protected $appends= [ "sub", "id" ];
 
-	protected $fillable = [
-		'titulo',
-		'debe',
-		'haber'
-	];
+
+
+    public function getIdAttribute()
+    {
+        return $this->attributes["id"] = $this->id_rubro;
+    }
+
+    public function getSubAttribute()
+    {
+        return $this->attributes['sub'] = $this->sub_rubros_padres()->get()->toArray();
+    }
+
+
 
 	public function sub_rubros_padres()
 	{

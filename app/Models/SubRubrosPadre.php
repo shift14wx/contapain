@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class SubRubrosPadre
- * 
+ *
  * @property int $id_sub_rubro_padre
  * @property character varying $titulo
  * @property int $id_rubro
  * @property timestamp without time zone|null $created_at
  * @property timestamp without time zone|null $updated_at
  * @property string|null $deleted_at
- * 
+ *
  * @property Rubro $rubro
  * @property Collection|SubRubrosHijo[] $sub_rubros_hijos
  *
@@ -32,11 +32,11 @@ class SubRubrosPadre extends Model
 	protected $primaryKey = 'id_sub_rubro_padre';
 
 	protected $casts = [
-		'titulo' => 'character varying',
-		'id_rubro' => 'int',
-		'created_at' => 'timestamp without time zone',
-		'updated_at' => 'timestamp without time zone'
+		'created_at' => 'datetime:Y-m-d',
+		'updated_at' =>  'datetime:Y-m-d',
 	];
+
+	protected $appends = [ "sub", "id" ];
 
 	protected $fillable = [
 		'titulo',
@@ -47,6 +47,16 @@ class SubRubrosPadre extends Model
 	{
 		return $this->belongsTo(Rubro::class, 'id_rubro');
 	}
+
+    public function getIdAttribute()
+    {
+        return $this->attributes["id"] = $this->id_sub_rubro_padre;
+    }
+
+	public function getSubAttribute()
+    {
+        return $this->sub_rubros_hijos()->get()->toArray();
+    }
 
 	public function sub_rubros_hijos()
 	{

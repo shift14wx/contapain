@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class SubRubrosHijo
- * 
+ *
  * @property int $id_sub_rubro_hijo
  * @property character varying|null $titulo
  * @property int $id_sub_rubro_padre
  * @property timestamp without time zone|null $created_at
  * @property timestamp without time zone|null $updated_at
  * @property string|null $deleted_at
- * 
+ *
  * @property SubRubrosPadre $sub_rubros_padre
  * @property Collection|Categoria[] $categorias
  *
@@ -31,22 +31,28 @@ class SubRubrosHijo extends Model
 	protected $table = 'sub_rubros_hijo';
 	protected $primaryKey = 'id_sub_rubro_hijo';
 
-	protected $casts = [
-		'titulo' => 'character varying',
-		'id_sub_rubro_padre' => 'int',
-		'created_at' => 'timestamp without time zone',
-		'updated_at' => 'timestamp without time zone'
-	];
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' =>  'datetime:Y-m-d',
+    ];
 
-	protected $fillable = [
-		'titulo',
-		'id_sub_rubro_padre'
-	];
+    protected $appends = ["sub", "id"];
 
-	public function sub_rubros_padre()
+    public function getIdAttribute()
+    {
+        return $this->attributes["id"] = $this->id_sub_rubro_hijo;
+    }
+
+    public function getSubAttribute()
+    {
+        return $this->categorias()->get()->toArray();
+    }
+
+    public function sub_rubros_padre()
 	{
 		return $this->belongsTo(SubRubrosPadre::class, 'id_sub_rubro_padre');
 	}
+
 
 	public function categorias()
 	{

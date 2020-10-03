@@ -16,6 +16,8 @@ window._ = require('lodash');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// esto no es necesario hasta el momento en  dado caso sea, ahi se quedara el paquete cookie instalado, pero
+// no es importante para nada mas
 window.axios.defaults.headers.common["X-XSRF-TOKEN"] = cookie.parse(document.cookie)['XSRF-TOKEN']
 
 /**

@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Categoria
- * 
+ *
  * @property int $id_sub_rubro_hijo
  * @property int $id_categorias
  * @property character varying|null $titulo
  * @property timestamp without time zone|null $created_at
  * @property timestamp without time zone|null $updated_at
  * @property string|null $deleted_at
- * 
+ *
  * @property SubRubrosHijo $sub_rubros_hijo
  * @property Collection|SubCategoriasPadre[] $sub_categorias_padres
  *
@@ -31,17 +31,21 @@ class Categoria extends Model
 	protected $table = 'categorias';
 	protected $primaryKey = 'id_categorias';
 
-	protected $casts = [
-		'id_sub_rubro_hijo' => 'int',
-		'titulo' => 'character varying',
-		'created_at' => 'timestamp without time zone',
-		'updated_at' => 'timestamp without time zone'
-	];
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' =>  'datetime:Y-m-d',
+    ];
+    protected $appends= [ "sub", "id" ];
 
-	protected $fillable = [
-		'id_sub_rubro_hijo',
-		'titulo'
-	];
+    public function getIdAttribute()
+    {
+        return $this->attributes["id"] = $this->id_categorias;
+    }
+
+    public function getSubAttribute()
+    {
+        return $this->attributes['sub'] = $this->sub_categorias_padres()->get()->toArray();
+    }
 
 	public function sub_rubros_hijo()
 	{

@@ -48,12 +48,6 @@ class Asiento extends Model
 		'fecha_cerrado'
 	];
 
-	protected $fillable = [
-		'fecha_inicio',
-		'fecha_cerrado',
-		'concepto_general',
-		'saldo'
-	];
 
 	public function registros()
 	{
