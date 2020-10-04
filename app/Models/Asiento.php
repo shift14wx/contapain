@@ -40,7 +40,8 @@ class Asiento extends Model
 	protected $casts = [
 		'saldo' => 'float',
         'created_at' => "datetime:Y-m-d",
-        "updated_at" => "datetime:Y-m-d"
+        "updated_at" => "datetime:Y-m-d",
+        "fecha_inicio" => "datetime:Y-m-d"
 	];
 
 	protected $dates = [
