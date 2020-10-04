@@ -11,7 +11,6 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" data-app>
 
                     <v-app>
-                        {{ registros[0] }}
                         <v-data-table
                             :headers="headers"
                             :items="registros"
@@ -67,7 +66,7 @@
                                                         >
                                                             <v-autocomplete
                                                                 v-model="editedItem.id_detalle_concepto"
-                                                                :items="catalogoCuentas"
+                                                                :items="catalogoCuentasParsed"
                                                                 :item-value="'id'"
                                                                 :item-text="'tituloAndId'"
                                                                 label="Detalle o concepto"
@@ -187,6 +186,7 @@ export default {
             "registros" : this.selectedRegistros,
             "catalogoCuentas" : this.catalogo_cuentas,
             "asiento" : this.selectedAsiento,
+            "catalogoCuentasParsed" : this.catalogo_cuentas.map(cuenta => { return {"tituloAndId":cuenta.tituloAndId,"id":cuenta.id,"titulo":cuenta.titulo}; } ),
             dialog: false,
             dialogDelete: false,
             headers: [
@@ -243,19 +243,19 @@ export default {
         },
 
         editItem(item) {
-            this.editedIndex = this.desserts.indexOf(item)
+            this.editedIndex = this.registros.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
 
         deleteItem(item) {
-            this.editedIndex = this.desserts.indexOf(item)
+            this.editedIndex = this.registros.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialogDelete = true
         },
 
         deleteItemConfirm() {
-            this.desserts.splice(this.editedIndex, 1)
+            this.registros.splice(this.editedIndex, 1)
             this.closeDelete()
         },
 
@@ -277,9 +277,10 @@ export default {
 
         save() {
             if (this.editedIndex > -1) {
-                Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                Object.assign(this.registros[this.editedIndex], this.editedItem)
+                this.registros[ this.editedIndex ].titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
             } else {
-                this.desserts.push(this.editedItem)
+                this.registros.push(this.editedItem)
             }
             this.close()
         },

@@ -4062,7 +4062,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4074,6 +4073,13 @@ __webpack_require__.r(__webpack_exports__);
       "registros": this.selectedRegistros,
       "catalogoCuentas": this.catalogo_cuentas,
       "asiento": this.selectedAsiento,
+      "catalogoCuentasParsed": this.catalogo_cuentas.map(function (cuenta) {
+        return {
+          "tituloAndId": cuenta.tituloAndId,
+          "id": cuenta.id,
+          "titulo": cuenta.titulo
+        };
+      }),
       dialog: false,
       dialogDelete: false,
       headers: [{
@@ -4136,17 +4142,17 @@ __webpack_require__.r(__webpack_exports__);
       this.registros = this.selectedRegistros;
     },
     editItem: function editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.registros.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.registros.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
     deleteItemConfirm: function deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.registros.splice(this.editedIndex, 1);
       this.closeDelete();
     },
     close: function close() {
@@ -4168,10 +4174,15 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     save: function save() {
+      var _this3 = this;
+
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.registros[this.editedIndex], this.editedItem);
+        this.registros[this.editedIndex].titulo = this.catalogoCuentasParsed.find(function (cat) {
+          return cat.id == _this3.editedItem.id_detalle_concepto;
+        }).titulo;
       } else {
-        this.desserts.push(this.editedItem);
+        this.registros.push(this.editedItem);
       }
 
       this.close();
@@ -29495,11 +29506,6 @@ var render = function() {
               _c(
                 "v-app",
                 [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.registros[0]) +
-                      "\n                    "
-                  ),
                   _c("v-data-table", {
                     staticClass: "elevation-1",
                     attrs: {
@@ -29653,7 +29659,7 @@ var render = function() {
                                                         _c("v-autocomplete", {
                                                           attrs: {
                                                             items:
-                                                              _vm.catalogoCuentas,
+                                                              _vm.catalogoCuentasParsed,
                                                             "item-value": "id",
                                                             "item-text":
                                                               "tituloAndId",

@@ -59,7 +59,6 @@ class AsientosController extends Controller
 
         $rubros = Rubro::all()->toArray();
         $rubrosParseados = [];
-
         $this->parseRubros($rubros,$rubrosParseados);
         $asiento = Asiento::find( $id_asiento )->toArray();
         $registros = registro::where("id_asiento",$id_asiento)->get()->toArray();
@@ -123,14 +122,21 @@ class AsientosController extends Controller
 
 
 
-    public function parseRubros( $rubros, &$parsedRubros )
+    public function parseRubros( $rubros, &$parsedRubros, $rubroActivos = [] )
     {
         foreach ($rubros as $key => $rubro)
         {
+            if( $rubro["tabla"] == "rubro" ) {
+                $rubroActivos = [
+                    "debe" => $rubro["debe"],
+                    "haber" => $rubro["haber"]
+                ];
+            }
             if( array_key_exists( "sub", $rubro ) && count( $rubro["sub"] ) >= 1 ) {
-                $this->parseRubros( $rubro["sub"], $parsedRubros );
+                $this->parseRubros( $rubro["sub"], $parsedRubros,$rubroActivos );
             }
             unset($rubro["sub"]);
+            $rubro = array_merge($rubro, $rubroActivos);
             array_push( $parsedRubros, $rubro );
         }
         $parsedRubros = array_unique( $parsedRubros, SORT_REGULAR );
