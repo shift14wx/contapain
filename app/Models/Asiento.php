@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float|null $saldo
  * @property string|null $deleted_at
  * @property timestamp without time zone|null $created_at
- * @property timestamp without time zone|null $updated_at
+ * @property timestamp  time zone|null $updated_at
  *
  * @property Collection|Registro[] $registros
  *

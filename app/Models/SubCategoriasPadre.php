@@ -36,7 +36,12 @@ class SubCategoriasPadre extends Model
         'updated_at' =>  'datetime:Y-m-d',
     ];
 
-    protected $appends = [ "id", "tabla" ];
+    protected $appends = [ "id", "tabla", "tituloAndId" ];
+
+    public function getTituloAndIdAttribute()
+    {
+        return $this->attributes["tituloAndId"] = $this->id." ".$this->titulo;
+    }
 
     public function getIdAttribute()
     {

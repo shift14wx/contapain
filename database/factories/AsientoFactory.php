@@ -22,8 +22,8 @@ class AsientoFactory extends Factory
     public function definition()
     {
         return [
-            "fecha_inicio" => $this->faker->dateTimeBetween("2020-09-01","2020-09-30"),
-            "fecha_cerrado" => $this->faker->dateTimeBetween("2020-09-01","2020-09-30"),
+            "fecha_inicio" => $this->faker->dateTimeBetween("2020-09-31","2020-10-30"),
+            "fecha_cerrado" => $this->faker->dateTimeBetween("2020-09-31","2020-10-30"),
             "concepto_general" => "solo un copcepto bien malo",
             "saldo" => 10.02,
             "id_user" => $this->faker->numberBetween($min = 1, $max = 3)

@@ -38,12 +38,17 @@ class SubRubrosPadre extends Model
 		'updated_at' =>  'datetime:Y-m-d',
 	];
 
-	protected $appends = [ "sub", "id", "tabla" ];
+	protected $appends = [ "sub", "id", "tabla", "tituloAndId" ];
 
 	protected $fillable = [
 		'titulo',
 		'id_rubro'
 	];
+
+    public function getTituloAndIdAttribute()
+    {
+        return $this->attributes["tituloAndId"] = $this->id." ".$this->titulo;
+    }
 
 	public function rubro()
 	{

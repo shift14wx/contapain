@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asiento;
-use App\Models\Registro;
+use App\Models\registro;
 use App\Models\Rubro;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AsientosController extends Controller
 {
@@ -61,7 +62,7 @@ class AsientosController extends Controller
 
         $this->parseRubros($rubros,$rubrosParseados);
         $asiento = Asiento::find( $id_asiento )->toArray();
-        $registros = Registro::where("id_asiento","=",$id_asiento)->get()->toArray();
+        $registros = registro::where("id_asiento",$id_asiento)->get()->toArray();
         return \Inertia\Inertia::render('Contapain/Registros',[
             "id_asiento" => $id_asiento,
             "selectedRegistros" => $registros,

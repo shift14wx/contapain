@@ -22,15 +22,14 @@ class registroFactory extends Factory
     public function definition()
     {
         return [
-            'id_detalle_concepto' => $this->faker->randomDigitNotNull,
-        'debe' => $this->faker->word,
-        'haber' => $this->faker->word,
+        'id_detalle_concepto' => $this->faker->numberBetween($min=1,$max=3),
+        'debe' => 100,
+        'haber' => 200,
         'concepto_detallado' => $this->faker->word,
-        'id_rubro' => $this->faker->randomDigitNotNull,
-        'id_asiento' => $this->faker->randomDigitNotNull,
+        'id_rubro' => $this->faker->numberBetween($min=1,$max=3),
+        'id_asiento' => $this->faker->numberBetween($min=1,$max=3),
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
-        'updated_at' => $this->faker->date('Y-m-d H:i:s'),
-        'deleted_at' => $this->faker->date('Y-m-d H:i:s')
+        'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }
 }

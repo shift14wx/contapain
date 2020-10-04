@@ -37,7 +37,12 @@ class Categoria extends Model
         'created_at' => 'datetime:Y-m-d',
         'updated_at' =>  'datetime:Y-m-d',
     ];
-    protected $appends= [ "sub", "id", "tabla" ];
+    protected $appends= [ "sub", "id", "tabla", "tituloAndId" ];
+
+    public function getTituloAndIdAttribute()
+    {
+        return $this->attributes["tituloAndId"] = $this->id." ".$this->titulo;
+    }
 
     public function getIdAttribute()
     {

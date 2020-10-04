@@ -46,7 +46,7 @@ class CreateRegistroTable extends Migration
                 ->onUpdate('CASCADE');
             $table->timestamps();
             $table->softDeletes();
-            
+
         });
     }
 

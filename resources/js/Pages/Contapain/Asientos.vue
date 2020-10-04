@@ -87,23 +87,22 @@
                                 </v-col>
                             </v-row>
 
+                            <!--FULL SCREEN DIALOG-->
+                            <dialog-fullscreen v-if="showDialog" v-model="showDialog" >
+                                <template v-slot:title>
+                                    <p>Asiento {{ selectedAsiento || 'nuevo' }}</p>
+                                </template>Asiento
+                                <template v-slot:content>
+                                    <form-asiento :selected_fecha_inicio="fecha_inicio_selected"></form-asiento>
+                                </template>
+                            </dialog-fullscreen>
+
                         </v-app>
 
 
                     </div>
                 </div>
             </div>
-
-            <!--FULL SCREEN DIALOG-->
-            <dialog-fullscreen v-model="showDialog" >
-                <template v-slot:title>
-                    <p>Asiento {{ selectedAsiento || 'nuevo' }}</p>
-                </template>Asiento
-                <template v-slot:content>
-                    <form-asiento :selected_fecha_inicio="fecha_inicio_selected"></form-asiento>
-                </template>
-            </dialog-fullscreen>
-
         </app-layout>
 
 </template>
