@@ -10,6 +10,7 @@ use App\Repositories\registroRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Http\JsonResponse;
 use Response;
 
 class registroController extends AppBaseController
@@ -61,13 +62,21 @@ class registroController extends AppBaseController
             'id_detalle_concepto'=> 'required',
             'debe' => 'required',
             'haber'=> 'required',
-            'concepto_detallado' => 'required',
             'id_rubro'=> 'required',
             'id_asiento' => 'required']
         ); 
-        $input = $request->all();
+        $input = $request->only("id_detalle_concepto","id_rubro","debe","haber","id_rubro","id_asiento");
 
         $registro = $this->registroRepository->create($input);
+
+        if( $request->exists("json") && $request->get("json") == true ){
+            return response()->json(
+                [
+                    "id_registro" => $registro->id_registro
+                ],
+                JsonResponse::HTTP_CREATED
+            );
+        }
 
         Flash::success('Registro saved successfully.');
 
@@ -132,7 +141,11 @@ class registroController extends AppBaseController
             return redirect(route('registros.index'));
         }
 
-        $registro = $this->registroRepository->update($request->all(), $id);
+        $registro = $this->registroRepository->update($request->only("id_rubro", "id_registro", "id_detalle_concepto", "id_asiento", "debe", "haber", "concepto_detallado"), $id);
+
+        if( $request->exists("json") && $request->get("json") == true ){
+            return response()->json(["msg"=>"done"], JsonResponse::HTTP_OK );
+        }
 
         Flash::success('Registro updated successfully.');
 
@@ -148,17 +161,24 @@ class registroController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $registro = $this->registroRepository->find($id);
 
         if (empty($registro)) {
+            if( $request->exists("json") && $request->get("json") == true ){
+                return response()->json(["msg"=>"no se encontro ese ID"], JsonResponse::HTTP_INTERNAL_SERVER_ERROR );
+            }
             Flash::error('Registro not found');
-
+            
             return redirect(route('registros.index'));
         }
 
         $this->registroRepository->delete($id);
+
+        if( $request->exists("json") && $request->get("json") == true ){
+            return response()->json(["msg"=>"done"], JsonResponse::HTTP_OK );
+        }
 
         Flash::success('Registro deleted successfully.');
 

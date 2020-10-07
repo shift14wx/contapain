@@ -18,7 +18,7 @@
                               <strong>Edit Registro</strong>
                           </div>
                           <div class="card-body">
-                              {!! Form::model($registro, ['route' => ['registros.update', $registro->id], 'method' => 'patch']) !!}
+                              {!! Form::model($registro, ['route' => ['registros.update', $registro->id_registro], 'method' => 'patch']) !!}
 
                               @include('registros.fields')
 

@@ -78,7 +78,7 @@
                                                         <v-col
                                                             cols="12"
                                                             sm="6"
-                                                            md="4"
+                                                            md="6"
                                                         >
                                                             <v-text-field
                                                                 v-model="editedItem.debe"
@@ -90,7 +90,7 @@
                                                         <v-col
                                                             cols="12"
                                                             sm="6"
-                                                            md="4"
+                                                            md="6"
                                                         >
                                                             <v-text-field
                                                                 v-model="editedItem.haber"
@@ -223,6 +223,11 @@ export default {
                 "haber":0.0,
                 "concepto_detallado" : ""
             },
+            METHODS  : {
+                POST : "post",
+                PATCH : "patch",
+                DELETE : "delete"
+            }
         };
     },
     computed:{
@@ -244,6 +249,10 @@ export default {
     },
 
     methods: {
+        showAlert() {
+      // Use sweetalert2
+        this.$swal('Hello Vue world!!!');
+        },
         initialize() {
             this.registros = this.selectedRegistros;
         },
@@ -262,7 +271,8 @@ export default {
 
         deleteItemConfirm() {
             this.registros.splice(this.editedIndex, 1)
-            this.closeDelete()
+            this.sendRequest( this.METHODS.DELETE, this.editedIndex );
+            
         },
 
         close() {
@@ -282,14 +292,135 @@ export default {
         },
 
         save() {
-            if (this.editedIndex > -1) {
+            if (this.editedIndex > -1) { // SI ESTA EDITANDO
                 Object.assign(this.registros[this.editedIndex], this.editedItem)
                 this.registros[ this.editedIndex ].titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
-            } else {
+                this.sendRequest( this.METHODS.PATCH, this.editedIndex );
+            } else { // SI ESTA ALMACENANDO
                 this.editedItem.titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
-                    this.registros.push(this.editedItem);
+                    
+                this.sendRequest( this.METHODS.POST );
             }
-            this.close()
+        },
+        sendRequest( method = null, index = -1 ){
+                       // https://contapain.lndo.site/registros
+            let titulo = "";
+                if("post" == method){
+                    titulo = "agregar";
+                }else if( "patch" == method ){
+                    titulo = "editar";
+                }else if( "delete" == method ){
+                    titulo = "eliminar";
+                }else{
+                    titulo = "procesar";
+                }
+          this.$swal.fire({  
+              title: `¿Esta seguro de ${titulo} este registro?`,
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Simon',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                if( this.METHODS.POST == method && index == -1 ){ // desea almacenar
+               this.editedItem._token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+             this.editedItem.json = true; // esto es para que en el endpoint entienda que necesitamos una respuesta json, esto es mannual no lo hace laravel
+             this.editedItem.id_rubro = this.editedItem.id_detalle_concepto.toString().substr(0,1);
+             this.editedItem.id_asiento = this.idAsiento;
+                return fetch('/registros',{
+                        method: 'POST',
+                        headers: {
+                        //'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.editedItem)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error(response.statusText)
+                        }
+                        return response.json();
+                    })
+                    .catch(error => {
+                        this.$swal.showValidationMessage(
+                        `Request failed: ${error}`
+                        )
+                    })
+                }else if( this.METHODS.POST == method && index >= 0 ) { // desea actualizar
+                    this.editedItem._token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+                    this.editedItem.json = true; // esto es para que en el endpoint entienda que necesitamos una respuesta json, esto es mannual no lo hace laravel
+                    this.editedItem.id_rubro = this.editedItem.id_detalle_concepto.toString().substr(0,1);
+                    this.editedItem.id_asiento = this.idAsiento;
+                return fetch(`/registros/${this.editedItem.id_registro}`,{
+                        method: 'PATCH',
+                        headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.editedItem)
+                    })
+                    .then(response => {
+                        if ( response.hasOwnProperty("ok") && !response.ok) {
+                        throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .catch(error => {
+                        this.$swal.showValidationMessage(
+                        `Request failed: ${error}`
+                        )
+                    })
+                }else if( this.METHODS.DELETE == method && index >= 0 ) { // desea elimnar
+                return fetch(`/registros/${this.editedItem.id_registro}`,{
+                        method: 'DELETE',
+                        headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({"json":true})
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error(response.statusText)
+                        }
+                        this.closeDelete()
+                        return response.json()
+                    })
+                    .catch(error => {
+                        this.$swal.showValidationMessage(
+                        `Request failed: ${error}`
+                        )
+                        this.closeDelete()
+                    })
+                }
+            },
+            allowOutsideClick: () => !this.$swal.isLoading()
+            }).then((result) => {
+            if (result.isConfirmed) {
+                if("post" == method){
+                    titulo = "agregado";
+                        this.editedItem.id_registro = result.value.id_registro;
+                        this.registros.push(this.editedItem);
+                }else if( "patch" == method ){
+                    titulo = "editado";
+                }else if( "delete" == method ){
+                    titulo = "eliminado";
+                }else{
+                    titulo = "procesar";
+                }
+                this.$swal.fire({
+                title: `El registro fue ${titulo}`,
+                })
+            }
+            
+            this.close()  
+            }).catch((err)=>{
+                console.log(err);
+            //this.closeDelete()   
+            this.close()  
+            });    
+                   
         },
         momentSetLocale() {
             moment.locale('es', {
