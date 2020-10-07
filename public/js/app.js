@@ -4062,6 +4062,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4182,6 +4183,10 @@ __webpack_require__.r(__webpack_exports__);
           return cat.id == _this3.editedItem.id_detalle_concepto;
         }).titulo;
       } else {
+        console.log(this.editedItem);
+        this.editedItem.titulo = this.catalogoCuentasParsed.find(function (cat) {
+          return cat.id == _this3.editedItem.id_detalle_concepto;
+        }).titulo;
         this.registros.push(this.editedItem);
       }
 
@@ -29607,29 +29612,31 @@ var render = function() {
                                                     _c(
                                                       "v-col",
                                                       [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            disabled: "",
-                                                            label:
-                                                              "Id de registro"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.editedItem
-                                                                .id_registro,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.editedItem,
-                                                                "id_registro",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "editedItem.id_registro"
-                                                          }
-                                                        }),
+                                                        _vm.editedIndex > -1
+                                                          ? _c("v-text-field", {
+                                                              attrs: {
+                                                                disabled: "",
+                                                                label:
+                                                                  "Id de registro"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.editedItem
+                                                                    .id_registro,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.$set(
+                                                                    _vm.editedItem,
+                                                                    "id_registro",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                                expression:
+                                                                  "editedItem.id_registro"
+                                                              }
+                                                            })
+                                                          : _vm._e(),
                                                         _vm._v(" "),
                                                         _c("input", {
                                                           attrs: {

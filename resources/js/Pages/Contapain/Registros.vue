@@ -56,6 +56,7 @@
                                                                 v-model="editedItem.id_registro"
                                                                 disabled
                                                                 label="Id de registro"
+                                                                v-if="(editedIndex > -1)"
                                                             ></v-text-field>
                                                             <input :value="editedItem.id_registro" type="hidden" name="id_registro">
                                                         </v-col>
@@ -280,6 +281,8 @@ export default {
                 Object.assign(this.registros[this.editedIndex], this.editedItem)
                 this.registros[ this.editedIndex ].titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
             } else {
+                console.log( this.editedItem );
+                 this.editedItem.titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
                 this.registros.push(this.editedItem)
             }
             this.close()
