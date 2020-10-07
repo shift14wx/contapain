@@ -33,12 +33,13 @@
                                     >
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-btn
-                                                color="primary"
+                                                color="success"
                                                 dark
                                                 class="mb-2"
                                                 v-bind="attrs"
                                                 v-on="on"
                                             >
+                                            <v-icon> mdi-plus </v-icon> &nbsp;
                                                 Agregar Registro
                                             </v-btn>
                                         </template>
@@ -79,10 +80,12 @@
                                                             
                                                         <v-col
                                                             cols="12"
-                                                            sm="6"
-                                                            md="6"
+                                                            :sm="(parseFloat(editedItem.haber) > 0.0) ? 6 : 12"
+                                                            :md="(parseFloat(editedItem.haber) > 0.0) ? 6 : 12"
                                                         >
                                                             <v-text-field
+                                                            v-if="!(parseFloat(editedItem.haber) > 0.0)"
+                                                                prepend-icon="mdi-currency-usd"
                                                                 v-model="editedItem.debe"
                                                                 :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
                                                                 type="decimal"
@@ -91,10 +94,12 @@
                                                         </v-col>
                                                         <v-col
                                                             cols="12"
-                                                            sm="6"
-                                                            md="6"
+                                                            :sm="(parseFloat(editedItem.debe) > 0.0) ? 6 : 12"
+                                                            :md="(parseFloat(editedItem.debe) > 0.0) ? 6 : 12"
                                                         >
                                                             <v-text-field
+                                                            v-if="!(parseFloat(editedItem.debe) > 0.0)"
+                                                                prepend-icon="mdi-currency-usd"
                                                                 v-model="editedItem.haber"
                                                                  :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
                                                                 type="decimal"
@@ -150,17 +155,62 @@
                                     </v-dialog>
                                 </v-toolbar>
                             </template>
+
+                            <!--
+
+                                DEBE  HABER CAMPOS
+                            -->
+                            <template v-slot:item.debe="{ item }">
+                                <v-chip
+                                class="ma-2"
+                                color="green"
+                                text-color="white"
+                                v-if="showCorrectDebeHaber(item.id_detalle_concepto,'debe')"
+                                >
+                                ${{item.debe}}
+                                </v-chip>
+
+                                 <v-chip
+                                 v-else
+                                class="ma-2"
+                                color="red"
+                                text-color="white"
+                                >
+                                ${{item.debe}}
+                                </v-chip>
+                            </template>
+
+                             <template v-slot:item.haber="{ item }">
+                                <v-chip
+                                class="ma-2"
+                                color="green"
+                                text-color="white"
+                                v-if="showCorrectDebeHaber(item.id_detalle_concepto,'haber')"
+                                >
+                                ${{item.haber}}
+                                </v-chip>
+
+                                 <v-chip
+                                 v-else
+                                class="ma-2"
+                                color="red"
+                                text-color="white"
+                                >
+                                ${{item.haber}}
+                                </v-chip>
+                            </template>
+
                             <template v-slot:item.actions="{ item }">
                                 <v-icon
-                                    small
                                     class="mr-2"
                                     @click="editItem(item)"
+                                    :color="'primary'"
                                 >
                                     mdi-pencil
                                 </v-icon>
                                 <v-icon
-                                    small
                                     @click="deleteItem(item)"
+                                    :color="'error'"
                                 >
                                     mdi-delete
                                 </v-icon>
@@ -252,6 +302,10 @@ export default {
     },
 
     methods: {
+        showCorrectDebeHaber(idConcepto, tipo){
+            let concepto = this.catalogo_cuentas.find( ( catalogo ) => catalogo.id == idConcepto );
+            return concepto[tipo];
+        },
         showAlert() {
       // Use sweetalert2
         this.$swal('Hello Vue world!!!');

@@ -4070,6 +4070,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4150,6 +4200,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    showCorrectDebeHaber: function showCorrectDebeHaber(idConcepto, tipo) {
+      var concepto = this.catalogo_cuentas.find(function (catalogo) {
+        return catalogo.id == idConcepto;
+      });
+      return concepto[tipo];
+    },
     showAlert: function showAlert() {
       // Use sweetalert2
       this.$swal('Hello Vue world!!!');
@@ -32921,7 +32977,7 @@ var render = function() {
                                               {
                                                 staticClass: "mb-2",
                                                 attrs: {
-                                                  color: "primary",
+                                                  color: "success",
                                                   dark: ""
                                                 }
                                               },
@@ -32932,10 +32988,14 @@ var render = function() {
                                             on
                                           ),
                                           [
+                                            _c("v-icon", [
+                                              _vm._v(" mdi-plus ")
+                                            ]),
                                             _vm._v(
-                                              "\n                                            Agregar Registro\n                                        "
+                                              "  \n                                            Agregar Registro\n                                        "
                                             )
-                                          ]
+                                          ],
+                                          1
                                         )
                                       ]
                                     }
@@ -33088,55 +33148,82 @@ var render = function() {
                                                           {
                                                             attrs: {
                                                               cols: "12",
-                                                              sm: "6",
-                                                              md: "6"
+                                                              sm:
+                                                                parseFloat(
+                                                                  _vm.editedItem
+                                                                    .haber
+                                                                ) > 0.0
+                                                                  ? 6
+                                                                  : 12,
+                                                              md:
+                                                                parseFloat(
+                                                                  _vm.editedItem
+                                                                    .haber
+                                                                ) > 0.0
+                                                                  ? 6
+                                                                  : 12
                                                             }
                                                           },
                                                           [
-                                                            _c("v-text-field", {
-                                                              attrs: {
-                                                                rules: [
-                                                                  function(
-                                                                    value
-                                                                  ) {
-                                                                    return (
-                                                                      !!value ||
-                                                                      "Este campo es necesario"
-                                                                    )
-                                                                  },
-                                                                  function(
-                                                                    value
-                                                                  ) {
-                                                                    return (
-                                                                      !isNaN(
-                                                                        parseFloat(
+                                                            !(
+                                                              parseFloat(
+                                                                _vm.editedItem
+                                                                  .haber
+                                                              ) > 0.0
+                                                            )
+                                                              ? _c(
+                                                                  "v-text-field",
+                                                                  {
+                                                                    attrs: {
+                                                                      "prepend-icon":
+                                                                        "mdi-currency-usd",
+                                                                      rules: [
+                                                                        function(
                                                                           value
+                                                                        ) {
+                                                                          return (
+                                                                            !!value ||
+                                                                            "Este campo es necesario"
+                                                                          )
+                                                                        },
+                                                                        function(
+                                                                          value
+                                                                        ) {
+                                                                          return (
+                                                                            !isNaN(
+                                                                              parseFloat(
+                                                                                value
+                                                                              )
+                                                                            ) ||
+                                                                            "Solo digitos"
+                                                                          )
+                                                                        }
+                                                                      ],
+                                                                      type:
+                                                                        "decimal",
+                                                                      label:
+                                                                        "Debe"
+                                                                    },
+                                                                    model: {
+                                                                      value:
+                                                                        _vm
+                                                                          .editedItem
+                                                                          .debe,
+                                                                      callback: function(
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.editedItem,
+                                                                          "debe",
+                                                                          $$v
                                                                         )
-                                                                      ) ||
-                                                                      "Solo digitos"
-                                                                    )
+                                                                      },
+                                                                      expression:
+                                                                        "editedItem.debe"
+                                                                    }
                                                                   }
-                                                                ],
-                                                                type: "decimal",
-                                                                label: "Debe"
-                                                              },
-                                                              model: {
-                                                                value:
-                                                                  _vm.editedItem
-                                                                    .debe,
-                                                                callback: function(
-                                                                  $$v
-                                                                ) {
-                                                                  _vm.$set(
-                                                                    _vm.editedItem,
-                                                                    "debe",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                                expression:
-                                                                  "editedItem.debe"
-                                                              }
-                                                            })
+                                                                )
+                                                              : _vm._e()
                                                           ],
                                                           1
                                                         ),
@@ -33146,55 +33233,82 @@ var render = function() {
                                                           {
                                                             attrs: {
                                                               cols: "12",
-                                                              sm: "6",
-                                                              md: "6"
+                                                              sm:
+                                                                parseFloat(
+                                                                  _vm.editedItem
+                                                                    .debe
+                                                                ) > 0.0
+                                                                  ? 6
+                                                                  : 12,
+                                                              md:
+                                                                parseFloat(
+                                                                  _vm.editedItem
+                                                                    .debe
+                                                                ) > 0.0
+                                                                  ? 6
+                                                                  : 12
                                                             }
                                                           },
                                                           [
-                                                            _c("v-text-field", {
-                                                              attrs: {
-                                                                rules: [
-                                                                  function(
-                                                                    value
-                                                                  ) {
-                                                                    return (
-                                                                      !!value ||
-                                                                      "Este campo es necesario"
-                                                                    )
-                                                                  },
-                                                                  function(
-                                                                    value
-                                                                  ) {
-                                                                    return (
-                                                                      !isNaN(
-                                                                        parseFloat(
+                                                            !(
+                                                              parseFloat(
+                                                                _vm.editedItem
+                                                                  .debe
+                                                              ) > 0.0
+                                                            )
+                                                              ? _c(
+                                                                  "v-text-field",
+                                                                  {
+                                                                    attrs: {
+                                                                      "prepend-icon":
+                                                                        "mdi-currency-usd",
+                                                                      rules: [
+                                                                        function(
                                                                           value
+                                                                        ) {
+                                                                          return (
+                                                                            !!value ||
+                                                                            "Este campo es necesario"
+                                                                          )
+                                                                        },
+                                                                        function(
+                                                                          value
+                                                                        ) {
+                                                                          return (
+                                                                            !isNaN(
+                                                                              parseFloat(
+                                                                                value
+                                                                              )
+                                                                            ) ||
+                                                                            "Solo digitos"
+                                                                          )
+                                                                        }
+                                                                      ],
+                                                                      type:
+                                                                        "decimal",
+                                                                      label:
+                                                                        "Haber"
+                                                                    },
+                                                                    model: {
+                                                                      value:
+                                                                        _vm
+                                                                          .editedItem
+                                                                          .haber,
+                                                                      callback: function(
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.editedItem,
+                                                                          "haber",
+                                                                          $$v
                                                                         )
-                                                                      ) ||
-                                                                      "Solo digitos"
-                                                                    )
+                                                                      },
+                                                                      expression:
+                                                                        "editedItem.haber"
+                                                                    }
                                                                   }
-                                                                ],
-                                                                type: "decimal",
-                                                                label: "Haber"
-                                                              },
-                                                              model: {
-                                                                value:
-                                                                  _vm.editedItem
-                                                                    .haber,
-                                                                callback: function(
-                                                                  $$v
-                                                                ) {
-                                                                  _vm.$set(
-                                                                    _vm.editedItem,
-                                                                    "haber",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                                expression:
-                                                                  "editedItem.haber"
-                                                              }
-                                                            })
+                                                                )
+                                                              : _vm._e()
                                                           ],
                                                           1
                                                         )
@@ -33365,6 +33479,86 @@ var render = function() {
                     proxy: true
                   },
                   {
+                    key: "item.debe",
+                    fn: function(ref) {
+                      var item = ref.item
+                      return [
+                        _vm.showCorrectDebeHaber(
+                          item.id_detalle_concepto,
+                          "debe"
+                        )
+                          ? _c(
+                              "v-chip",
+                              {
+                                staticClass: "ma-2",
+                                attrs: { color: "green", "text-color": "white" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            $" +
+                                    _vm._s(item.debe) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _c(
+                              "v-chip",
+                              {
+                                staticClass: "ma-2",
+                                attrs: { color: "red", "text-color": "white" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            $" +
+                                    _vm._s(item.debe) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                      ]
+                    }
+                  },
+                  {
+                    key: "item.haber",
+                    fn: function(ref) {
+                      var item = ref.item
+                      return [
+                        _vm.showCorrectDebeHaber(
+                          item.id_detalle_concepto,
+                          "haber"
+                        )
+                          ? _c(
+                              "v-chip",
+                              {
+                                staticClass: "ma-2",
+                                attrs: { color: "green", "text-color": "white" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            $" +
+                                    _vm._s(item.haber) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _c(
+                              "v-chip",
+                              {
+                                staticClass: "ma-2",
+                                attrs: { color: "red", "text-color": "white" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            $" +
+                                    _vm._s(item.haber) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                      ]
+                    }
+                  },
+                  {
                     key: "item.actions",
                     fn: function(ref) {
                       var item = ref.item
@@ -33373,7 +33567,7 @@ var render = function() {
                           "v-icon",
                           {
                             staticClass: "mr-2",
-                            attrs: { small: "" },
+                            attrs: { color: "primary" },
                             on: {
                               click: function($event) {
                                 return _vm.editItem(item)
@@ -33390,7 +33584,7 @@ var render = function() {
                         _c(
                           "v-icon",
                           {
-                            attrs: { small: "" },
+                            attrs: { color: "error" },
                             on: {
                               click: function($event) {
                                 return _vm.deleteItem(item)

@@ -22,7 +22,7 @@ class CatalogodeCuentasController extends Controller
 
             $tabla = $catalogoCollection->get('tabla');
 
-            $objectWhitTable = $catalogoCollection->only("titulo", "tabla", "id_$tabla" );
+            $objectWhitTable = $catalogoCollection->only("titulo", "tabla", "id_$tabla", "haber", "debe" );
 
             $this->insertInRepectiveTable( $objectWhitTable );
 
@@ -46,7 +46,7 @@ class CatalogodeCuentasController extends Controller
 
             $tabla = $catalogoCollection->get('tabla');
 
-            $objectWhitTable = $catalogoCollection->only("titulo", "tabla", "id_$tabla" );
+            $objectWhitTable = $catalogoCollection->only("titulo", "tabla", "id_$tabla");
 
             /**
              * esta verificacionn es debido a que la tabla categorias tiene su id como id_categorias y en sub_categorias_padre la 
