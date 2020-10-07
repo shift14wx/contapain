@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Registro;
+use App\Models\registro;
 
 use App\Http\Requests\CreateregistroRequest;
 use App\Http\Requests\UpdateregistroRequest;

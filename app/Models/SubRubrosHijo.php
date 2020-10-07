@@ -32,8 +32,10 @@ class SubRubrosHijo extends Model
 	use SoftDeletes;
 	protected $table = 'sub_rubros_hijo';
 	protected $primaryKey = 'id_sub_rubro_hijo';
-
+    protected $guarded = [];
     protected $casts = [
+        'id_sub_rubro_padre' => "int",
+        'id_sub_rubro_hijo' => "int",
         'created_at' => 'datetime:Y-m-d',
         'updated_at' =>  'datetime:Y-m-d',
     ];

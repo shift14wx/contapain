@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Registro;
+use App\Models\registro;
 use App\Repositories\BaseRepository;
 
 /**

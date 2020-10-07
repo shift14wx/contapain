@@ -3123,6 +3123,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3505,10 +3507,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Asientos_formAsiento__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Asientos/formAsiento */ "./resources/js/Pages/Contapain/Asientos/formAsiento.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-//
-//
-//
-//
 //
 //
 //
@@ -4063,6 +4061,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4070,6 +4074,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["id_asiento", "selectedRegistros", "catalogo_cuentas", "selectedAsiento"],
   data: function data() {
     return {
+      mandar: null,
       "idAsiento": this.id_asiento,
       "registros": this.selectedRegistros,
       "catalogoCuentas": this.catalogo_cuentas,
@@ -4107,18 +4112,16 @@ __webpack_require__.r(__webpack_exports__);
       }],
       editedIndex: -1,
       editedItem: {
-        id_registro: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        "titulo": "",
+        "debe": 0.0,
+        "haber": 0.0,
+        "concepto_detallado": ""
       },
       defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        "titulo": "",
+        "debe": 0.0,
+        "haber": 0.0,
+        "concepto_detallado": ""
       }
     };
   },
@@ -4183,7 +4186,6 @@ __webpack_require__.r(__webpack_exports__);
           return cat.id == _this3.editedItem.id_detalle_concepto;
         }).titulo;
       } else {
-        console.log(this.editedItem);
         this.editedItem.titulo = this.catalogoCuentasParsed.find(function (cat) {
           return cat.id == _this3.editedItem.id_detalle_concepto;
         }).titulo;
@@ -28308,7 +28310,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("main", [_vm._t("default")], 2),
+      _c("main", [_c("v-app", [_vm._t("default")], 2)], 1),
       _vm._v(" "),
       _c("portal-target", { attrs: { name: "modal", multiple: "" } })
     ],
@@ -29061,270 +29063,252 @@ var render = function() {
             },
             [
               _c(
-                "v-app",
+                "v-row",
                 [
-                  _c(
-                    "v-row",
-                    [
-                      _vm.AsientosObjectos
-                        ? _c(
-                            "v-col",
+                  _vm.AsientosObjectos
+                    ? _c(
+                        "v-col",
+                        [
+                          _c(
+                            "v-sheet",
+                            { attrs: { height: "64" } },
                             [
                               _c(
-                                "v-sheet",
-                                { attrs: { height: "64" } },
+                                "v-toolbar",
+                                { attrs: { flat: "" } },
                                 [
                                   _c(
-                                    "v-toolbar",
-                                    { attrs: { flat: "" } },
+                                    "v-btn",
+                                    {
+                                      staticClass: "mr-4",
+                                      attrs: {
+                                        outlined: "",
+                                        color: "grey darken-2"
+                                      },
+                                      on: { click: _vm.setToday }
+                                    },
                                     [
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          staticClass: "mr-4",
-                                          attrs: {
-                                            outlined: "",
-                                            color: "grey darken-2"
-                                          },
-                                          on: { click: _vm.setToday }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                        AHORA\n                                    "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: {
-                                            fab: "",
-                                            text: "",
-                                            small: "",
-                                            color: "grey darken-2"
-                                          },
-                                          on: { click: _vm.prev }
-                                        },
-                                        [
-                                          _c(
-                                            "v-icon",
-                                            { attrs: { small: "" } },
-                                            [
-                                              _vm._v(
-                                                "\n                                            mdi-chevron-left\n                                        "
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: {
-                                            fab: "",
-                                            text: "",
-                                            small: "",
-                                            color: "grey darken-2"
-                                          },
-                                          on: { click: _vm.next }
-                                        },
-                                        [
-                                          _c(
-                                            "v-icon",
-                                            { attrs: { small: "" } },
-                                            [
-                                              _vm._v(
-                                                "\n                                            mdi-chevron-right\n                                        "
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _vm.$refs.calendar
-                                        ? _c("v-toolbar-title", [
-                                            _vm._v(
-                                              "\n                                        " +
-                                                _vm._s(
-                                                  _vm.$refs.calendar.title
-                                                ) +
-                                                "\n                                    "
-                                            )
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _c("v-spacer")
+                                      _vm._v(
+                                        "\n                                        AHORA\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        fab: "",
+                                        text: "",
+                                        small: "",
+                                        color: "grey darken-2"
+                                      },
+                                      on: { click: _vm.prev }
+                                    },
+                                    [
+                                      _c("v-icon", { attrs: { small: "" } }, [
+                                        _vm._v(
+                                          "\n                                            mdi-chevron-left\n                                        "
+                                        )
+                                      ])
                                     ],
                                     1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-sheet",
-                                { attrs: { height: "500" } },
-                                [
-                                  _c("v-calendar", {
-                                    ref: "calendar",
-                                    attrs: { color: "primary" },
-                                    on: {
-                                      change: _vm.updateRange,
-                                      "click:date": _vm.viewDay
-                                    },
-                                    scopedSlots: _vm._u(
-                                      [
-                                        {
-                                          key: "day",
-                                          fn: function(ref) {
-                                            var present = ref.present
-                                            var past = ref.past
-                                            var date = ref.date
-                                            return [
-                                              _c(
-                                                "v-row",
-                                                { staticClass: "fill-height" },
-                                                [
-                                                  past &&
-                                                  parseInt(
-                                                    _vm.existAsiento(date)
-                                                  ) + 1
-                                                    ? [
-                                                        _c(
-                                                          "v-sheet",
-                                                          {
-                                                            attrs: {
-                                                              title:
-                                                                _vm
-                                                                  .AsientosObjectos[
-                                                                  _vm.existAsiento(
-                                                                    date
-                                                                  )
-                                                                ]
-                                                                  .concepto_general,
-                                                              color: _vm.getColor(
-                                                                _vm.existAsiento(
-                                                                  date
-                                                                )
-                                                              ),
-                                                              width: "100%",
-                                                              height: "100%",
-                                                              tile: ""
-                                                            }
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "h1",
-                                                              {
-                                                                staticClass:
-                                                                  "text-center"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Saldo: $ " +
-                                                                    _vm._s(
-                                                                      _vm
-                                                                        .AsientosObjectos[
-                                                                        _vm.existAsiento(
-                                                                          date
-                                                                        )
-                                                                      ].saldo
-                                                                    ) +
-                                                                    " "
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    : _vm._e()
-                                                ],
-                                                2
-                                              )
-                                            ]
-                                          }
-                                        }
-                                      ],
-                                      null,
-                                      false,
-                                      3444289089
-                                    ),
-                                    model: {
-                                      value: _vm.focus,
-                                      callback: function($$v) {
-                                        _vm.focus = $$v
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        fab: "",
+                                        text: "",
+                                        small: "",
+                                        color: "grey darken-2"
                                       },
-                                      expression: "focus"
-                                    }
-                                  })
+                                      on: { click: _vm.next }
+                                    },
+                                    [
+                                      _c("v-icon", { attrs: { small: "" } }, [
+                                        _vm._v(
+                                          "\n                                            mdi-chevron-right\n                                        "
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.$refs.calendar
+                                    ? _c("v-toolbar-title", [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(_vm.$refs.calendar.title) +
+                                            "\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("v-spacer")
                                 ],
                                 1
                               )
                             ],
                             1
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm.showDialog
-                    ? _c(
-                        "dialog-fullscreen",
-                        {
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "title",
-                                fn: function() {
-                                  return [
-                                    _c("p", [
-                                      _vm._v(
-                                        "Asiento " +
-                                          _vm._s(_vm.selectedAsiento || "nuevo")
-                                      )
-                                    ])
-                                  ]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "content",
-                                fn: function() {
-                                  return [
-                                    _c("form-asiento", {
-                                      attrs: {
-                                        selected_fecha_inicio:
-                                          _vm.fecha_inicio_selected
-                                      }
-                                    })
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ],
-                            null,
-                            false,
-                            3515002246
                           ),
-                          model: {
-                            value: _vm.showDialog,
-                            callback: function($$v) {
-                              _vm.showDialog = $$v
-                            },
-                            expression: "showDialog"
-                          }
-                        },
-                        [_vm._v("Asiento\n                        ")]
+                          _vm._v(" "),
+                          _c(
+                            "v-sheet",
+                            { attrs: { height: "500" } },
+                            [
+                              _c("v-calendar", {
+                                ref: "calendar",
+                                attrs: { color: "primary" },
+                                on: {
+                                  change: _vm.updateRange,
+                                  "click:date": _vm.viewDay
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "day",
+                                      fn: function(ref) {
+                                        var present = ref.present
+                                        var past = ref.past
+                                        var date = ref.date
+                                        return [
+                                          _c(
+                                            "v-row",
+                                            { staticClass: "fill-height" },
+                                            [
+                                              past &&
+                                              parseInt(_vm.existAsiento(date)) +
+                                                1
+                                                ? [
+                                                    _c(
+                                                      "v-sheet",
+                                                      {
+                                                        attrs: {
+                                                          title:
+                                                            _vm
+                                                              .AsientosObjectos[
+                                                              _vm.existAsiento(
+                                                                date
+                                                              )
+                                                            ].concepto_general,
+                                                          color: _vm.getColor(
+                                                            _vm.existAsiento(
+                                                              date
+                                                            )
+                                                          ),
+                                                          width: "100%",
+                                                          height: "100%",
+                                                          tile: ""
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "h1",
+                                                          {
+                                                            staticClass:
+                                                              "text-center"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "Saldo: $ " +
+                                                                _vm._s(
+                                                                  _vm
+                                                                    .AsientosObjectos[
+                                                                    _vm.existAsiento(
+                                                                      date
+                                                                    )
+                                                                  ].saldo
+                                                                ) +
+                                                                " "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                : _vm._e()
+                                            ],
+                                            2
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  null,
+                                  false,
+                                  3444289089
+                                ),
+                                model: {
+                                  value: _vm.focus,
+                                  callback: function($$v) {
+                                    _vm.focus = $$v
+                                  },
+                                  expression: "focus"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
                       )
                     : _vm._e()
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _vm.showDialog
+                ? _c(
+                    "dialog-fullscreen",
+                    {
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "title",
+                            fn: function() {
+                              return [
+                                _c("p", [
+                                  _vm._v(
+                                    "Asiento " +
+                                      _vm._s(_vm.selectedAsiento || "nuevo")
+                                  )
+                                ])
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "content",
+                            fn: function() {
+                              return [
+                                _c("form-asiento", {
+                                  attrs: {
+                                    selected_fecha_inicio:
+                                      _vm.fecha_inicio_selected
+                                  }
+                                })
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        false,
+                        3515002246
+                      ),
+                      model: {
+                        value: _vm.showDialog,
+                        callback: function($$v) {
+                          _vm.showDialog = $$v
+                        },
+                        expression: "showDialog"
+                      }
+                    },
+                    [_vm._v("Asiento\n                        ")]
+                  )
+                : _vm._e()
             ],
             1
           )
@@ -29508,100 +29492,107 @@ var render = function() {
               attrs: { "data-app": "" }
             },
             [
-              _c(
-                "v-app",
-                [
-                  _c("v-data-table", {
-                    staticClass: "elevation-1",
-                    attrs: {
-                      headers: _vm.headers,
-                      items: _vm.registros,
-                      "sort-by": "id"
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "top",
-                        fn: function() {
-                          return [
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.headers,
+                  items: _vm.registros,
+                  "sort-by": "id"
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "top",
+                    fn: function() {
+                      return [
+                        _c(
+                          "v-toolbar",
+                          { attrs: { flat: "" } },
+                          [
+                            _c("v-toolbar-title", [
+                              _vm._v(
+                                "Registros de Asiento con id " +
+                                  _vm._s(_vm.id_asiento)
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("v-divider", {
+                              staticClass: "mx-4",
+                              attrs: { inset: "", vertical: "" }
+                            }),
+                            _vm._v(" "),
+                            _c("v-spacer"),
+                            _vm._v(" "),
                             _c(
-                              "v-toolbar",
-                              { attrs: { flat: "" } },
-                              [
-                                _c("v-toolbar-title", [
-                                  _vm._v(
-                                    "Registros de Asiento con id " +
-                                      _vm._s(_vm.id_asiento)
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", {
-                                  staticClass: "mx-4",
-                                  attrs: { inset: "", vertical: "" }
-                                }),
-                                _vm._v(" "),
-                                _c("v-spacer"),
-                                _vm._v(" "),
-                                _c(
-                                  "v-dialog",
+                              "v-dialog",
+                              {
+                                attrs: { "max-width": "500px" },
+                                scopedSlots: _vm._u([
                                   {
-                                    attrs: { "max-width": "500px" },
-                                    scopedSlots: _vm._u([
-                                      {
-                                        key: "activator",
-                                        fn: function(ref) {
-                                          var on = ref.on
-                                          var attrs = ref.attrs
-                                          return [
-                                            _c(
+                                    key: "activator",
+                                    fn: function(ref) {
+                                      var on = ref.on
+                                      var attrs = ref.attrs
+                                      return [
+                                        _c(
+                                          "v-btn",
+                                          _vm._g(
+                                            _vm._b(
+                                              {
+                                                staticClass: "mb-2",
+                                                attrs: {
+                                                  color: "primary",
+                                                  dark: ""
+                                                }
+                                              },
                                               "v-btn",
-                                              _vm._g(
-                                                _vm._b(
-                                                  {
-                                                    staticClass: "mb-2",
-                                                    attrs: {
-                                                      color: "primary",
-                                                      dark: ""
-                                                    }
-                                                  },
-                                                  "v-btn",
-                                                  attrs,
-                                                  false
-                                                ),
-                                                on
-                                              ),
-                                              [
-                                                _vm._v(
-                                                  "\n                                            Agregar Registro\n                                        "
-                                                )
-                                              ]
+                                              attrs,
+                                              false
+                                            ),
+                                            on
+                                          ),
+                                          [
+                                            _vm._v(
+                                              "\n                                            Agregar Registro\n                                        "
                                             )
                                           ]
-                                        }
-                                      }
-                                    ]),
-                                    model: {
-                                      value: _vm.dialog,
-                                      callback: function($$v) {
-                                        _vm.dialog = $$v
-                                      },
-                                      expression: "dialog"
+                                        )
+                                      ]
                                     }
+                                  }
+                                ]),
+                                model: {
+                                  value: _vm.dialog,
+                                  callback: function($$v) {
+                                    _vm.dialog = $$v
                                   },
+                                  expression: "dialog"
+                                }
+                              },
+                              [
+                                _vm._v(" "),
+                                _c(
+                                  "v-card",
                                   [
+                                    _c("v-card-title", [
+                                      _c("span", { staticClass: "headline" }, [
+                                        _vm._v(_vm._s(_vm.formTitle))
+                                      ])
+                                    ]),
                                     _vm._v(" "),
                                     _c(
-                                      "v-card",
+                                      "v-card-text",
                                       [
-                                        _c("v-card-title", [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v(_vm._s(_vm.formTitle))]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
                                         _c(
-                                          "v-card-text",
+                                          "v-form",
+                                          {
+                                            model: {
+                                              value: _vm.mandar,
+                                              callback: function($$v) {
+                                                _vm.mandar = $$v
+                                              },
+                                              expression: "mandar"
+                                            }
+                                          },
                                           [
                                             _c(
                                               "v-container",
@@ -29658,8 +29649,14 @@ var render = function() {
                                                       {
                                                         attrs: {
                                                           cols: "12",
-                                                          sm: "6",
-                                                          md: "4"
+                                                          sm:
+                                                            _vm.editedIndex > -1
+                                                              ? 6
+                                                              : 12,
+                                                          md:
+                                                            _vm.editedIndex > -1
+                                                              ? 4
+                                                              : 12
                                                         }
                                                       },
                                                       [
@@ -29668,6 +29665,14 @@ var render = function() {
                                                             items:
                                                               _vm.catalogoCuentasParsed,
                                                             "item-value": "id",
+                                                            rules: [
+                                                              function(value) {
+                                                                return (
+                                                                  !!value ||
+                                                                  "Este campo es necesario"
+                                                                )
+                                                              }
+                                                            ],
                                                             "item-text":
                                                               "tituloAndId",
                                                             label:
@@ -29706,6 +29711,25 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            rules: [
+                                                              function(value) {
+                                                                return (
+                                                                  !!value ||
+                                                                  "Este campo es necesario"
+                                                                )
+                                                              },
+                                                              function(value) {
+                                                                return (
+                                                                  !isNaN(
+                                                                    parseFloat(
+                                                                      value
+                                                                    )
+                                                                  ) ||
+                                                                  "Solo digitos"
+                                                                )
+                                                              }
+                                                            ],
+                                                            type: "decimal",
                                                             label: "Debe"
                                                           },
                                                           model: {
@@ -29741,6 +29765,25 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            rules: [
+                                                              function(value) {
+                                                                return (
+                                                                  !!value ||
+                                                                  "Este campo es necesario"
+                                                                )
+                                                              },
+                                                              function(value) {
+                                                                return (
+                                                                  !isNaN(
+                                                                    parseFloat(
+                                                                      value
+                                                                    )
+                                                                  ) ||
+                                                                  "Solo digitos"
+                                                                )
+                                                              }
+                                                            ],
+                                                            type: "decimal",
                                                             label: "Haber"
                                                           },
                                                           model: {
@@ -29769,8 +29812,8 @@ var render = function() {
                                                       {
                                                         attrs: {
                                                           cols: "12",
-                                                          sm: "6",
-                                                          md: "4"
+                                                          sm: "12",
+                                                          md: "12"
                                                         }
                                                       },
                                                       [
@@ -29807,30 +29850,34 @@ var render = function() {
                                             )
                                           ],
                                           1
-                                        ),
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-actions",
+                                      [
+                                        _c("v-spacer"),
                                         _vm._v(" "),
                                         _c(
-                                          "v-card-actions",
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              color: "blue darken-1",
+                                              text: ""
+                                            },
+                                            on: { click: _vm.close }
+                                          },
                                           [
-                                            _c("v-spacer"),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: {
-                                                  color: "blue darken-1",
-                                                  text: ""
-                                                },
-                                                on: { click: _vm.close }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                Cancel\n                                            "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
+                                            _vm._v(
+                                              "\n                                                Cancel\n                                            "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _vm.mandar
+                                          ? _c(
                                               "v-btn",
                                               {
                                                 attrs: {
@@ -29845,71 +29892,67 @@ var render = function() {
                                                 )
                                               ]
                                             )
-                                          ],
-                                          1
-                                        )
+                                          : _vm._e()
                                       ],
                                       1
                                     )
                                   ],
                                   1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-dialog",
-                                  {
-                                    attrs: { "max-width": "500px" },
-                                    model: {
-                                      value: _vm.dialogDelete,
-                                      callback: function($$v) {
-                                        _vm.dialogDelete = $$v
-                                      },
-                                      expression: "dialogDelete"
-                                    }
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-dialog",
+                              {
+                                attrs: { "max-width": "500px" },
+                                model: {
+                                  value: _vm.dialogDelete,
+                                  callback: function($$v) {
+                                    _vm.dialogDelete = $$v
                                   },
+                                  expression: "dialogDelete"
+                                }
+                              },
+                              [
+                                _c(
+                                  "v-card",
                                   [
                                     _c(
-                                      "v-card",
+                                      "v-card-title",
+                                      { staticClass: "headline" },
                                       [
+                                        _vm._v(
+                                          "¿Deseas eliminar este registro?"
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-actions",
+                                      [
+                                        _c("v-spacer"),
+                                        _vm._v(" "),
                                         _c(
-                                          "v-card-title",
-                                          { staticClass: "headline" },
-                                          [
-                                            _vm._v(
-                                              "¿Deseas eliminar este registro?"
-                                            )
-                                          ]
+                                          "v-btn",
+                                          {
+                                            attrs: { color: "primary" },
+                                            on: { click: _vm.closeDelete }
+                                          },
+                                          [_vm._v("Cancel")]
                                         ),
                                         _vm._v(" "),
                                         _c(
-                                          "v-card-actions",
-                                          [
-                                            _c("v-spacer"),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                staticClass: "bg-primary",
-                                                on: { click: _vm.closeDelete }
-                                              },
-                                              [_vm._v("Cancel")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: { color: "danger" },
-                                                on: {
-                                                  click: _vm.deleteItemConfirm
-                                                }
-                                              },
-                                              [_vm._v("OK")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("v-spacer")
-                                          ],
-                                          1
-                                        )
+                                          "v-btn",
+                                          {
+                                            attrs: { color: "danger" },
+                                            on: { click: _vm.deleteItemConfirm }
+                                          },
+                                          [_vm._v("OK")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("v-spacer")
                                       ],
                                       1
                                     )
@@ -29919,77 +29962,77 @@ var render = function() {
                               ],
                               1
                             )
-                          ]
-                        },
-                        proxy: true
-                      },
-                      {
-                        key: "item.actions",
-                        fn: function(ref) {
-                          var item = ref.item
-                          return [
-                            _c(
-                              "v-icon",
-                              {
-                                staticClass: "mr-2",
-                                attrs: { small: "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editItem(item)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                mdi-pencil\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-icon",
-                              {
-                                attrs: { small: "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.deleteItem(item)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                mdi-delete\n                            "
-                                )
-                              ]
+                          ],
+                          1
+                        )
+                      ]
+                    },
+                    proxy: true
+                  },
+                  {
+                    key: "item.actions",
+                    fn: function(ref) {
+                      var item = ref.item
+                      return [
+                        _c(
+                          "v-icon",
+                          {
+                            staticClass: "mr-2",
+                            attrs: { small: "" },
+                            on: {
+                              click: function($event) {
+                                return _vm.editItem(item)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                mdi-pencil\n                            "
                             )
                           ]
-                        }
-                      },
-                      {
-                        key: "no-data",
-                        fn: function() {
-                          return [
-                            _c(
-                              "v-btn",
-                              {
-                                attrs: { color: "primary" },
-                                on: { click: _vm.initialize }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                Reset\n                            "
-                                )
-                              ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-icon",
+                          {
+                            attrs: { small: "" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteItem(item)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                mdi-delete\n                            "
                             )
                           ]
-                        },
-                        proxy: true
-                      }
-                    ])
-                  })
-                ],
-                1
-              )
+                        )
+                      ]
+                    }
+                  },
+                  {
+                    key: "no-data",
+                    fn: function() {
+                      return [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary" },
+                            on: { click: _vm.initialize }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Reset\n                            "
+                            )
+                          ]
+                        )
+                      ]
+                    },
+                    proxy: true
+                  }
+                ])
+              })
             ],
             1
           )
@@ -91697,7 +91740,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
-var opts = {};
+var opts = {
+  icons: {
+    iconfont: 'mdi' // default - only for display purposes
+
+  }
+};
 /* harmony default export */ __webpack_exports__["default"] = (new vuetify__WEBPACK_IMPORTED_MODULE_1___default.a(opts));
 
 /***/ }),

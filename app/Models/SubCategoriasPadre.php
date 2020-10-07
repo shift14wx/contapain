@@ -31,6 +31,8 @@ class SubCategoriasPadre extends Model
 	protected $table = 'sub_categorias_padre';
 	protected $primaryKey = 'is_sub_categoria_padre';
 
+    protected $guarded = [];
+
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',
         'updated_at' =>  'datetime:Y-m-d',

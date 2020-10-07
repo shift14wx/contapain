@@ -35,9 +35,13 @@ class Rubro extends Model
 	protected $primaryKey = 'id_rubro';
 
     protected $casts = [
+        "id_rubro" => "int",
         'created_at' => 'datetime:Y-m-d',
         'updated_at' =>  'datetime:Y-m-d',
     ];
+
+    protected $guarded = [];
+
     protected $appends= [ "sub", "id", "tabla","tituloAndId" ];
 
     public function getTituloAndIdAttribute()

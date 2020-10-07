@@ -34,16 +34,14 @@ class SubRubrosPadre extends Model
 	protected $primaryKey = 'id_sub_rubro_padre';
 
 	protected $casts = [
+        'id_sub_rubro_padre' => "int",
 		'created_at' => 'datetime:Y-m-d',
 		'updated_at' =>  'datetime:Y-m-d',
 	];
 
 	protected $appends = [ "sub", "id", "tabla", "tituloAndId" ];
 
-	protected $fillable = [
-		'titulo',
-		'id_rubro'
-	];
+	protected $guarded = [];
 
     public function getTituloAndIdAttribute()
     {

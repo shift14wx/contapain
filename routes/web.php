@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AsientosController;
+use App\Http\Controllers\CatalogodeCuentasController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\registroController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\registroController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/store/catalogos', [CatalogodeCuentasController::class,"storeByJson"]);
 
 Route::get('/', function () {
     return view('welcome');

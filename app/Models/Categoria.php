@@ -31,9 +31,12 @@ class Categoria extends Model
     use HasFactory;
 	use SoftDeletes;
 	protected $table = 'categorias';
-	protected $primaryKey = 'id_categorias';
+    protected $primaryKey = 'id_categorias';
+    
+    protected $guarded = [];
 
     protected $casts = [
+        "id_categorias" => "int",
         'created_at' => 'datetime:Y-m-d',
         'updated_at' =>  'datetime:Y-m-d',
     ];

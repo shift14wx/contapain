@@ -10,7 +10,6 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" data-app>
 
-                    <v-app>
                         <v-data-table
                             :headers="headers"
                             :items="registros"
@@ -49,6 +48,8 @@
                                             </v-card-title>
 
                                             <v-card-text>
+                                                <v-form v-model="mandar">
+                                                    
                                                 <v-container>
                                                     <v-row>
                                                         <v-col>
@@ -62,13 +63,14 @@
                                                         </v-col>
                                                         <v-col
                                                             cols="12"
-                                                            sm="6"
-                                                            md="4"
+                                                            :sm="(editedIndex > -1) ? 6 : 12"
+                                                            :md="(editedIndex > -1) ? 4 : 12"
                                                         >
                                                             <v-autocomplete
                                                                 v-model="editedItem.id_detalle_concepto"
                                                                 :items="catalogoCuentasParsed"
                                                                 :item-value="'id'"
+                                                                :rules="[ value => !!value || 'Este campo es necesario' ]"
                                                                 :item-text="'tituloAndId'"
                                                                 label="Detalle o concepto"
                                                             ></v-autocomplete>
@@ -80,6 +82,8 @@
                                                         >
                                                             <v-text-field
                                                                 v-model="editedItem.debe"
+                                                                :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
+                                                                type="decimal"
                                                                 label="Debe"
                                                             ></v-text-field>
                                                         </v-col>
@@ -90,13 +94,15 @@
                                                         >
                                                             <v-text-field
                                                                 v-model="editedItem.haber"
+                                                                 :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
+                                                                type="decimal"
                                                                 label="Haber"
                                                             ></v-text-field>
                                                         </v-col>
                                                         <v-col
                                                             cols="12"
-                                                            sm="6"
-                                                            md="4"
+                                                            sm="12"
+                                                            md="12"
                                                         >
                                                             <v-text-field
                                                                 v-model="editedItem.concepto_detallado"
@@ -105,6 +111,7 @@
                                                         </v-col>
                                                     </v-row>
                                                 </v-container>
+                                                </v-form>
                                             </v-card-text>
 
                                             <v-card-actions>
@@ -119,6 +126,7 @@
                                                 <v-btn
                                                     color="blue darken-1"
                                                     text
+                                                    v-if="mandar"
                                                     @click="save"
                                                 >
                                                     Almacenar
@@ -131,7 +139,7 @@
                                             <v-card-title class="headline">¿Deseas eliminar este registro?</v-card-title>
                                             <v-card-actions>
                                                 <v-spacer></v-spacer>
-                                                <v-btn class="bg-primary" @click="closeDelete">Cancel</v-btn>
+                                                <v-btn color="primary" @click="closeDelete">Cancel</v-btn>
                                                 <v-btn color="danger" @click="deleteItemConfirm">OK</v-btn>
                                                 <v-spacer></v-spacer>
                                             </v-card-actions>
@@ -164,8 +172,6 @@
                             </template>
                         </v-data-table>
 
-                    </v-app>
-
                 </div>
             </div>
         </div>
@@ -183,6 +189,7 @@ export default {
     props: ["id_asiento","selectedRegistros","catalogo_cuentas","selectedAsiento"],
     data(){
         return {
+             mandar     : null,
             "idAsiento" : this.id_asiento,
             "registros" : this.selectedRegistros,
             "catalogoCuentas" : this.catalogo_cuentas,
@@ -205,18 +212,16 @@ export default {
             ],
             editedIndex: -1,
             editedItem: {
-                id_registro: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
+                "titulo":"",
+                "debe":0.0,
+                "haber":0.0,
+                "concepto_detallado" : ""
             },
             defaultItem: {
-                name: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
+                "titulo":"",
+                "debe":0.0,
+                "haber":0.0,
+                "concepto_detallado" : ""
             },
         };
     },
@@ -281,9 +286,8 @@ export default {
                 Object.assign(this.registros[this.editedIndex], this.editedItem)
                 this.registros[ this.editedIndex ].titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
             } else {
-                console.log( this.editedItem );
-                 this.editedItem.titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
-                this.registros.push(this.editedItem)
+                this.editedItem.titulo = this.catalogoCuentasParsed.find( cat => cat.id == this.editedItem.id_detalle_concepto ).titulo;
+                    this.registros.push(this.editedItem);
             }
             this.close()
         },

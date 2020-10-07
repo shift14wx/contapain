@@ -24,7 +24,7 @@ class CreateCategoriasTable extends Migration
             $table->engine = 'InnoDB';
             $table->integer('id_sub_rubro_hijo');
             $table->increments('id_categorias');
-            $table->string('titulo', 45)->nullable();
+            $table->string('titulo', 255)->nullable();
 
             $table->index(["id_sub_rubro_hijo"], 'fk_sub_rubro_hijo_categorias_sub_rubro_hijo1_idx');
 

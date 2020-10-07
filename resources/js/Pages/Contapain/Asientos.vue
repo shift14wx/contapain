@@ -10,8 +10,6 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" data-app>
 
-                        <v-app>
-
                             <v-row>
                                 <v-col v-if="AsientosObjectos">
 
@@ -96,8 +94,6 @@
                                     <form-asiento :selected_fecha_inicio="fecha_inicio_selected"></form-asiento>
                                 </template>
                             </dialog-fullscreen>
-
-                        </v-app>
 
 
                     </div>
