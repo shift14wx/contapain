@@ -64,7 +64,7 @@
                                                         <v-col
                                                             cols="12"
                                                             :sm="(editedIndex > -1) ? 6 : 12"
-                                                            :md="(editedIndex > -1) ? 4 : 12"
+                                                            :md="(editedIndex > -1) ? 6 : 12"
                                                         >
                                                             <v-autocomplete
                                                                 v-model="editedItem.id_detalle_concepto"
@@ -75,6 +75,8 @@
                                                                 label="Detalle o concepto"
                                                             ></v-autocomplete>
                                                         </v-col>
+                                                        <v-row>
+                                                            
                                                         <v-col
                                                             cols="12"
                                                             sm="6"
@@ -99,6 +101,7 @@
                                                                 label="Haber"
                                                             ></v-text-field>
                                                         </v-col>
+                                                        </v-row>
                                                         <v-col
                                                             cols="12"
                                                             sm="12"

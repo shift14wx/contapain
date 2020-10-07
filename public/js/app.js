@@ -4067,6 +4067,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -33033,7 +33036,7 @@ var render = function() {
                                                               : 12,
                                                           md:
                                                             _vm.editedIndex > -1
-                                                              ? 4
+                                                              ? 6
                                                               : 12
                                                         }
                                                       },
@@ -33078,109 +33081,123 @@ var render = function() {
                                                     ),
                                                     _vm._v(" "),
                                                     _c(
-                                                      "v-col",
-                                                      {
-                                                        attrs: {
-                                                          cols: "12",
-                                                          sm: "6",
-                                                          md: "6"
-                                                        }
-                                                      },
+                                                      "v-row",
                                                       [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            rules: [
-                                                              function(value) {
-                                                                return (
-                                                                  !!value ||
-                                                                  "Este campo es necesario"
-                                                                )
-                                                              },
-                                                              function(value) {
-                                                                return (
-                                                                  !isNaN(
-                                                                    parseFloat(
-                                                                      value
-                                                                    )
-                                                                  ) ||
-                                                                  "Solo digitos"
-                                                                )
-                                                              }
-                                                            ],
-                                                            type: "decimal",
-                                                            label: "Debe"
+                                                        _c(
+                                                          "v-col",
+                                                          {
+                                                            attrs: {
+                                                              cols: "12",
+                                                              sm: "6",
+                                                              md: "6"
+                                                            }
                                                           },
-                                                          model: {
-                                                            value:
-                                                              _vm.editedItem
-                                                                .debe,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.editedItem,
-                                                                "debe",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "editedItem.debe"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-col",
-                                                      {
-                                                        attrs: {
-                                                          cols: "12",
-                                                          sm: "6",
-                                                          md: "6"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            rules: [
-                                                              function(value) {
-                                                                return (
-                                                                  !!value ||
-                                                                  "Este campo es necesario"
-                                                                )
-                                                              },
-                                                              function(value) {
-                                                                return (
-                                                                  !isNaN(
-                                                                    parseFloat(
-                                                                      value
+                                                          [
+                                                            _c("v-text-field", {
+                                                              attrs: {
+                                                                rules: [
+                                                                  function(
+                                                                    value
+                                                                  ) {
+                                                                    return (
+                                                                      !!value ||
+                                                                      "Este campo es necesario"
                                                                     )
-                                                                  ) ||
-                                                                  "Solo digitos"
-                                                                )
+                                                                  },
+                                                                  function(
+                                                                    value
+                                                                  ) {
+                                                                    return (
+                                                                      !isNaN(
+                                                                        parseFloat(
+                                                                          value
+                                                                        )
+                                                                      ) ||
+                                                                      "Solo digitos"
+                                                                    )
+                                                                  }
+                                                                ],
+                                                                type: "decimal",
+                                                                label: "Debe"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.editedItem
+                                                                    .debe,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.$set(
+                                                                    _vm.editedItem,
+                                                                    "debe",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                                expression:
+                                                                  "editedItem.debe"
                                                               }
-                                                            ],
-                                                            type: "decimal",
-                                                            label: "Haber"
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "v-col",
+                                                          {
+                                                            attrs: {
+                                                              cols: "12",
+                                                              sm: "6",
+                                                              md: "6"
+                                                            }
                                                           },
-                                                          model: {
-                                                            value:
-                                                              _vm.editedItem
-                                                                .haber,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.editedItem,
-                                                                "haber",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "editedItem.haber"
-                                                          }
-                                                        })
+                                                          [
+                                                            _c("v-text-field", {
+                                                              attrs: {
+                                                                rules: [
+                                                                  function(
+                                                                    value
+                                                                  ) {
+                                                                    return (
+                                                                      !!value ||
+                                                                      "Este campo es necesario"
+                                                                    )
+                                                                  },
+                                                                  function(
+                                                                    value
+                                                                  ) {
+                                                                    return (
+                                                                      !isNaN(
+                                                                        parseFloat(
+                                                                          value
+                                                                        )
+                                                                      ) ||
+                                                                      "Solo digitos"
+                                                                    )
+                                                                  }
+                                                                ],
+                                                                type: "decimal",
+                                                                label: "Haber"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.editedItem
+                                                                    .haber,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.$set(
+                                                                    _vm.editedItem,
+                                                                    "haber",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                                expression:
+                                                                  "editedItem.haber"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        )
                                                       ],
                                                       1
                                                     ),
