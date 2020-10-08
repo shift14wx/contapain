@@ -3886,6 +3886,47 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+var _name$props$data$comp;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4122,11 +4163,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_name$props$data$comp = {
   name: "Registros",
   props: ["id_asiento", "selectedRegistros", "catalogo_cuentas", "selectedAsiento"],
   data: function data() {
     return {
+      "totalHaber": 0.0,
+      "totalDebe": 0.0,
       mandar: null,
       "idAsiento": this.id_asiento,
       "registros": this.selectedRegistros,
@@ -4313,7 +4356,7 @@ __webpack_require__.r(__webpack_exports__);
             })["catch"](function (error) {
               _this4.$swal.showValidationMessage("Request failed: ".concat(error));
             });
-          } else if (_this4.METHODS.POST == method && index >= 0) {
+          } else if (_this4.METHODS.PATCH == method && index >= 0) {
             // desea actualizar
             _this4.editedItem._token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
             _this4.editedItem.json = true; // esto es para que en el endpoint entienda que necesitamos una respuesta json, esto es mannual no lo hace laravel
@@ -4331,6 +4374,8 @@ __webpack_require__.r(__webpack_exports__);
               if (response.hasOwnProperty("ok") && !response.ok) {
                 throw new Error(response.statusText);
               }
+
+              _this4.calcularTotales();
 
               return response.json();
             })["catch"](function (error) {
@@ -4455,18 +4500,46 @@ __webpack_require__.r(__webpack_exports__);
 
         }
       });
+    },
+    calcularTotales: function calcularTotales() {
+      var _this5 = this;
+
+      this.registros.forEach(function (registro) {
+        /** DEBE */
+        if (_this5.showCorrectDebeHaber(registro.id_detalle_concepto, "debe")) {
+          // se suma
+          _this5.totalDebe += parseInt(registro.debe);
+        } else {
+          // se resta
+          _this5.totalDebe -= parseInt(registro.debe);
+        }
+        /** HABER */
+
+
+        if (_this5.showCorrectDebeHaber(registro.id_detalle_concepto, "haber")) {
+          // se suma
+          _this5.totalHaber += parseInt(registro.haber);
+        } else {
+          // se resta
+          _this5.totalHaber -= parseInt(registro.haber);
+        }
+      });
     }
-  },
-  components: {
-    Input: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  created: function created() {
-    this.initialize();
-    this.momentSetLocale();
-    moment.locale("es");
   }
-});
+}, _defineProperty(_name$props$data$comp, "watch", {
+  registros: function registros() {
+    // este solo funciona cuando se agrega o se elimina registro para calcular el total
+    this.calcularTotales();
+  }
+}), _defineProperty(_name$props$data$comp, "components", {
+  Input: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
+  AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
+}), _defineProperty(_name$props$data$comp, "created", function created() {
+  this.initialize();
+  this.momentSetLocale();
+  moment.locale("es");
+  this.calcularTotales();
+}), _name$props$data$comp);
 
 /***/ }),
 
@@ -33143,35 +33216,53 @@ var render = function() {
                                                     _c(
                                                       "v-row",
                                                       [
-                                                        _c(
-                                                          "v-col",
-                                                          {
-                                                            attrs: {
-                                                              cols: "12",
-                                                              sm:
-                                                                parseFloat(
-                                                                  _vm.editedItem
-                                                                    .haber
-                                                                ) > 0.0
-                                                                  ? 6
-                                                                  : 12,
-                                                              md:
-                                                                parseFloat(
-                                                                  _vm.editedItem
-                                                                    .haber
-                                                                ) > 0.0
-                                                                  ? 6
-                                                                  : 12
-                                                            }
-                                                          },
-                                                          [
-                                                            !(
-                                                              parseFloat(
-                                                                _vm.editedItem
-                                                                  .haber
-                                                              ) > 0.0
-                                                            )
-                                                              ? _c(
+                                                        !(
+                                                          parseFloat(
+                                                            _vm.editedItem.haber
+                                                          ) > 0.0
+                                                        )
+                                                          ? _c(
+                                                              "v-col",
+                                                              {
+                                                                attrs: {
+                                                                  cols: "12",
+                                                                  sm:
+                                                                    parseFloat(
+                                                                      _vm
+                                                                        .editedItem
+                                                                        .haber
+                                                                    ) > 0.0
+                                                                      ? 6
+                                                                      : 12,
+                                                                  md:
+                                                                    parseFloat(
+                                                                      _vm
+                                                                        .editedItem
+                                                                        .haber
+                                                                    ) > 0.0
+                                                                      ? 6
+                                                                      : 12
+                                                                }
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "d-none"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                            " +
+                                                                        _vm._s(
+                                                                          (_vm.editedItem.haber = 0.0)
+                                                                        ) +
+                                                                        "\n                                                        "
+                                                                    )
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
                                                                   "v-text-field",
                                                                   {
                                                                     attrs: {
@@ -33223,40 +33314,58 @@ var render = function() {
                                                                     }
                                                                   }
                                                                 )
-                                                              : _vm._e()
-                                                          ],
-                                                          1
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "v-col",
-                                                          {
-                                                            attrs: {
-                                                              cols: "12",
-                                                              sm:
-                                                                parseFloat(
-                                                                  _vm.editedItem
-                                                                    .debe
-                                                                ) > 0.0
-                                                                  ? 6
-                                                                  : 12,
-                                                              md:
-                                                                parseFloat(
-                                                                  _vm.editedItem
-                                                                    .debe
-                                                                ) > 0.0
-                                                                  ? 6
-                                                                  : 12
-                                                            }
-                                                          },
-                                                          [
-                                                            !(
-                                                              parseFloat(
-                                                                _vm.editedItem
-                                                                  .debe
-                                                              ) > 0.0
+                                                              ],
+                                                              1
                                                             )
-                                                              ? _c(
+                                                          : _vm._e(),
+                                                        _vm._v(" "),
+                                                        !(
+                                                          parseFloat(
+                                                            _vm.editedItem.debe
+                                                          ) > 0.0
+                                                        )
+                                                          ? _c(
+                                                              "v-col",
+                                                              {
+                                                                attrs: {
+                                                                  cols: "12",
+                                                                  sm:
+                                                                    parseFloat(
+                                                                      _vm
+                                                                        .editedItem
+                                                                        .debe
+                                                                    ) > 0.0
+                                                                      ? 6
+                                                                      : 12,
+                                                                  md:
+                                                                    parseFloat(
+                                                                      _vm
+                                                                        .editedItem
+                                                                        .debe
+                                                                    ) > 0.0
+                                                                      ? 6
+                                                                      : 12
+                                                                }
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "d-none"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                            " +
+                                                                        _vm._s(
+                                                                          (_vm.editedItem.debe = 0.0)
+                                                                        ) +
+                                                                        "\n                                                        "
+                                                                    )
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
                                                                   "v-text-field",
                                                                   {
                                                                     attrs: {
@@ -33308,10 +33417,10 @@ var render = function() {
                                                                     }
                                                                   }
                                                                 )
-                                                              : _vm._e()
-                                                          ],
-                                                          1
-                                                        )
+                                                              ],
+                                                              1
+                                                            )
+                                                          : _vm._e()
                                                       ],
                                                       1
                                                     ),
@@ -33509,7 +33618,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            $" +
+                                  "\n                            -$" +
                                     _vm._s(item.debe) +
                                     "\n                            "
                                 )
@@ -33549,7 +33658,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            $" +
+                                  "\n                            -$" +
                                     _vm._s(item.haber) +
                                     "\n                            "
                                 )
@@ -33616,6 +33725,65 @@ var render = function() {
                             )
                           ]
                         )
+                      ]
+                    },
+                    proxy: true
+                  }
+                ])
+              }),
+              _vm._v(" "),
+              _c("v-simple-table", {
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function() {
+                      return [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", { staticClass: "text-left" }),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-left" }, [
+                              _vm._v(
+                                "\n                                Debe\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-left" }, [
+                              _vm._v(
+                                "\n                                Haber\n                            "
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c(
+                            "tr",
+                            {
+                              staticClass: "white--text",
+                              class: {
+                                "red darken-4": _vm.totalDebe != _vm.totalHaber,
+                                "light-blue accent-4":
+                                  _vm.totalDebe == _vm.totalHaber &&
+                                  _vm.totalDebe >= 0.0 && _vm.totalHaber >= 0.0,
+                                "yellow accent-2":
+                                  _vm.totalDebe == _vm.totalHaber &&
+                                  _vm.totalDebe < 0.0 && _vm.totalHaber < 0.0
+                              }
+                            },
+                            [
+                              _c("td", [_c("b", [_vm._v("Total")])]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(" $" + _vm._s(_vm.totalDebe) + " ")
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(" $" + _vm._s(_vm.totalHaber) + " ")
+                              ])
+                            ]
+                          )
+                        ])
                       ]
                     },
                     proxy: true

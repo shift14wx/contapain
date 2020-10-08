@@ -79,12 +79,16 @@
                                                         <v-row>
                                                             
                                                         <v-col
+                                                        
+                                                            v-if="!(parseFloat(editedItem.haber) > 0.0)"
                                                             cols="12"
                                                             :sm="(parseFloat(editedItem.haber) > 0.0) ? 6 : 12"
                                                             :md="(parseFloat(editedItem.haber) > 0.0) ? 6 : 12"
                                                         >
+                                                            <div class="d-none">
+                                                                {{ editedItem.haber =0.0 }}
+                                                            </div>
                                                             <v-text-field
-                                                            v-if="!(parseFloat(editedItem.haber) > 0.0)"
                                                                 prepend-icon="mdi-currency-usd"
                                                                 v-model="editedItem.debe"
                                                                 :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
@@ -93,12 +97,16 @@
                                                             ></v-text-field>
                                                         </v-col>
                                                         <v-col
+                                                        
+                                                            v-if="!(parseFloat(editedItem.debe) > 0.0)"
                                                             cols="12"
                                                             :sm="(parseFloat(editedItem.debe) > 0.0) ? 6 : 12"
                                                             :md="(parseFloat(editedItem.debe) > 0.0) ? 6 : 12"
                                                         >
+                                                            <div class="d-none">
+                                                                {{ editedItem.debe =0.0 }}
+                                                            </div>
                                                             <v-text-field
-                                                            v-if="!(parseFloat(editedItem.debe) > 0.0)"
                                                                 prepend-icon="mdi-currency-usd"
                                                                 v-model="editedItem.haber"
                                                                  :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
@@ -176,7 +184,7 @@
                                 color="red"
                                 text-color="white"
                                 >
-                                ${{item.debe}}
+                                -${{item.debe}}
                                 </v-chip>
                             </template>
 
@@ -196,7 +204,7 @@
                                 color="red"
                                 text-color="white"
                                 >
-                                ${{item.haber}}
+                                -${{item.haber}}
                                 </v-chip>
                             </template>
 
@@ -225,6 +233,35 @@
                             </template>
                         </v-data-table>
 
+                        <!--TOTALES-->
+                        <v-simple-table>
+                            <template v-slot:default>
+                            <thead>
+                                <tr>
+                                <th class="text-left">
+                                </th>
+                                <th class="text-left">
+                                    Debe
+                                </th>
+                                <th class="text-left">
+                                    Haber
+                                </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                class="white--text"
+                                :class="{ 'red darken-4': (totalDebe != totalHaber), 'light-blue accent-4' : (totalDebe == totalHaber && ( totalDebe>=0.0 && totalHaber >= 0.0 ) ), 'yellow accent-2' :(totalDebe == totalHaber && ( totalDebe<0.0 && totalHaber < 0.0 ) ) }"
+                                >
+                                <td><b>Total</b></td>
+                                <td> ${{ totalDebe }} </td>
+                                <td> ${{ totalHaber }} </td>
+                                </tr>
+                            </tbody>
+                            </template>
+                        </v-simple-table>
+
+
                 </div>
             </div>
         </div>
@@ -242,6 +279,8 @@ export default {
     props: ["id_asiento","selectedRegistros","catalogo_cuentas","selectedAsiento"],
     data(){
         return {
+            "totalHaber": 0.0,
+            "totalDebe" : 0.0,
              mandar     : null,
             "idAsiento" : this.id_asiento,
             "registros" : this.selectedRegistros,
@@ -404,7 +443,7 @@ export default {
                         `Request failed: ${error}`
                         )
                     })
-                }else if( this.METHODS.POST == method && index >= 0 ) { // desea actualizar
+                }else if( this.METHODS.PATCH == method && index >= 0 ) { // desea actualizar
                     this.editedItem._token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
                     this.editedItem.json = true; // esto es para que en el endpoint entienda que necesitamos una respuesta json, esto es mannual no lo hace laravel
                     this.editedItem.id_rubro = this.editedItem.id_detalle_concepto.toString().substr(0,1);
@@ -421,6 +460,7 @@ export default {
                         if ( response.hasOwnProperty("ok") && !response.ok) {
                         throw new Error(response.statusText)
                         }
+                        this.calcularTotales();
                         return response.json()
                     })
                     .catch(error => {
@@ -540,6 +580,27 @@ export default {
                     doy: 4  // Used to determine first week of the year.
                 }
             });
+        },
+        calcularTotales(){
+            this.registros.forEach(registro => {
+                /** DEBE */
+                if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
+                    this.totalDebe += parseInt( registro.debe );
+                }else{ // se resta
+                    this.totalDebe -= parseInt( registro.debe );
+                }
+                /** HABER */
+                 if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
+                    this.totalHaber += parseInt( registro.haber );
+                }else{ // se resta
+                    this.totalHaber -= parseInt( registro.haber );
+                }
+            });
+        }
+    },
+    watch:{
+        registros:function () { // este solo funciona cuando se agrega o se elimina registro para calcular el total
+            this.calcularTotales();
         }
     },
     components:{
@@ -550,6 +611,7 @@ export default {
         this.initialize();
         this.momentSetLocale();
         moment.locale("es");
+        this.calcularTotales();
     }
 }
 </script>
