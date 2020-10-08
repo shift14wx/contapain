@@ -4071,12 +4071,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["asientos", "catalogo_cuentas"],
   data: function data() {
     return {
       totalDebe: [],
       totalHaber: [],
+      totalDebeNeto: 0.0,
+      totalHaberNeto: 0.0,
       catalogo: this.catalogo_cuentas,
       headers: [{
         text: 'Id',
@@ -4103,6 +4156,70 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    momentSetLocale: function momentSetLocale() {
+      moment.locale('es', {
+        months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+        monthsShort: 'Ene._Feb._Mar_Abr._May_Jun_Jul._Agost_Sept._Oct._Nov._Dec.'.split('_'),
+        monthsParseExact: true,
+        weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
+        weekdaysShort: 'Dom._Lun._Mar._Mir._Jue._Vie._Sab.'.split('_'),
+        weekdaysMin: 'Di_Lu_Ma_Mi_Ju_Vi_Sa'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+          LT: 'HH:mm',
+          LTS: 'HH:mm:ss',
+          L: 'DD/MM/YYYY',
+          LL: 'D MMMM YYYY',
+          LLL: 'D MMMM YYYY HH:mm',
+          LLLL: 'dddd D MMMM YYYY HH:mm'
+        },
+        calendar: {
+          sameDay: '[Aujourd’hui à] LT',
+          nextDay: '[Demain à] LT',
+          nextWeek: 'dddd [à] LT',
+          lastDay: '[Hier à] LT',
+          lastWeek: 'dddd [dernier à] LT',
+          sameElse: 'L'
+        },
+        relativeTime: {
+          future: 'dans %s',
+          past: 'il y a %s',
+          s: 'quelques secondes',
+          m: 'une minute',
+          mm: '%d minutes',
+          h: 'une heure',
+          hh: '%d heures',
+          d: 'un jour',
+          dd: '%d jours',
+          M: 'un mois',
+          MM: '%d mois',
+          y: 'un an',
+          yy: '%d ans'
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
+        ordinal: function ordinal(number) {
+          return number + (number === 1 ? 'er' : 'e');
+        },
+        meridiemParse: /PD|MD/,
+        isPM: function isPM(input) {
+          return input.charAt(0) === 'M';
+        },
+        // In case the meridiem units are not separated around 12, then implement
+        // this function (look at locale/id.js for an example).
+        // meridiemHour : function (hour, meridiem) {
+        //     return /* 0-23 hour, given meridiem token and hour 1-12 */ ;
+        // },
+        meridiem: function meridiem(hours, minutes, isLower) {
+          return hours < 12 ? 'PD' : 'MD';
+        },
+        week: {
+          dow: 1,
+          // Monday is the first day of the week.
+          doy: 4 // Used to determine first week of the year.
+
+        }
+      });
+    },
     goTo: function goTo() {
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -4147,7 +4264,26 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       this.totalHaber[index] = haber;
+    },
+    calcTotalesDebeNeto: function calcTotalesDebeNeto() {
+      this.totalDebeNeto = this.totalDebe.reduce(function (a, b) {
+        return a + b;
+      });
+    },
+    calcTotalesHaberNeto: function calcTotalesHaberNeto() {
+      this.totalHaberNeto = this.totalHaber.reduce(function (a, b) {
+        return a + b;
+      });
     }
+  },
+  computed: {
+    fecha: function fecha() {
+      return moment();
+    }
+  },
+  created: function created() {
+    this.momentSetLocale();
+    moment.locale("es");
   }
 });
 
@@ -33275,267 +33411,404 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
-    _vm._l(_vm.asientos, function(asiento, index) {
-      return _c(
+    [
+      _vm._l(_vm.asientos, function(asiento, index) {
+        return _c(
+          "v-row",
+          { key: index },
+          [
+            _c(
+              "v-col",
+              { attrs: { cols: "12" } },
+              [
+                _c("v-data-table", {
+                  staticClass: "elevation-1",
+                  attrs: {
+                    headers: _vm.headers,
+                    items: asiento.registros,
+                    "sort-by": "id"
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "top",
+                        fn: function() {
+                          return [
+                            _c(
+                              "v-toolbar",
+                              { attrs: { flat: "" } },
+                              [
+                                _c("v-toolbar-title", [
+                                  _vm._v(
+                                    "Registros de Asiento con id " +
+                                      _vm._s(asiento.id_asiento) +
+                                      " del " +
+                                      _vm._s(asiento.fecha_inicio)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("v-divider", {
+                                  staticClass: "mx-4",
+                                  attrs: { inset: "", vertical: "" }
+                                }),
+                                _vm._v(" "),
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "mb-2",
+                                    attrs: { color: "success", dark: "" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.goTo(asiento.id_asiento)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("v-icon", [_vm._v(" mdi-pencil ")]),
+                                    _vm._v(
+                                      "  \n                                            Editar Asiento\n                                        "
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        },
+                        proxy: true
+                      },
+                      {
+                        key: "item.debe",
+                        fn: function(ref) {
+                          var item = ref.item
+                          return [
+                            _vm.showCorrectDebeHaber(
+                              item.id_detalle_concepto,
+                              "debe"
+                            )
+                              ? _c(
+                                  "v-chip",
+                                  {
+                                    staticClass: "ma-2",
+                                    attrs: {
+                                      color: "green",
+                                      "text-color": "white"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            $" +
+                                        _vm._s(item.debe) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
+                              : _c(
+                                  "v-chip",
+                                  {
+                                    staticClass: "ma-2",
+                                    attrs: {
+                                      color: "red",
+                                      "text-color": "white"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            -$" +
+                                        _vm._s(item.debe) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
+                          ]
+                        }
+                      },
+                      {
+                        key: "item.haber",
+                        fn: function(ref) {
+                          var item = ref.item
+                          return [
+                            _vm.showCorrectDebeHaber(
+                              item.id_detalle_concepto,
+                              "haber"
+                            )
+                              ? _c(
+                                  "v-chip",
+                                  {
+                                    staticClass: "ma-2",
+                                    attrs: {
+                                      color: "green",
+                                      "text-color": "white"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            $" +
+                                        _vm._s(item.haber) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
+                              : _c(
+                                  "v-chip",
+                                  {
+                                    staticClass: "ma-2",
+                                    attrs: {
+                                      color: "red",
+                                      "text-color": "white"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            -$" +
+                                        _vm._s(item.haber) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
+                          ]
+                        }
+                      },
+                      {
+                        key: "no-data",
+                        fn: function() {
+                          return [
+                            _vm._v(
+                              "\n                            no hay registros\n                        "
+                            )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                }),
+                _vm._v(" "),
+                _c("v-simple-table", {
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "default",
+                        fn: function() {
+                          return [
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th", { staticClass: "text-left" }),
+                                _vm._v(" "),
+                                _c("th", { staticClass: "text-left" }, [
+                                  _vm._v(
+                                    "\n                                Debe\n                            "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("th", { staticClass: "text-left" }, [
+                                  _vm._v(
+                                    "\n                                Haber\n                            "
+                                  )
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("tbody", [
+                              _c("div", { staticClass: "d-none" }, [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.calcTotalesDebe(index)) +
+                                    "\n                                " +
+                                    _vm._s(_vm.calcTotalesHaber(index)) +
+                                    "\n                            "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "tr",
+                                {
+                                  staticClass: "white--text",
+                                  class: {
+                                    "red darken-4":
+                                      _vm.totalDebe[index] !=
+                                      _vm.totalHaber[index],
+                                    "light-blue accent-4":
+                                      _vm.totalDebe[index] ==
+                                        _vm.totalHaber[index] &&
+                                      _vm.totalDebe[index] >= 0.0 &&
+                                        _vm.totalHaber[index] >= 0.0,
+                                    "yellow accent-2":
+                                      _vm.totalDebe[index] ==
+                                        _vm.totalHaber[index] &&
+                                      _vm.totalDebe[index] < 0.0 &&
+                                        _vm.totalHaber[index] < 0.0
+                                  }
+                                },
+                                [
+                                  _c("td", [_c("b", [_vm._v("Total")])]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      " $" + _vm._s(_vm.totalDebe[index]) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      " $" + _vm._s(_vm.totalHaber[index]) + " "
+                                    )
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
+      _c(
         "v-row",
-        { key: index },
         [
           _c(
             "v-col",
             { attrs: { cols: "12" } },
             [
-              _c("v-data-table", {
-                staticClass: "elevation-1",
-                attrs: {
-                  headers: _vm.headers,
-                  items: asiento.registros,
-                  "sort-by": "id"
-                },
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "top",
-                      fn: function() {
-                        return [
-                          _c(
-                            "v-toolbar",
-                            { attrs: { flat: "" } },
-                            [
-                              _c("v-toolbar-title", [
-                                _vm._v(
-                                  "Registros de Asiento con id " +
-                                    _vm._s(asiento.id_asiento) +
-                                    " del " +
-                                    _vm._s(asiento.fecha_inicio)
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("v-divider", {
-                                staticClass: "mx-4",
-                                attrs: { inset: "", vertical: "" }
-                              }),
-                              _vm._v(" "),
-                              _c("v-spacer"),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  staticClass: "mb-2",
-                                  attrs: { color: "success", dark: "" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.goTo(asiento.id_asiento)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("v-icon", [_vm._v(" mdi-pencil ")]),
-                                  _vm._v(
-                                    "  \n                                            Editar Asiento\n                                        "
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
+              _c("v-card", { attrs: { color: "#1F7087", dark: "" } }, [
+                _c("div", {}, [
+                  _c(
+                    "div",
+                    [
+                      _c("v-card-title", {
+                        staticClass: "headline",
+                        domProps: {
+                          textContent: _vm._s(
+                            "Total del mes de " + _vm.fecha.format("MMMM")
                           )
-                        ]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "item.debe",
-                      fn: function(ref) {
-                        var item = ref.item
-                        return [
-                          _vm.showCorrectDebeHaber(
-                            item.id_detalle_concepto,
-                            "debe"
-                          )
-                            ? _c(
-                                "v-chip",
-                                {
-                                  staticClass: "ma-2",
-                                  attrs: {
-                                    color: "green",
-                                    "text-color": "white"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            $" +
-                                      _vm._s(item.debe) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            : _c(
-                                "v-chip",
-                                {
-                                  staticClass: "ma-2",
-                                  attrs: { color: "red", "text-color": "white" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            -$" +
-                                      _vm._s(item.debe) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    },
-                    {
-                      key: "item.haber",
-                      fn: function(ref) {
-                        var item = ref.item
-                        return [
-                          _vm.showCorrectDebeHaber(
-                            item.id_detalle_concepto,
-                            "haber"
-                          )
-                            ? _c(
-                                "v-chip",
-                                {
-                                  staticClass: "ma-2",
-                                  attrs: {
-                                    color: "green",
-                                    "text-color": "white"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            $" +
-                                      _vm._s(item.haber) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            : _c(
-                                "v-chip",
-                                {
-                                  staticClass: "ma-2",
-                                  attrs: { color: "red", "text-color": "white" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            -$" +
-                                      _vm._s(item.haber) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    },
-                    {
-                      key: "no-data",
-                      fn: function() {
-                        return [
-                          _vm._v(
-                            "\n                            no hay registros\n                        "
-                          )
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ],
-                  null,
-                  true
-                )
-              }),
-              _vm._v(" "),
-              _c("v-simple-table", {
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "default",
-                      fn: function() {
-                        return [
-                          _c("thead", [
-                            _c("tr", [
-                              _c("th", { staticClass: "text-left" }),
-                              _vm._v(" "),
-                              _c("th", { staticClass: "text-left" }, [
-                                _vm._v(
-                                  "\n                                Debe\n                            "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("th", { staticClass: "text-left" }, [
-                                _vm._v(
-                                  "\n                                Haber\n                            "
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tbody", [
-                            _c("div", { staticClass: "d-none" }, [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.calcTotalesDebe(index)) +
-                                  "\n                                " +
-                                  _vm._s(_vm.calcTotalesHaber(index)) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "tr",
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-card-subtitle", {
+                        domProps: {
+                          textContent: _vm._s("Asientos de este mes ")
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c("v-simple-table", {
+                            scopedSlots: _vm._u([
                               {
-                                staticClass: "white--text",
-                                class: {
-                                  "red darken-4":
-                                    _vm.totalDebe[index] !=
-                                    _vm.totalHaber[index],
-                                  "light-blue accent-4":
-                                    _vm.totalDebe[index] ==
-                                      _vm.totalHaber[index] &&
-                                    _vm.totalDebe[index] >= 0.0 &&
-                                      _vm.totalHaber[index] >= 0.0,
-                                  "yellow accent-2":
-                                    _vm.totalDebe[index] ==
-                                      _vm.totalHaber[index] &&
-                                    _vm.totalDebe[index] < 0.0 &&
-                                      _vm.totalHaber[index] < 0.0
-                                }
-                              },
-                              [
-                                _c("td", [_c("b", [_vm._v("Total")])]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _vm._v(
-                                    " $" + _vm._s(_vm.totalDebe[index]) + " "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _vm._v(
-                                    " $" + _vm._s(_vm.totalHaber[index]) + " "
-                                  )
-                                ])
-                              ]
-                            )
-                          ])
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ],
-                  null,
-                  true
-                )
-              })
+                                key: "default",
+                                fn: function() {
+                                  return [
+                                    _c("thead", [
+                                      _c("tr", [
+                                        _c("th", { staticClass: "text-left" }),
+                                        _vm._v(" "),
+                                        _c("th", { staticClass: "text-left" }, [
+                                          _vm._v(
+                                            "\n                                        Debe\n                                    "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("th", { staticClass: "text-left" }, [
+                                          _vm._v(
+                                            "\n                                        Haber\n                                    "
+                                          )
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tbody", [
+                                      _c("div", { staticClass: "d-none" }, [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(_vm.calcTotalesDebeNeto()) +
+                                            "\n                                        " +
+                                            _vm._s(_vm.calcTotalesHaberNeto()) +
+                                            "\n                                    "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "tr",
+                                        {
+                                          staticClass: "white--text",
+                                          class: {
+                                            "red darken-4":
+                                              _vm.totalDebeNeto !=
+                                              _vm.totalHaberNeto,
+                                            "light-blue accent-4":
+                                              _vm.totalDebeNeto ==
+                                                _vm.totalHaberNeto &&
+                                              _vm.totalDebeNeto >= 0.0 &&
+                                                _vm.totalHaberNeto >= 0.0,
+                                            "yellow accent-2":
+                                              _vm.totalDebeNeto ==
+                                                _vm.totalHaberNeto &&
+                                              _vm.totalDebeNeto < 0.0 &&
+                                                _vm.totalHaberNeto < 0.0
+                                          }
+                                        },
+                                        [
+                                          _c("td", [
+                                            _c("b", [_vm._v("Totales")])
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              " $" +
+                                                _vm._s(_vm.totalDebeNeto) +
+                                                " "
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              " $" +
+                                                _vm._s(_vm.totalHaberNeto) +
+                                                " "
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
             ],
             1
           )
         ],
         1
       )
-    }),
-    1
+    ],
+    2
   )
 }
 var staticRenderFns = []
