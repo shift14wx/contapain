@@ -775,8 +775,8 @@
             "id_rubro": "4",
             "titulo": "Cuenta de resultado acreedoras",
             "tabla": "rubro",
-						"haber" : false,
-						"debe" : true,
+            "haber" : true,
+            "debe" : false,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "41",
@@ -1134,10 +1134,10 @@
         },
         {
             "id_rubro": "5",
-            "titulo": "cuentas de resultado acreedoras",
+            "titulo": "cuentas de resultado deudoras",
             "tabla": "rubro",
-						"haber" : false,
-						"debe" : true,
+            "haber" : false,
+            "debe" : true,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "51",
@@ -1195,10 +1195,10 @@
         },
         {
             "id_rubro": "6",
-            "titulo": "cuentas de cierre",
+            "titulo": "cuentas de liquidadoras",
             "tabla": "rubro",
-						"haber" : true,
-						"debe" : false,
+            "haber" : true,
+            "debe" : false,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "61",
