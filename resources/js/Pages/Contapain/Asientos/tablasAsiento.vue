@@ -268,26 +268,28 @@ export default {
         calcTotalesDebe( index ){
             let debe = 0.0;            
             this.asientos[index].registros.forEach(registro => {
+                    debe += parseFloat( registro.debe );
                 /** DEBE */
-                if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
-                    debe += parseInt( registro.debe );
+                /*if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
+                    debe += parseFloat( registro.debe );
                 }else{ // se resta
-                    debe -= parseInt( registro.debe );
-                }
+                    debe -= parseFloat( registro.debe );
+                }*/
             });
-            this.totalDebe[index] = debe;
+            this.totalDebe[index] = debe.toFixed(2);
         },
         calcTotalesHaber( index ){
             let haber = 0.0;
             this.asientos[index].registros.forEach(registro => {
+                    haber += parseFloat( registro.haber );
                 /** HABER */
-                 if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
-                    haber += parseInt( registro.haber );
+                 /*if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
+                    haber += parseFloat( registro.haber );
                 }else{ // se resta
-                    haber -= parseInt( registro.haber );
-                }
+                    haber -= parseFloat( registro.haber );
+                }*/
             });
-            this.totalHaber[index] = haber;
+            this.totalHaber[index] = haber.toFixed(2);
         },
         calcTotalesDebeNeto(){
             this.totalDebeNeto = this.totalDebe.reduce((a,b)=>a+b);

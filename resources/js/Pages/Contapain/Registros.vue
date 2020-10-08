@@ -257,6 +257,11 @@
                                 <td> ${{ totalDebe }} </td>
                                 <td> ${{ totalHaber }} </td>
                                 </tr>
+                                <tr>
+                                    <td><b>Saldo</b></td>
+                                    <td></td>
+                                <td > ${{ saldo }} </td>
+                                </tr>
                             </tbody>
                             </template>
                         </v-simple-table>
@@ -323,6 +328,9 @@ export default {
         };
     },
     computed:{
+        saldo(){
+            return this.totalDebe - this.totalHaber;
+        },
         computedDate(){
             return moment( this.asiento.fecha_inicio ).locale("es").format("DD dddd MMMM YYYY");
         },
@@ -508,6 +516,8 @@ export default {
                 }
                 this.$swal.fire({
                 title: `El registro fue ${titulo}`,
+                icon: 'success',
+                timer:1500
                 })
             }
             
@@ -585,19 +595,33 @@ export default {
             this.totalDebe = 0.0;
             this.totalHaber = 0.0;
             this.registros.forEach(registro => {
+                this.totalDebe += parseFloat( registro.debe );
+                this.totalHaber += parseFloat( registro.haber );
                 /** DEBE */
-                if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
-                    this.totalDebe += parseInt( registro.debe );
+               /* if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
+                    this.totalDebe += parseFloat( registro.debe );
                 }else{ // se resta
-                    this.totalDebe -= parseInt( registro.debe );
-                }
+                    this.totalDebe -= parseFloat( registro.debe );
+                }*/
                 /** HABER */
-                 if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
-                    this.totalHaber += parseInt( registro.haber );
+                 /*if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
+                    this.totalHaber += parseFloat( registro.haber );
                 }else{ // se resta
-                    this.totalHaber -= parseInt( registro.haber );
-                }
+                    this.totalHaber -= parseFloat( registro.haber );
+                }*/
             });
+
+            if( this.isFloat( this.totalDebe ) )
+            {
+                this.totalDebe = parseFloat( this.totalDebe ).toFixed(2);
+            }
+            if( this.isFloat( this.totalHaber ) )
+            {
+                this.totalHaber = parseFloat( this.totalHaber ).toFixed(2);
+            }
+        },
+        isFloat(n){
+            return Number(n) === n && n % 1 !== 0;
         }
     },
     watch:{

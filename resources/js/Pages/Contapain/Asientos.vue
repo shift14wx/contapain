@@ -93,7 +93,11 @@
                                     </v-sheet>
                                 </v-col>
                             </v-row>
+                            <v-row>
+                                <v-col cols="12">
 
+                                </v-col>
+                            </v-row>
                             <!--FULL SCREEN DIALOG-->
                             <dialog-fullscreen v-if="showDialog" v-model="showDialog" >
                                 <template v-slot:title>
@@ -178,7 +182,11 @@ export default {
 
             }else{
 
-                alert("no puede agregar un asiento despues de la fecha de ahora");
+                this.$swal.fire(
+                        "No se puede agregar un Asiento con fecha mayor a la actual!",
+                        "esta fecha "+moment(date).format("dddd DD MMMM YYYY")+" es mayor a la actual ",
+                        "warning",
+                );
 
             }
 
@@ -308,6 +316,7 @@ export default {
     created(){
         this.momentSetLocale();
         moment.locale("es");
+        this.focus = moment().format("YYYY-MM-DD");
     }
 }
 </script>

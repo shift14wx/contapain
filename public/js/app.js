@@ -3631,6 +3631,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3702,7 +3706,7 @@ __webpack_require__.r(__webpack_exports__);
 
         this.focus = date; //this.type = 'day'
       } else {
-        alert("no puede agregar un asiento despues de la fecha de ahora");
+        this.$swal.fire("No se puede agregar un Asiento con fecha mayor a la actual!", "esta fecha " + moment(date).format("dddd DD MMMM YYYY") + " es mayor a la actual ", "warning");
       }
     },
     getEventColor: function getEventColor(event) {
@@ -3835,6 +3839,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.momentSetLocale();
     moment.locale("es");
+    this.focus = moment().format("YYYY-MM-DD");
   }
 });
 
@@ -4234,36 +4239,32 @@ __webpack_require__.r(__webpack_exports__);
       return concepto[tipo];
     },
     calcTotalesDebe: function calcTotalesDebe(index) {
-      var _this = this;
-
       var debe = 0.0;
       this.asientos[index].registros.forEach(function (registro) {
+        debe += parseFloat(registro.debe);
         /** DEBE */
-        if (_this.showCorrectDebeHaber(registro.id_detalle_concepto, "debe")) {
-          // se suma
-          debe += parseInt(registro.debe);
-        } else {
-          // se resta
-          debe -= parseInt(registro.debe);
-        }
+
+        /*if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
+            debe += parseFloat( registro.debe );
+        }else{ // se resta
+            debe -= parseFloat( registro.debe );
+        }*/
       });
-      this.totalDebe[index] = debe;
+      this.totalDebe[index] = debe.toFixed(2);
     },
     calcTotalesHaber: function calcTotalesHaber(index) {
-      var _this2 = this;
-
       var haber = 0.0;
       this.asientos[index].registros.forEach(function (registro) {
+        haber += parseFloat(registro.haber);
         /** HABER */
-        if (_this2.showCorrectDebeHaber(registro.id_detalle_concepto, "haber")) {
-          // se suma
-          haber += parseInt(registro.haber);
-        } else {
-          // se resta
-          haber -= parseInt(registro.haber);
-        }
+
+        /*if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
+           haber += parseFloat( registro.haber );
+        }else{ // se resta
+           haber -= parseFloat( registro.haber );
+        }*/
       });
-      this.totalHaber[index] = haber;
+      this.totalHaber[index] = haber.toFixed(2);
     },
     calcTotalesDebeNeto: function calcTotalesDebeNeto() {
       this.totalDebeNeto = this.totalDebe.reduce(function (a, b) {
@@ -4304,6 +4305,11 @@ var _name$props$data$comp;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4641,6 +4647,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: {
+    saldo: function saldo() {
+      return this.totalDebe - this.totalHaber;
+    },
     computedDate: function computedDate() {
       return moment(this.asiento.fecha_inicio).locale("es").format("DD dddd MMMM YYYY");
     },
@@ -4840,7 +4849,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
 
           _this4.$swal.fire({
-            title: "El registro fue ".concat(titulo)
+            title: "El registro fue ".concat(titulo),
+            icon: 'success',
+            timer: 1500
           });
         }
 
@@ -4921,25 +4932,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.totalDebe = 0.0;
       this.totalHaber = 0.0;
       this.registros.forEach(function (registro) {
+        _this5.totalDebe += parseFloat(registro.debe);
+        _this5.totalHaber += parseFloat(registro.haber);
         /** DEBE */
-        if (_this5.showCorrectDebeHaber(registro.id_detalle_concepto, "debe")) {
-          // se suma
-          _this5.totalDebe += parseInt(registro.debe);
-        } else {
-          // se resta
-          _this5.totalDebe -= parseInt(registro.debe);
-        }
+
+        /* if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
+             this.totalDebe += parseFloat( registro.debe );
+         }else{ // se resta
+             this.totalDebe -= parseFloat( registro.debe );
+         }*/
+
         /** HABER */
 
-
-        if (_this5.showCorrectDebeHaber(registro.id_detalle_concepto, "haber")) {
-          // se suma
-          _this5.totalHaber += parseInt(registro.haber);
-        } else {
-          // se resta
-          _this5.totalHaber -= parseInt(registro.haber);
-        }
+        /*if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
+           this.totalHaber += parseFloat( registro.haber );
+        }else{ // se resta
+           this.totalHaber -= parseFloat( registro.haber );
+        }*/
       });
+
+      if (this.isFloat(this.totalDebe)) {
+        this.totalDebe = parseFloat(this.totalDebe).toFixed(2);
+      }
+
+      if (this.isFloat(this.totalHaber)) {
+        this.totalHaber = parseFloat(this.totalHaber).toFixed(2);
+      }
+    },
+    isFloat: function isFloat(n) {
+      return Number(n) === n && n % 1 !== 0;
     }
   }
 }, _defineProperty(_name$props$data$comp, "watch", {
@@ -33215,6 +33236,8 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
+              _c("v-row", [_c("v-col", { attrs: { cols: "12" } })], 1),
+              _vm._v(" "),
               _vm.showDialog
                 ? _c(
                     "dialog-fullscreen",
@@ -34658,7 +34681,15 @@ var render = function() {
                                 _vm._v(" $" + _vm._s(_vm.totalHaber) + " ")
                               ])
                             ]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("td", [_c("b", [_vm._v("Saldo")])]),
+                            _vm._v(" "),
+                            _c("td"),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(" $" + _vm._s(_vm.saldo) + " ")])
+                          ])
                         ])
                       ]
                     },
