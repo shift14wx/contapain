@@ -122,6 +122,7 @@ export default {
         formAsiento
     },
     data: () => ({
+        today: moment().format("YYYY-MM-DD"),
         showDialog:false,
         focus: '',
         AsientosObjectos: null,
@@ -138,25 +139,34 @@ export default {
             return exist;
         },
         viewDay ({ date }) {
-            this.fecha_inicio_selected = date;
-            let index = this.existAsiento(date);
-            if( index >= 0 ){
-                this.$inertia.visit(`/contapain/asientos/${ this.AsientosObjectos[ index ].id_asiento }/registros`, {
-                    method: 'get'
-                })
-                // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
-                // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
-                this.selectedAsiento = moment(this.AsientosObjectos[ index ].fecha_inicio).format("DD dddd MM YYYY");
-                let exitsSaldo = this.AsientosObjectos[ index ].saldo != null;
+            if( moment(date).isSameOrBefore(this.today) ){
+                
+                this.fecha_inicio_selected = date;
+                let index = this.existAsiento(date);
+                if( index >= 0 ){
+                    this.$inertia.visit(`/contapain/asientos/${ this.AsientosObjectos[ index ].id_asiento }/registros`, {
+                        method: 'get'
+                    })
+                    // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
+                    // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
+                    this.selectedAsiento = moment(this.AsientosObjectos[ index ].fecha_inicio).format("DD dddd MM YYYY");
+                    let exitsSaldo = this.AsientosObjectos[ index ].saldo != null;
+                }else{
+                    this.selectedAsiento = "";
+                    // si no se encuentra entonces en ese dia no se ha agregado un asiento
+                    // se presentara el formulario
+                    this.showFormularioAgregar = true;
+                    this.showDialog = true;
+                }
+                this.focus = date
+                //this.type = 'day'
+
             }else{
-                this.selectedAsiento = "";
-                // si no se encuentra entonces en ese dia no se ha agregado un asiento
-                // se presentara el formulario
-                this.showFormularioAgregar = true;
-                this.showDialog = true;
+
+                alert("no puede agregar un asiento despues de la fecha de ahora");
+
             }
-            this.focus = date
-            //this.type = 'day'
+
         },
         getEventColor (event) {
             return event.color
@@ -171,6 +181,9 @@ export default {
             this.$refs.calendar.next()
         },
         updateRange ({ start, end }) {
+
+            this.startDateCalendar = start;
+            this.endDateCalendar = end;
 
         },
         getColor( index ){
@@ -245,6 +258,7 @@ export default {
     mounted() {
         this.AsientosObjectos = this.Asientos;
         this.focus = moment().format("YYYY-MM-DD");
+        this.today = moment().format("YYYY-MM-DD");
     },
     created(){
         this.momentSetLocale();

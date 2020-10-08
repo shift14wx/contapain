@@ -106,7 +106,7 @@ class AsientosController extends Controller
         {
             $date = Carbon::now()->toDate()->format("Y-m");
         }
-        return Asiento::where("fecha_inicio","LIKE","%$date%")->get()->toArray();
+        return Asiento::where("fecha_inicio","LIKE","%$date%")->where("id_user", Auth::user()->getAuthIdentifier() )->get()->toArray();
     }
 
     /**
