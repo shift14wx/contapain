@@ -33511,7 +33511,7 @@ var render = function() {
                                   {
                                     staticClass: "ma-2",
                                     attrs: {
-                                      color: "red",
+                                      color: "grey darken-2",
                                       "text-color": "white"
                                     }
                                   },
@@ -33557,7 +33557,7 @@ var render = function() {
                                   {
                                     staticClass: "ma-2",
                                     attrs: {
-                                      color: "red",
+                                      color: "grey darken-2",
                                       "text-color": "white"
                                     }
                                   },
@@ -33638,7 +33638,7 @@ var render = function() {
                                         _vm.totalHaber[index] &&
                                       _vm.totalDebe[index] >= 0.0 &&
                                         _vm.totalHaber[index] >= 0.0,
-                                    "yellow accent-2":
+                                    "orange darken-4":
                                       _vm.totalDebe[index] ==
                                         _vm.totalHaber[index] &&
                                       _vm.totalDebe[index] < 0.0 &&
@@ -33757,7 +33757,7 @@ var render = function() {
                                                 _vm.totalHaberNeto &&
                                               _vm.totalDebeNeto >= 0.0 &&
                                                 _vm.totalHaberNeto >= 0.0,
-                                            "yellow accent-2":
+                                            "orange darken-4":
                                               _vm.totalDebeNeto ==
                                                 _vm.totalHaberNeto &&
                                               _vm.totalDebeNeto < 0.0 &&
@@ -34484,7 +34484,10 @@ var render = function() {
                               "v-chip",
                               {
                                 staticClass: "ma-2",
-                                attrs: { color: "red", "text-color": "white" }
+                                attrs: {
+                                  color: "grey darken-2",
+                                  "text-color": "white"
+                                }
                               },
                               [
                                 _vm._v(
@@ -34524,7 +34527,10 @@ var render = function() {
                               "v-chip",
                               {
                                 staticClass: "ma-2",
-                                attrs: { color: "red", "text-color": "white" }
+                                attrs: {
+                                  color: "grey darken-2",
+                                  "text-color": "white"
+                                }
                               },
                               [
                                 _vm._v(
@@ -34636,7 +34642,7 @@ var render = function() {
                                 "light-blue accent-4":
                                   _vm.totalDebe == _vm.totalHaber &&
                                   _vm.totalDebe >= 0.0 && _vm.totalHaber >= 0.0,
-                                "yellow accent-2":
+                                "orange darken-4":
                                   _vm.totalDebe == _vm.totalHaber &&
                                   _vm.totalDebe < 0.0 && _vm.totalHaber < 0.0
                               }

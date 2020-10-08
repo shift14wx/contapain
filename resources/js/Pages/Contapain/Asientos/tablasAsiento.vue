@@ -49,7 +49,7 @@
                                  <v-chip
                                  v-else
                                 class="ma-2"
-                                color="red"
+                                color="grey darken-2"
                                 text-color="white"
                                 >
                                 -${{item.debe}}
@@ -69,7 +69,7 @@
                                  <v-chip
                                  v-else
                                 class="ma-2"
-                                color="red"
+                                color="grey darken-2"
                                 text-color="white"
                                 >
                                 -${{item.haber}}
@@ -102,7 +102,7 @@
                                 </div>
                                 <tr
                                 class="white--text"
-                                :class="{ 'red darken-4': (totalDebe[index] != totalHaber[index]), 'light-blue accent-4' : (totalDebe[index] == totalHaber[index] && ( totalDebe[index]>=0.0 && totalHaber[index] >= 0.0 ) ), 'yellow accent-2' :(totalDebe[index] == totalHaber[index] && ( totalDebe[index]<0.0 && totalHaber[index] < 0.0 ) ) }"
+                                :class="{ 'red darken-4': (totalDebe[index] != totalHaber[index]), 'light-blue accent-4' : (totalDebe[index] == totalHaber[index] && ( totalDebe[index]>=0.0 && totalHaber[index] >= 0.0 ) ), 'orange darken-4' :(totalDebe[index] == totalHaber[index] && ( totalDebe[index]<0.0 && totalHaber[index] < 0.0 ) ) }"
                                 >
                                 <td><b>Total</b></td>
                                 <td> ${{ totalDebe[index] }} </td>
@@ -149,7 +149,7 @@
                                         </div>
                                         <tr
                                         class="white--text"
-                                        :class="{ 'red darken-4': (totalDebeNeto != totalHaberNeto), 'light-blue accent-4' : (totalDebeNeto == totalHaberNeto && ( totalDebeNeto>=0.0 && totalHaberNeto >= 0.0 ) ), 'yellow accent-2' :(totalDebeNeto == totalHaberNeto && ( totalDebeNeto<0.0 && totalHaberNeto < 0.0 ) ) }"
+                                        :class="{ 'red darken-4': (totalDebeNeto != totalHaberNeto), 'light-blue accent-4' : (totalDebeNeto == totalHaberNeto && ( totalDebeNeto>=0.0 && totalHaberNeto >= 0.0 ) ), 'orange darken-4' :(totalDebeNeto == totalHaberNeto && ( totalDebeNeto<0.0 && totalHaberNeto < 0.0 ) ) }"
                                         >
                                         <td><b>Totales</b></td>
                                         <td> ${{ totalDebeNeto }} </td>

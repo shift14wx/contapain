@@ -181,7 +181,7 @@
                                  <v-chip
                                  v-else
                                 class="ma-2"
-                                color="red"
+                                color="grey darken-2"
                                 text-color="white"
                                 >
                                 -${{item.debe}}
@@ -201,7 +201,7 @@
                                  <v-chip
                                  v-else
                                 class="ma-2"
-                                color="red"
+                                color="grey darken-2"
                                 text-color="white"
                                 >
                                 -${{item.haber}}
@@ -251,7 +251,7 @@
                             <tbody>
                                 <tr
                                 class="white--text"
-                                :class="{ 'red darken-4': (totalDebe != totalHaber), 'light-blue accent-4' : (totalDebe == totalHaber && ( totalDebe>=0.0 && totalHaber >= 0.0 ) ), 'yellow accent-2' :(totalDebe == totalHaber && ( totalDebe<0.0 && totalHaber < 0.0 ) ) }"
+                                :class="{ 'red darken-4': (totalDebe != totalHaber), 'light-blue accent-4' : (totalDebe == totalHaber && ( totalDebe>=0.0 && totalHaber >= 0.0 ) ), 'orange darken-4' :(totalDebe == totalHaber && ( totalDebe<0.0 && totalHaber < 0.0 ) ) }"
                                 >
                                 <td><b>Total</b></td>
                                 <td> ${{ totalDebe }} </td>
