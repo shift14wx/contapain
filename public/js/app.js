@@ -3622,6 +3622,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3653,6 +3662,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    isAfterDate: function isAfterDate(date) {
+      return moment(date).isAfter(this.today);
+    },
     existAsiento: function existAsiento(date) {
       var exist = this.AsientosObjectos.findIndex(function (asiento) {
         return asiento["fecha_inicio"] === date;
@@ -3661,6 +3673,8 @@ __webpack_require__.r(__webpack_exports__);
       return exist;
     },
     viewDay: function viewDay(_ref) {
+      var _this = this;
+
       var date = _ref.date;
 
       if (moment(date).isSameOrBefore(this.today)) {
@@ -3668,8 +3682,11 @@ __webpack_require__.r(__webpack_exports__);
         var index = this.existAsiento(date);
 
         if (index >= 0) {
+          this.loadingVisit();
           this.$inertia.visit("/contapain/asientos/".concat(this.AsientosObjectos[index].id_asiento, "/registros"), {
             method: 'get'
+          }).then(function (result) {
+            _this.$swal.close();
           }); // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
           // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
 
@@ -3774,6 +3791,39 @@ __webpack_require__.r(__webpack_exports__);
           doy: 4 // Used to determine first week of the year.
 
         }
+      });
+    },
+    loadingVisit: function loadingVisit() {
+      var timerInterval = null;
+      this.$swal.fire({
+        title: 'Cargando espere',
+        html: 'Espere por favor',
+        timer: 10000,
+        timerProgressBar: true,
+        willOpen: function willOpen() {
+          $swal.showLoading();
+          timerInterval = setInterval(function () {
+            /*const content = Swal.getContent()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }*/
+          }, 100);
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return false;
+        },
+        onClose: function onClose() {
+          clearInterval(timerInterval);
+        }
+      }).then(function (result) {
+        /* Read more about handling dismissals below */
+
+        /*if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }*/
       });
     }
   },
@@ -32985,6 +33035,19 @@ var render = function() {
                                                       ]
                                                     )
                                                   ]
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _vm.isAfterDate(date)
+                                                ? [
+                                                    _c("v-sheet", {
+                                                      attrs: {
+                                                        color: "grey",
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        tile: ""
+                                                      }
+                                                    })
+                                                  ]
                                                 : _vm._e()
                                             ],
                                             2
@@ -32995,7 +33058,7 @@ var render = function() {
                                   ],
                                   null,
                                   false,
-                                  3444289089
+                                  4123352357
                                 ),
                                 model: {
                                   value: _vm.focus,

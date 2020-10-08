@@ -78,6 +78,15 @@
                                                             <h1 class="text-center">Saldo: $ {{ AsientosObjectos[ existAsiento(date) ].saldo }} </h1>
                                                         </v-sheet>
                                                     </template>
+                                                     <template v-if=" isAfterDate( date ) ">
+                                                          <v-sheet
+                                                            :color="'grey'"
+                                                            :width="`100%`"
+                                                            height="100%"
+                                                            tile
+                                                        >
+                                                          </v-sheet>
+                                                     </template>
                                                 </v-row>
                                             </template>
                                         </v-calendar>
@@ -133,6 +142,9 @@ export default {
         fecha_inicio_selected: moment().format("YYYY-MM-DD")
     }),
     methods: {
+        isAfterDate( date ){
+            return moment( date ).isAfter( this.today );
+        },
         existAsiento( date ){
             let exist = this.AsientosObjectos.findIndex( asiento => asiento["fecha_inicio"] === date );
             console.log("exist: ",exist,"date: ",date);
@@ -144,9 +156,12 @@ export default {
                 this.fecha_inicio_selected = date;
                 let index = this.existAsiento(date);
                 if( index >= 0 ){
+                    this.loadingVisit();
                     this.$inertia.visit(`/contapain/asientos/${ this.AsientosObjectos[ index ].id_asiento }/registros`, {
                         method: 'get'
-                    })
+                    }).then((result)=>{
+                        this.$swal.close();
+                    });
                     // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
                     // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
                     this.selectedAsiento = moment(this.AsientosObjectos[ index ].fecha_inicio).format("DD dddd MM YYYY");
@@ -253,6 +268,36 @@ export default {
                     doy : 4  // Used to determine first week of the year.
                 }
             });
+        },
+        loadingVisit(){
+            let timerInterval = null;
+            this.$swal.fire({
+            title: 'Cargando espere',
+            html: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            willOpen: () => {
+                $swal.showLoading()
+                timerInterval = setInterval(() => {
+                /*const content = Swal.getContent()
+                if (content) {
+                    const b = content.querySelector('b')
+                    if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                    }
+                }*/
+                }, 100)
+            },
+            allowOutsideClick: () => false,
+            onClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            /*if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+            }*/
+            })
         }
     },
     mounted() {
