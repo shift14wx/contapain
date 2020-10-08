@@ -35,6 +35,8 @@ class Asiento extends Model
 	protected $table = 'Asiento';
 	protected $primaryKey = 'id_asiento';
 
+	protected $appends = ["registros"];
+
 	protected $guarded = [];
 
 	protected $casts = [
@@ -50,8 +52,13 @@ class Asiento extends Model
 	];
 
 
+	public function getRegistrosAttribute()
+	{
+		return $this->attributes["atributos"] = $this->registros()->get();
+	}
+
 	public function registros()
 	{
-		return $this->hasMany(Registro::class, 'id_asiento');
+		return $this->hasMany(registro::class, 'id_asiento');
 	}
 }

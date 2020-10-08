@@ -3885,6 +3885,215 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["asientos", "catalogo_cuentas"],
+  data: function data() {
+    return {
+      totalDebe: 0.0,
+      totalHaber: 0.0,
+      catalogo: this.catalogo_cuentas,
+      headers: [{
+        text: 'Id',
+        align: 'start',
+        sortable: true,
+        value: 'id_registro'
+      }, {
+        text: 'Detalle o concepto',
+        value: 'titulo'
+      }, {
+        text: 'Debe',
+        value: 'debe'
+      }, {
+        text: 'Haber',
+        value: 'haber'
+      }, {
+        text: 'Concepto Detallado',
+        value: 'concepto_detallado'
+      }, {
+        text: 'Acciones',
+        value: 'actions',
+        sortable: false
+      }]
+    };
+  },
+  methods: {
+    goTo: function goTo() {
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (id) {
+        window.location.href = "/contapain/asientos/".concat(id, "/registros");
+      }
+    },
+    showCorrectDebeHaber: function showCorrectDebeHaber(idConcepto, tipo) {
+      var concepto = this.catalogo.find(function (catalogo) {
+        return catalogo.id == idConcepto;
+      });
+      return concepto[tipo];
+    },
+    calcTotalesDebe: function calcTotalesDebe(registros) {
+      var _this = this;
+
+      var debe = 0.0;
+      registros.forEach(function (registro) {
+        /** DEBE */
+        if (_this.showCorrectDebeHaber(registro.id_detalle_concepto, "debe")) {
+          // se suma
+          debe += parseInt(registro.debe);
+        } else {
+          // se resta
+          debe -= parseInt(registro.debe);
+        }
+      });
+      return debe;
+    },
+    calcTotalesHaber: function calcTotalesHaber(registros) {
+      var _this2 = this;
+
+      var haber = 0.0;
+      registros.forEach(function (registro) {
+        /** HABER */
+        if (_this2.showCorrectDebeHaber(registro.id_detalle_concepto, "haber")) {
+          // se suma
+          haber += parseInt(registro.haber);
+        } else {
+          // se resta
+          haber -= parseInt(registro.haber);
+        }
+      });
+      return haber;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Registros.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contapain/Registros.vue?vue&type=script&lang=js& ***!
@@ -4566,6 +4775,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
+/* harmony import */ var _Contapain_Asientos_tablasAsiento__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Contapain/Asientos/tablasAsiento */ "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue");
 //
 //
 //
@@ -4598,12 +4808,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["Asientos", "catalogo_cuentas"],
+  data: function data() {
+    return {
+      asientos: this.Asientos,
+      catalogoDeCuentas: this.catalogo_cuentas
+    };
+  },
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__["default"],
+    tablasAsientos: _Contapain_Asientos_tablasAsiento__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -32962,6 +33186,293 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=template&id=76bfe0a4&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=template&id=76bfe0a4& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    _vm._l(_vm.asientos, function(asiento, index) {
+      return _c(
+        "v-row",
+        { key: index },
+        [
+          _c(
+            "v-col",
+            { attrs: { cols: "12" } },
+            [
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.headers,
+                  items: asiento.registros,
+                  "sort-by": "id"
+                },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "top",
+                      fn: function() {
+                        return [
+                          _c(
+                            "v-toolbar",
+                            { attrs: { flat: "" } },
+                            [
+                              _c("v-toolbar-title", [
+                                _vm._v(
+                                  "Registros de Asiento con id " +
+                                    _vm._s(asiento.id_asiento) +
+                                    " del " +
+                                    _vm._s(asiento.fecha_inicio)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-divider", {
+                                staticClass: "mx-4",
+                                attrs: { inset: "", vertical: "" }
+                              }),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "mb-2",
+                                  attrs: { color: "success", dark: "" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.goTo(asiento.id_asiento)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("v-icon", [_vm._v(" mdi-pencil ")]),
+                                  _vm._v(
+                                    "  \n                                            Editar Asiento\n                                        "
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "item.debe",
+                      fn: function(ref) {
+                        var item = ref.item
+                        return [
+                          _vm.showCorrectDebeHaber(
+                            item.id_detalle_concepto,
+                            "debe"
+                          )
+                            ? _c(
+                                "v-chip",
+                                {
+                                  staticClass: "ma-2",
+                                  attrs: {
+                                    color: "green",
+                                    "text-color": "white"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            $" +
+                                      _vm._s(item.debe) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            : _c(
+                                "v-chip",
+                                {
+                                  staticClass: "ma-2",
+                                  attrs: { color: "red", "text-color": "white" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            -$" +
+                                      _vm._s(item.debe) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    },
+                    {
+                      key: "item.haber",
+                      fn: function(ref) {
+                        var item = ref.item
+                        return [
+                          _vm.showCorrectDebeHaber(
+                            item.id_detalle_concepto,
+                            "haber"
+                          )
+                            ? _c(
+                                "v-chip",
+                                {
+                                  staticClass: "ma-2",
+                                  attrs: {
+                                    color: "green",
+                                    "text-color": "white"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            $" +
+                                      _vm._s(item.haber) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            : _c(
+                                "v-chip",
+                                {
+                                  staticClass: "ma-2",
+                                  attrs: { color: "red", "text-color": "white" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            -$" +
+                                      _vm._s(item.haber) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    },
+                    {
+                      key: "no-data",
+                      fn: function() {
+                        return [
+                          _vm._v(
+                            "\n                            no hay registros\n                        "
+                          )
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ],
+                  null,
+                  true
+                )
+              }),
+              _vm._v(" "),
+              _c("v-simple-table", {
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function() {
+                        return [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", { staticClass: "text-left" }),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-left" }, [
+                                _vm._v(
+                                  "\n                                Debe\n                            "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-left" }, [
+                                _vm._v(
+                                  "\n                                Haber\n                            "
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tbody", [
+                            _c("div", { staticClass: "d-none" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(
+                                    (_vm.totalDebe = _vm.calcTotalesDebe(
+                                      asiento.registros
+                                    ))
+                                  ) +
+                                  "\n                                " +
+                                  _vm._s(
+                                    (_vm.totalHaber = _vm.calcTotalesHaber(
+                                      asiento.registros
+                                    ))
+                                  ) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "tr",
+                              {
+                                staticClass: "white--text",
+                                class: {
+                                  "red darken-4":
+                                    _vm.totalDebe != _vm.totalHaber,
+                                  "light-blue accent-4":
+                                    _vm.totalDebe == _vm.totalHaber &&
+                                    _vm.totalDebe >= 0.0 &&
+                                      _vm.totalHaber >= 0.0,
+                                  "yellow accent-2":
+                                    _vm.totalDebe == _vm.totalHaber &&
+                                    _vm.totalDebe < 0.0 && _vm.totalHaber < 0.0
+                                }
+                              },
+                              [
+                                _c("td", [_c("b", [_vm._v("Total")])]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(" $" + _vm._s(_vm.totalDebe) + " ")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(" $" + _vm._s(_vm.totalHaber) + " ")
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ],
+                  null,
+                  true
+                )
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    }),
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Registros.vue?vue&type=template&id=414d629d&scoped=true&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contapain/Registros.vue?vue&type=template&id=414d629d&scoped=true& ***!
@@ -33887,6 +34398,26 @@ var render = function() {
                           _vm._v("Asientos Contables de este mes")
                         ])
                       ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12" } },
+                        [
+                          _c("tablas-asientos", {
+                            attrs: {
+                              asientos: _vm.asientos,
+                              catalogo_cuentas: _vm.catalogoDeCuentas
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
@@ -94128,6 +94659,8 @@ var map = {
 	"./Contapain/Asientos.vue": "./resources/js/Pages/Contapain/Asientos.vue",
 	"./Contapain/Asientos/formAsiento": "./resources/js/Pages/Contapain/Asientos/formAsiento.vue",
 	"./Contapain/Asientos/formAsiento.vue": "./resources/js/Pages/Contapain/Asientos/formAsiento.vue",
+	"./Contapain/Asientos/tablasAsiento": "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue",
+	"./Contapain/Asientos/tablasAsiento.vue": "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue",
 	"./Contapain/Registros": "./resources/js/Pages/Contapain/Registros.vue",
 	"./Contapain/Registros.vue": "./resources/js/Pages/Contapain/Registros.vue",
 	"./Dashboard": "./resources/js/Pages/Dashboard.vue",
@@ -94453,6 +94986,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formAsiento_vue_vue_type_template_id_121dc2f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formAsiento_vue_vue_type_template_id_121dc2f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tablasAsiento.vue?vue&type=template&id=76bfe0a4& */ "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=template&id=76bfe0a4&");
+/* harmony import */ var _tablasAsiento_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tablasAsiento.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _tablasAsiento_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Contapain/Asientos/tablasAsiento.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_tablasAsiento_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./tablasAsiento.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_tablasAsiento_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=template&id=76bfe0a4&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=template&id=76bfe0a4& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./tablasAsiento.vue?vue&type=template&id=76bfe0a4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue?vue&type=template&id=76bfe0a4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

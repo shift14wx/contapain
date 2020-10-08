@@ -6,6 +6,7 @@ use App\Models\Asiento;
 use App\Models\registro;
 use App\Models\Rubro;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +85,28 @@ class AsientosController extends Controller
                 "Asientos" => $Asientos,
                 "statusCode" => JsonResponse::HTTP_OK
             ]);
+    }
+
+
+    public function Dashboard()
+    {
+        $rubros = Rubro::all()->toArray();
+        $rubrosParseados = [];
+        $this->parseRubros($rubros,$rubrosParseados);
+        $asientos = $this->getAsientosFromADate();
+        return \Inertia\Inertia::render('Dashboard',[
+            "Asientos" => $asientos,
+            "catalogo_cuentas" => $rubrosParseados,
+        ]);
+    }
+
+    public function getAsientosFromADate( $date= null)
+    {
+        if($date == null)
+        {
+            $date = Carbon::now()->toDate()->format("Y-m");
+        }
+        return Asiento::where("fecha_inicio","LIKE","%$date%")->get()->toArray();
     }
 
     /**

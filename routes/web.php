@@ -22,14 +22,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',[ AsientosController::class, 'Dashboard' ])->name('dashboard');
 
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
-    dd("what");
     return Inertia\Inertia::render('Contapain/Asientos');
 })->name('/contapain/asientos');
 

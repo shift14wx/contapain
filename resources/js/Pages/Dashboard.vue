@@ -22,6 +22,11 @@
                             <h2 class="text-rigth">Asientos Contables de este mes</h2>
                         </v-col>
                     </v-row>
+                    <v-row>
+                        <v-col cols="12">
+                            <tablas-asientos :asientos="asientos" :catalogo_cuentas="catalogoDeCuentas"  />
+                        </v-col>
+                    </v-row>
                 </v-container>
 
                 </div>
@@ -33,11 +38,20 @@
 <script>
     import AppLayout from './../Layouts/AppLayout'
     import Welcome from './../Jetstream/Welcome'
+    import tablasAsientos from "./Contapain/Asientos/tablasAsiento"
 
     export default {
+        props:["Asientos", "catalogo_cuentas" ],
+        data(){
+            return{
+                asientos:this.Asientos,
+                catalogoDeCuentas : this.catalogo_cuentas
+            }
+        },
         components: {
             AppLayout,
             Welcome,
+            tablasAsientos
         },
     }
 </script>
