@@ -4075,8 +4075,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ["asientos", "catalogo_cuentas"],
   data: function data() {
     return {
-      totalDebe: 0.0,
-      totalHaber: 0.0,
+      totalDebe: [],
+      totalHaber: [],
       catalogo: this.catalogo_cuentas,
       headers: [{
         text: 'Id',
@@ -4116,11 +4116,11 @@ __webpack_require__.r(__webpack_exports__);
       });
       return concepto[tipo];
     },
-    calcTotalesDebe: function calcTotalesDebe(registros) {
+    calcTotalesDebe: function calcTotalesDebe(index) {
       var _this = this;
 
       var debe = 0.0;
-      registros.forEach(function (registro) {
+      this.asientos[index].registros.forEach(function (registro) {
         /** DEBE */
         if (_this.showCorrectDebeHaber(registro.id_detalle_concepto, "debe")) {
           // se suma
@@ -4130,13 +4130,13 @@ __webpack_require__.r(__webpack_exports__);
           debe -= parseInt(registro.debe);
         }
       });
-      return debe;
+      this.totalDebe[index] = debe;
     },
-    calcTotalesHaber: function calcTotalesHaber(registros) {
+    calcTotalesHaber: function calcTotalesHaber(index) {
       var _this2 = this;
 
       var haber = 0.0;
-      registros.forEach(function (registro) {
+      this.asientos[index].registros.forEach(function (registro) {
         /** HABER */
         if (_this2.showCorrectDebeHaber(registro.id_detalle_concepto, "haber")) {
           // se suma
@@ -4146,7 +4146,7 @@ __webpack_require__.r(__webpack_exports__);
           haber -= parseInt(registro.haber);
         }
       });
-      return haber;
+      this.totalHaber[index] = haber;
     }
   }
 });
@@ -33475,17 +33475,9 @@ var render = function() {
                             _c("div", { staticClass: "d-none" }, [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(
-                                    (_vm.totalDebe = _vm.calcTotalesDebe(
-                                      asiento.registros
-                                    ))
-                                  ) +
+                                  _vm._s(_vm.calcTotalesDebe(index)) +
                                   "\n                                " +
-                                  _vm._s(
-                                    (_vm.totalHaber = _vm.calcTotalesHaber(
-                                      asiento.registros
-                                    ))
-                                  ) +
+                                  _vm._s(_vm.calcTotalesHaber(index)) +
                                   "\n                            "
                               )
                             ]),
@@ -33496,25 +33488,33 @@ var render = function() {
                                 staticClass: "white--text",
                                 class: {
                                   "red darken-4":
-                                    _vm.totalDebe != _vm.totalHaber,
+                                    _vm.totalDebe[index] !=
+                                    _vm.totalHaber[index],
                                   "light-blue accent-4":
-                                    _vm.totalDebe == _vm.totalHaber &&
-                                    _vm.totalDebe >= 0.0 &&
-                                      _vm.totalHaber >= 0.0,
+                                    _vm.totalDebe[index] ==
+                                      _vm.totalHaber[index] &&
+                                    _vm.totalDebe[index] >= 0.0 &&
+                                      _vm.totalHaber[index] >= 0.0,
                                   "yellow accent-2":
-                                    _vm.totalDebe == _vm.totalHaber &&
-                                    _vm.totalDebe < 0.0 && _vm.totalHaber < 0.0
+                                    _vm.totalDebe[index] ==
+                                      _vm.totalHaber[index] &&
+                                    _vm.totalDebe[index] < 0.0 &&
+                                      _vm.totalHaber[index] < 0.0
                                 }
                               },
                               [
                                 _c("td", [_c("b", [_vm._v("Total")])]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(" $" + _vm._s(_vm.totalDebe) + " ")
+                                  _vm._v(
+                                    " $" + _vm._s(_vm.totalDebe[index]) + " "
+                                  )
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(" $" + _vm._s(_vm.totalHaber) + " ")
+                                  _vm._v(
+                                    " $" + _vm._s(_vm.totalHaber[index]) + " "
+                                  )
                                 ])
                               ]
                             )

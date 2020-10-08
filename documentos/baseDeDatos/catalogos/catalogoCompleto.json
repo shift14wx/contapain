@@ -5,6 +5,8 @@
             "id_rubro": "1",
             "titulo": "Activo",
             "tabla": "rubro",
+            "haber" : false,
+            "debe" : true,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "11",
@@ -390,6 +392,8 @@
             "id_rubro": "2",
             "titulo": "pasivo",
             "tabla": "rubro",
+            "haber" : true,
+            "debe" : false,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "21",
@@ -710,6 +714,8 @@
             "id_rubro": "3",
             "titulo": "patrimonio",
             "tabla": "rubro",
+            "haber" : true,
+            "debe" : false,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "31",
@@ -769,6 +775,8 @@
             "id_rubro": "4",
             "titulo": "Cuenta de resultado acreedoras",
             "tabla": "rubro",
+						"haber" : false,
+						"debe" : true,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "41",
@@ -1128,6 +1136,8 @@
             "id_rubro": "5",
             "titulo": "cuentas de resultado acreedoras",
             "tabla": "rubro",
+						"haber" : false,
+						"debe" : true,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "51",
@@ -1187,6 +1197,8 @@
             "id_rubro": "6",
             "titulo": "cuentas de cierre",
             "tabla": "rubro",
+						"haber" : true,
+						"debe" : false,
             "subrubro": [
                 {
                     "id_sub_rubro_padre": "61",

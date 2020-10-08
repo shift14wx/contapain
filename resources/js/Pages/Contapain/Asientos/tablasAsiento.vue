@@ -97,16 +97,16 @@
                             </thead>
                             <tbody>
                                 <div class="d-none">
-                                    {{ totalDebe = calcTotalesDebe( asiento.registros ) }}
-                                    {{ totalHaber = calcTotalesHaber( asiento.registros ) }}
+                                    {{ calcTotalesDebe( index ) }}
+                                    {{ calcTotalesHaber( index ) }}
                                 </div>
                                 <tr
                                 class="white--text"
-                                :class="{ 'red darken-4': (totalDebe != totalHaber), 'light-blue accent-4' : (totalDebe == totalHaber && ( totalDebe>=0.0 && totalHaber >= 0.0 ) ), 'yellow accent-2' :(totalDebe == totalHaber && ( totalDebe<0.0 && totalHaber < 0.0 ) ) }"
+                                :class="{ 'red darken-4': (totalDebe[index] != totalHaber[index]), 'light-blue accent-4' : (totalDebe[index] == totalHaber[index] && ( totalDebe[index]>=0.0 && totalHaber[index] >= 0.0 ) ), 'yellow accent-2' :(totalDebe[index] == totalHaber[index] && ( totalDebe[index]<0.0 && totalHaber[index] < 0.0 ) ) }"
                                 >
                                 <td><b>Total</b></td>
-                                <td> ${{ totalDebe }} </td>
-                                <td> ${{ totalHaber }} </td>
+                                <td> ${{ totalDebe[index] }} </td>
+                                <td> ${{ totalHaber[index] }} </td>
                                 </tr>
                             </tbody>
                             </template>
@@ -121,8 +121,8 @@ export default {
     props: [ "asientos", "catalogo_cuentas" ],
     data(){
         return{
-            totalDebe : 0.0,
-            totalHaber : 0.0,
+            totalDebe : [],
+            totalHaber : [],
             catalogo: this.catalogo_cuentas,
              headers: [
                 {
@@ -150,9 +150,9 @@ export default {
             let concepto = this.catalogo.find( ( catalogo ) => catalogo.id == idConcepto );
             return concepto[tipo];
         },
-        calcTotalesDebe( registros ){
+        calcTotalesDebe( index ){
             let debe = 0.0;            
-            registros.forEach(registro => {
+            this.asientos[index].registros.forEach(registro => {
                 /** DEBE */
                 if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma
                     debe += parseInt( registro.debe );
@@ -160,11 +160,11 @@ export default {
                     debe -= parseInt( registro.debe );
                 }
             });
-            return debe;
+            this.totalDebe[index] = debe;
         },
-        calcTotalesHaber( registros ){
+        calcTotalesHaber( index ){
             let haber = 0.0;
-            registros.forEach(registro => {
+            this.asientos[index].registros.forEach(registro => {
                 /** HABER */
                  if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"haber") ){ // se suma
                     haber += parseInt( registro.haber );
@@ -172,7 +172,7 @@ export default {
                     haber -= parseInt( registro.haber );
                 }
             });
-            return haber;
+            this.totalHaber[index] = haber;
         }
 
     }
