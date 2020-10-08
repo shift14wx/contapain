@@ -582,6 +582,8 @@ export default {
             });
         },
         calcularTotales(){
+            this.totalDebe = 0.0;
+            this.totalHaber = 0.0;
             this.registros.forEach(registro => {
                 /** DEBE */
                 if( this.showCorrectDebeHaber(registro.id_detalle_concepto,"debe") ){ // se suma

@@ -7,7 +7,14 @@
                     <div class="flex">
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
+                             <v-img
+                                src="/images/logodashboard.png"
+                                max-height="50"
+                                max-width="50"
+                                @click="goDashboard"
+                                ></v-img>
                             <a href="/dashboard">
+                               
                                 <jet-application-mark class="block h-9 w-auto" />
                             </a>
                         </div>
@@ -239,6 +246,9 @@
         },
 
         methods: {
+            goDashboard(){
+                window.location.href = "/dashboard";
+            },
             switchToTeam(team) {
                 this.$inertia.put('/current-team', {
                     'team_id': team.id
