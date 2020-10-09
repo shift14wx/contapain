@@ -4383,6 +4383,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["parsedRegistros"],
@@ -4398,6 +4417,11 @@ __webpack_require__.r(__webpack_exports__);
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    goTo: function goTo(rubro, registro, tipo) {
+      console.log("#".concat(tipo).concat(rubro).concat(registro));
+      var idAsiento = parseInt(document.querySelector("#".concat(tipo).concat(rubro).concat(registro)).textContent);
+      this.$inertia.visit("/contapain/asientos/".concat(idAsiento, "/registros")).then(function () {});
+    },
     proximoDebe: function proximoDebe(indexRubro, indexRegistro) {
       try {
         var debe = this.rubros_registro[indexRubro].registros.find(function (registro, index) {
@@ -4412,7 +4436,7 @@ __webpack_require__.r(__webpack_exports__);
 
           var _debeCopy = Object.assign({}, debe);
 
-          this.deferDebe = _debeCopy.debe;
+          this.deferDebe = "$" + _debeCopy.debe;
           return _debeCopy.id_asiento;
         } else {
           this.deferDebe = "";
@@ -4433,7 +4457,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (haber != undefined && haber.hasOwnProperty("haber")) {
           var haberCopy = Object.assign({}, haber);
-          this.deferHaber = debeCopy.haber;
+          this.deferHaber = "$" + debeCopy.haber;
           return haberCopy.id_asiento;
         } else {
           this.deferHaber = "";
@@ -34134,9 +34158,13 @@ var render = function() {
                                             return [
                                               _c("thead", [
                                                 _c("tr", [
-                                                  _c("th", [
-                                                    _vm._v("id asiento")
-                                                  ]),
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass: "text-center"
+                                                    },
+                                                    [_vm._v("id asiento")]
+                                                  ),
                                                   _vm._v(" "),
                                                   _c(
                                                     "th",
@@ -34162,87 +34190,168 @@ var render = function() {
                                                     ]
                                                   ),
                                                   _vm._v(" "),
-                                                  _c("th", [
-                                                    _vm._v("id asiento")
-                                                  ])
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass: "text-center"
+                                                    },
+                                                    [_vm._v("id asiento")]
+                                                  )
                                                 ])
                                               ]),
                                               _vm._v(" "),
                                               _c(
                                                 "tbody",
-                                                _vm._l(
-                                                  rubro.registros,
-                                                  function(
-                                                    registro,
-                                                    indexRegistro
-                                                  ) {
-                                                    return _c(
-                                                      "tr",
-                                                      {
-                                                        key:
-                                                          registro.id_registro,
-                                                        class: {
-                                                          "d-none":
-                                                            _vm.noMostrar ==
-                                                            registro.id_registro
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("td", [
-                                                          _vm._v(
-                                                            _vm._s(
-                                                              registro.debe > 0
-                                                                ? registro.id_asiento
-                                                                : _vm.proximoDebe(
-                                                                    index,
-                                                                    indexRegistro
-                                                                  )
-                                                            )
-                                                          )
-                                                        ]),
-                                                        _vm._v(" "),
-                                                        _c("td", [
-                                                          _vm._v(
-                                                            " " +
-                                                              _vm._s(
-                                                                registro.debe >
-                                                                  0
-                                                                  ? registro.debe
-                                                                  : _vm.deferDebe
-                                                              ) +
-                                                              "\n                                                    "
-                                                          )
-                                                        ]),
-                                                        _vm._v(" "),
-                                                        _c("td", [
-                                                          _vm._v(
-                                                            " " +
-                                                              _vm._s(
-                                                                registro.haber >
-                                                                  0
-                                                                  ? registro.haber
-                                                                  : _vm.proximoHaber(
-                                                                      index,
+                                                [
+                                                  _vm._l(
+                                                    rubro.registros,
+                                                    function(
+                                                      registro,
+                                                      indexRegistro
+                                                    ) {
+                                                      return _c(
+                                                        "tr",
+                                                        {
+                                                          key:
+                                                            registro.id_registro,
+                                                          class: {
+                                                            "d-none":
+                                                              _vm.noMostrar ==
+                                                              registro.id_registro
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "td",
+                                                            [
+                                                              _c(
+                                                                "v-btn",
+                                                                {
+                                                                  attrs: {
+                                                                    id:
+                                                                      "debe" +
+                                                                      index +
                                                                       indexRegistro
-                                                                    )
+                                                                  },
+                                                                  on: {
+                                                                    click: function(
+                                                                      $event
+                                                                    ) {
+                                                                      return _vm.goTo(
+                                                                        index,
+                                                                        indexRegistro,
+                                                                        "debe"
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "\n                                                        " +
+                                                                      _vm._s(
+                                                                        registro.debe >
+                                                                          0
+                                                                          ? registro.id_asiento
+                                                                          : _vm.proximoDebe(
+                                                                              index,
+                                                                              indexRegistro
+                                                                            )
+                                                                      ) +
+                                                                      "\n                                                    "
+                                                                  )
+                                                                ]
                                                               )
-                                                          )
-                                                        ]),
-                                                        _vm._v(" "),
-                                                        _c("td", [
-                                                          _vm._v(
-                                                            _vm._s(
-                                                              registro.haber > 0
-                                                                ? registro.id_asiento
-                                                                : _vm.deferHaber
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c("td", [
+                                                            _vm._v(
+                                                              " " +
+                                                                _vm._s(
+                                                                  registro.debe >
+                                                                    0
+                                                                    ? "$" +
+                                                                        registro.debe
+                                                                    : _vm.deferDebe
+                                                                ) +
+                                                                "\n                                                    "
                                                             )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("td", [
+                                                            _vm._v(
+                                                              " " +
+                                                                _vm._s(
+                                                                  registro.haber >
+                                                                    0
+                                                                    ? "$" +
+                                                                        registro.haber
+                                                                    : _vm.proximoHaber(
+                                                                        index,
+                                                                        indexRegistro
+                                                                      )
+                                                                )
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "td",
+                                                            [
+                                                              _c(
+                                                                "v-btn",
+                                                                {
+                                                                  attrs: {
+                                                                    id:
+                                                                      "haber" +
+                                                                      index +
+                                                                      indexRegistro
+                                                                  },
+                                                                  on: {
+                                                                    click: function(
+                                                                      $event
+                                                                    ) {
+                                                                      return _vm.goTo(
+                                                                        index,
+                                                                        indexRegistro,
+                                                                        "haber"
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      registro.haber >
+                                                                        0
+                                                                        ? registro.id_asiento
+                                                                        : _vm.deferHaber
+                                                                    ) +
+                                                                      "\n                                                    "
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ],
+                                                            1
                                                           )
-                                                        ])
-                                                      ]
-                                                    )
-                                                  }
-                                                ),
-                                                0
+                                                        ]
+                                                      )
+                                                    }
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [
+                                                      _vm._v("Totales")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td"),
+                                                    _vm._v(" "),
+                                                    _c("td"),
+                                                    _vm._v(" "),
+                                                    _c("td")
+                                                  ])
+                                                ],
+                                                2
                                               )
                                             ]
                                           },

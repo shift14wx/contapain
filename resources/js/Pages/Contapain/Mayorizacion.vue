@@ -21,14 +21,14 @@
                                                 <template v-slot:default>
                                                 <thead>
                                                     <tr>
-                                                        <th>id asiento</th>
+                                                        <th class="text-center">id asiento</th>
                                                     <th class="text-center">
                                                         Debe
                                                     </th>
                                                     <th class="text-center">
                                                         Haber
                                                     </th>
-                                                        <th>id asiento</th>
+                                                        <th class="text-center">id asiento</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -37,11 +37,30 @@
                                                     :key="registro.id_registro"
                                                     :class="{'d-none':( noMostrar == registro.id_registro )}"
                                                     >
-                                                    <td>{{ ( registro.debe > 0 ) ? registro.id_asiento : proximoDebe( index, indexRegistro ) }}</td>
-                                                    <td > {{ ( registro.debe > 0 ) ? registro.debe : deferDebe }}
+                                                    <td>
+                                                        <v-btn
+                                                        @click="goTo(index, indexRegistro,'debe')"
+                                                        :id="`debe${index}${indexRegistro}`"
+                                                        >
+                                                            {{ ( registro.debe > 0 ) ? registro.id_asiento : proximoDebe( index, indexRegistro ) }}
+                                                        </v-btn>
+                                                    </td>
+                                                    <td > {{ ( registro.debe > 0 ) ? "$"+registro.debe : deferDebe }}
                                                         </td>
-                                                    <td > {{( registro.haber > 0 ) ? registro.haber : proximoHaber( index, indexRegistro ) }}</td>
-                                                    <td >{{ ( registro.haber > 0 ) ? registro.id_asiento : deferHaber }}</td>
+                                                    <td > {{( registro.haber > 0 ) ? "$"+registro.haber : proximoHaber( index, indexRegistro ) }}</td>
+                                                    <td >
+                                                        <v-btn
+                                                        @click="goTo(index, indexRegistro,'haber')"
+                                                        :id="`haber${index}${indexRegistro}`"
+                                                        >{{ ( registro.haber > 0 ) ? registro.id_asiento : deferHaber }}
+                                                        </v-btn>
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Totales</td>
+                                                        <td ></td>
+                                                        <td ></td>
+                                                        <td></td>
                                                     </tr>
                                                 </tbody>
                                                 </template>
@@ -75,6 +94,13 @@ export default {
         AppLayout,
     },
     methods:{
+        goTo(rubro, registro, tipo){
+            console.log( `#${tipo}${rubro}${registro}` );
+            let idAsiento = parseInt(document.querySelector(`#${tipo}${rubro}${registro}`).textContent);
+            this.$inertia.visit(`/contapain/asientos/${idAsiento}/registros`).then(()=>{
+
+            });
+        },
         proximoDebe( indexRubro, indexRegistro ){
             try {
                 let debe = this.rubros_registro[indexRubro].registros.find( (registro,index) => {
@@ -86,7 +112,7 @@ export default {
             if( debe != undefined && debe.hasOwnProperty( "debe" ) ){
                 this.noMostrar = debe.id_registro;
                 let debeCopy = Object.assign({},debe);
-                this.deferDebe = debeCopy.debe;
+                this.deferDebe = "$"+debeCopy.debe;
                 return debeCopy.id_asiento;
             }else{
                 
@@ -108,7 +134,7 @@ export default {
 
             if( haber != undefined && haber.hasOwnProperty( "haber" ) ){
                 let haberCopy = Object.assign({},haber);
-                this.deferHaber = debeCopy.haber;
+                this.deferHaber = "$"+debeCopy.haber;
                 return haberCopy.id_asiento;
             }else{
                 this.deferHaber = "";
