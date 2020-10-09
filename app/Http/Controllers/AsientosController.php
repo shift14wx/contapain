@@ -24,6 +24,12 @@ class AsientosController extends Controller
         //
     }
 
+    public function cerrarAsiento( Request $request )
+    {
+        $asiento = Asiento::where("id_asiento",$request->only("id_asiento"))->update($request->only("saldo"));
+        response()->json(["msg"=>"done"],JsonResponse::HTTP_NO_CONTENT);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -158,6 +164,7 @@ class AsientosController extends Controller
 
         return \Inertia\Inertia::render('Contapain/Mayorizacion',[
             "parsedRegistros" => $parsedRegistros,
+            "month" => $date
         ]);
     }
 

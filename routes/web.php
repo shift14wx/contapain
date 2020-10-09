@@ -26,6 +26,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',[ AsientosCont
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/mayorizacion',[ AsientosController::class, 'mayorizacionAndStuff' ])->name('mayorizacion');
 
+Route::middleware(['auth:sanctum', 'verified'])->post('/contapain/cerrarasiento',[ AsientosController::class, 'cerrarAsiento' ])->name('cerrarasiento');
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
     return Inertia\Inertia::render('Contapain/Asientos');
 })->name('/contapain/asientos');

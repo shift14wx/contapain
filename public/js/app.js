@@ -4476,19 +4476,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["parsedRegistros"],
+  props: ["parsedRegistros", "month"],
   data: function data() {
     return {
       "rubros_registro": this.parsedRegistros,
       "noMostrar": 0,
       "deferDebe": "",
-      "deferHaber": ""
+      "deferHaber": "",
+      "mes": this.month
     };
   },
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    momentSetLocale: function momentSetLocale() {
+      moment.locale('es', {
+        months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+        monthsShort: 'Ene._Feb._Mar_Abr._May_Jun_Jul._Agost_Sept._Oct._Nov._Dec.'.split('_'),
+        monthsParseExact: true,
+        weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
+        weekdaysShort: 'Dom._Lun._Mar._Mir._Jue._Vie._Sab.'.split('_'),
+        weekdaysMin: 'Di_Lu_Ma_Mi_Ju_Vi_Sa'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+          LT: 'HH:mm',
+          LTS: 'HH:mm:ss',
+          L: 'DD/MM/YYYY',
+          LL: 'D MMMM YYYY',
+          LLL: 'D MMMM YYYY HH:mm',
+          LLLL: 'dddd D MMMM YYYY HH:mm'
+        },
+        calendar: {
+          sameDay: '[Aujourd’hui à] LT',
+          nextDay: '[Demain à] LT',
+          nextWeek: 'dddd [à] LT',
+          lastDay: '[Hier à] LT',
+          lastWeek: 'dddd [dernier à] LT',
+          sameElse: 'L'
+        },
+        relativeTime: {
+          future: 'dans %s',
+          past: 'il y a %s',
+          s: 'quelques secondes',
+          m: 'une minute',
+          mm: '%d minutes',
+          h: 'une heure',
+          hh: '%d heures',
+          d: 'un jour',
+          dd: '%d jours',
+          M: 'un mois',
+          MM: '%d mois',
+          y: 'un an',
+          yy: '%d ans'
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
+        ordinal: function ordinal(number) {
+          return number + (number === 1 ? 'er' : 'e');
+        },
+        meridiemParse: /PD|MD/,
+        isPM: function isPM(input) {
+          return input.charAt(0) === 'M';
+        },
+        // In case the meridiem units are not separated around 12, then implement
+        // this function (look at locale/id.js for an example).
+        // meridiemHour : function (hour, meridiem) {
+        //     return /* 0-23 hour, given meridiem token and hour 1-12 */ ;
+        // },
+        meridiem: function meridiem(hours, minutes, isLower) {
+          return hours < 12 ? 'PD' : 'MD';
+        },
+        week: {
+          dow: 1,
+          // Monday is the first day of the week.
+          doy: 4 // Used to determine first week of the year.
+
+        }
+      });
+    },
     goTo: function goTo(rubro, registro, tipo) {
       console.log("#".concat(tipo).concat(rubro).concat(registro));
       var idAsiento = parseInt(document.querySelector("#".concat(tipo).concat(rubro).concat(registro)).textContent);
@@ -4546,6 +4611,15 @@ __webpack_require__.r(__webpack_exports__);
       });
       return true;
     }
+  },
+  computed: {
+    computedDate: function computedDate() {
+      return moment(this.mes).format("MMMM YYYY");
+    }
+  },
+  created: function created() {
+    this.momentSetLocale();
+    moment.locale("es");
   }
 });
 
@@ -4566,6 +4640,11 @@ var _name$props$data$comp;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5219,6 +5298,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     isFloat: function isFloat(n) {
       return Number(n) === n && n % 1 !== 0;
+    },
+    loadingVisit: function loadingVisit() {
+      var timerInterval = null;
+      this.$swal.fire({
+        title: 'Cargando espere',
+        html: 'Espere por favor',
+        timer: 10000,
+        timerProgressBar: true,
+        willOpen: function willOpen() {
+          $swal.showLoading();
+          timerInterval = setInterval(function () {
+            /*const content = Swal.getContent()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }*/
+          }, 100);
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return false;
+        },
+        onClose: function onClose() {
+          clearInterval(timerInterval);
+        }
+      }).then(function (result) {
+        /* Read more about handling dismissals below */
+
+        /*if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }*/
+      });
+    },
+    cerrarAsientoSaldo: function cerrarAsientoSaldo() {
+      var _this6 = this;
+
+      this.loadingVisit();
+      fetch("/contapain/cerrarasiento", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "id_asiento": this.id_asiento,
+          "saldo": parseFloat(this.saldo).toFixed(2),
+          "_token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+        })
+      }).then(function () {
+        _this6.$swal.close();
+
+        _this6.$swal.fire("El asiento se ha cerrado correctamente", "correcto!", "success");
+      })["catch"](function () {});
     }
   }
 }, _defineProperty(_name$props$data$comp, "watch", {
@@ -34171,7 +34304,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                Mayorización y mas informacion del mes de \n            "
+                    "\n                Mayorización y mas informacion del mes de " +
+                      _vm._s(_vm.computedDate) +
+                      "\n            "
                   )
                 ]
               )
@@ -35312,7 +35447,30 @@ var render = function() {
                             _vm._v(" "),
                             _c("td"),
                             _vm._v(" "),
-                            _c("td", [_vm._v(" $" + _vm._s(_vm.saldo) + " ")])
+                            _c("td", [
+                              _c("b", [_vm._v("$" + _vm._s(_vm.saldo) + " ")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c(
+                              "td",
+                              {
+                                staticClass: "text-center",
+                                attrs: { colspan: "3" }
+                              },
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "success" },
+                                    on: { click: _vm.cerrarAsientoSaldo }
+                                  },
+                                  [_vm._v(" Cerrar Asiento ")]
+                                )
+                              ],
+                              1
+                            )
                           ])
                         ])
                       ]

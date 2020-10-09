@@ -259,7 +259,12 @@
                                 <tr>
                                     <td><b>Saldo</b></td>
                                     <td></td>
-                                <td > ${{ saldo }} </td>
+                                <td > <b>${{ saldo }} </b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <v-btn :color="'success'" @click="cerrarAsientoSaldo"> Cerrar Asiento </v-btn> 
+                                    </td>
                                 </tr>
                             </tbody>
                             </template>
@@ -619,6 +624,60 @@ export default {
         },
         isFloat(n){
             return Number(n) === n && n % 1 !== 0;
+        }, 
+        loadingVisit(){
+            let timerInterval = null;
+            this.$swal.fire({
+            title: 'Cargando espere',
+            html: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            willOpen: () => {
+                $swal.showLoading()
+                timerInterval = setInterval(() => {
+                /*const content = Swal.getContent()
+                if (content) {
+                    const b = content.querySelector('b')
+                    if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                    }
+                }*/
+                }, 100)
+            },
+            allowOutsideClick: () => false,
+            onClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            /*if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+            }*/
+            })
+        },
+        cerrarAsientoSaldo(){
+            this.loadingVisit();
+            fetch("/contapain/cerrarasiento",{
+                        method: 'POST',
+                        headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                    "id_asiento":this.id_asiento,
+                    "saldo":parseFloat(this.saldo).toFixed(2),
+                    "_token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+                     })
+                    }).then(()=>{
+                        this.$swal.close();
+                this.$swal.fire(
+                    "El asiento se ha cerrado correctamente",
+                    "correcto!",
+                    "success"
+                )
+            }).catch(()=>{
+
+            });
         }
     },
     watch:{
