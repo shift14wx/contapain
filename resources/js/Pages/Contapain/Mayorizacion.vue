@@ -57,9 +57,12 @@
                                                     </td>
                                                     </tr>
                                                     <tr>
+                                                        <div class="d-none">
+                                                            {{calcularTotales(index)}}
+                                                        </div>
                                                         <td>Totales</td>
-                                                        <td ></td>
-                                                        <td ></td>
+                                                        <td class="text-center"> ${{ totales[ index ][ "debe" ] }}  </td>
+                                                        <td class="text-center"> ${{ totales[ index ][ "haber" ] }}  </td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>
@@ -83,6 +86,7 @@ export default {
     props:["parsedRegistros","month"],
     data(){
         return{
+            "totales":[],
             "rubros_registro" : this.parsedRegistros,
             "noMostrar" : 0,
             "deferDebe": "",
@@ -212,6 +216,17 @@ export default {
             // no se utiliza esta funci
            this.rubros_registro[indexRubro].registros = this.rubros_registro[indexRubro].registros.filter( ( reg )=>{ return reg.id_registro != id_registro } );
             return true;
+        },
+        calcularTotales( indexRubro ){
+            console.log(indexRubro);
+            this.totales[ indexRubro ] = {
+                "debe": 0,
+                "haber": 0
+            };
+            let debe = this.rubros_registro[ indexRubro ].registros.map( (reg)=> reg.debe );
+            let haber = this.rubros_registro[ indexRubro ].registros.map( (reg)=> reg.haber );
+            this.totales[ indexRubro ]["debe"] = debe.reduce( (a,b)=>a+b);
+            this.totales[ indexRubro ]["haber"] =  haber.reduce( (a,b)=>a+b);
         }
     },
     computed:{

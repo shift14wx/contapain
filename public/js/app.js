@@ -4474,11 +4474,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["parsedRegistros", "month"],
   data: function data() {
     return {
+      "totales": [],
       "rubros_registro": this.parsedRegistros,
       "noMostrar": 0,
       "deferDebe": "",
@@ -4610,6 +4614,25 @@ __webpack_require__.r(__webpack_exports__);
         return reg.id_registro != id_registro;
       });
       return true;
+    },
+    calcularTotales: function calcularTotales(indexRubro) {
+      console.log(indexRubro);
+      this.totales[indexRubro] = {
+        "debe": 0,
+        "haber": 0
+      };
+      var debe = this.rubros_registro[indexRubro].registros.map(function (reg) {
+        return reg.debe;
+      });
+      var haber = this.rubros_registro[indexRubro].registros.map(function (reg) {
+        return reg.haber;
+      });
+      this.totales[indexRubro]["debe"] = debe.reduce(function (a, b) {
+        return a + b;
+      });
+      this.totales[indexRubro]["haber"] = haber.reduce(function (a, b) {
+        return a + b;
+      });
     }
   },
   computed: {
@@ -34548,13 +34571,63 @@ var render = function() {
                                                   ),
                                                   _vm._v(" "),
                                                   _c("tr", [
+                                                    _c(
+                                                      "div",
+                                                      { staticClass: "d-none" },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                        " +
+                                                            _vm._s(
+                                                              _vm.calcularTotales(
+                                                                index
+                                                              )
+                                                            ) +
+                                                            "\n                                                    "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
                                                     _c("td", [
                                                       _vm._v("Totales")
                                                     ]),
                                                     _vm._v(" "),
-                                                    _c("td"),
+                                                    _c(
+                                                      "td",
+                                                      {
+                                                        staticClass:
+                                                          "text-center"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          " $" +
+                                                            _vm._s(
+                                                              _vm.totales[
+                                                                index
+                                                              ]["debe"]
+                                                            ) +
+                                                            "  "
+                                                        )
+                                                      ]
+                                                    ),
                                                     _vm._v(" "),
-                                                    _c("td"),
+                                                    _c(
+                                                      "td",
+                                                      {
+                                                        staticClass:
+                                                          "text-center"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          " $" +
+                                                            _vm._s(
+                                                              _vm.totales[
+                                                                index
+                                                              ]["haber"]
+                                                            ) +
+                                                            "  "
+                                                        )
+                                                      ]
+                                                    ),
                                                     _vm._v(" "),
                                                     _c("td")
                                                   ])
