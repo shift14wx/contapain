@@ -144,6 +144,45 @@ class AsientosController extends Controller
     }
 
 
+    public function mayorizacionAndStuff( Request $request )
+    {
+        $parsedRegistros= [];
+        $date = null;
+        if( $request->has("month") ){
+            $date = $request->get("month");
+        }
+        $asientos = $this->getAsientosFromADate($date);
+        $this->extractRegistros($asientos,$parsedRegistros);
+
+        return \Inertia\Inertia::render('Contapain/Mayorizacion',[
+            "parsedRegistros" => $parsedRegistros,
+        ]);
+    }
+
+    public function extractRegistros( $asientos,&$parsedRubros )
+    {
+        $registros = [];
+        /** extraemos los registros de los asientos */
+        foreach ($asientos as $key => $registro) {
+            $collectionRegistro = collect($registro);
+            if( $collectionRegistro->has("registros") ){
+                $registros = array_merge( $registros, $collectionRegistro->get("registros") );
+            }
+        }
+        /** TOMAR EL ID y titulo de robro DE RUBRO */
+       $parsedRubros = array_unique( array_map(function($reg){  return ["titulo" => $reg["titulo"],"id_detalle_concepto" => $reg["id_detalle_concepto"],"registros"=>[] ]; },$registros), SORT_REGULAR );
+       /** AHORA PONER LOS REGISTROS ORDENADOS POR ID */
+       foreach ($registros as $key => $registro) {
+            foreach ($parsedRubros as $key => $rubro) {
+                if( $rubro["id_detalle_concepto"] == $registro["id_detalle_concepto"] ){
+                    array_push($parsedRubros[$key]["registros"],$registro);
+                }
+            }
+        }
+
+    }
+
+
 
     public function parseRubros( $rubros, &$parsedRubros, $rubroActivos = [] )
     {

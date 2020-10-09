@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',[ AsientosController::class, 'Dashboard' ])->name('dashboard');
 
-
+Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/mayorizacion',[ AsientosController::class, 'mayorizacionAndStuff' ])->name('mayorizacion');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
     return Inertia\Inertia::render('Contapain/Asientos');

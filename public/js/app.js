@@ -3635,6 +3635,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3666,6 +3681,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    goTo: function goTo() {
+      var _this = this;
+
+      this.loadingVisit();
+      this.$inertia.visit("/contapain/mayorizacion").then(function () {
+        _this.$swal.close();
+      });
+    },
     isAfterDate: function isAfterDate(date) {
       return moment(date).isAfter(this.today);
     },
@@ -3677,7 +3700,7 @@ __webpack_require__.r(__webpack_exports__);
       return exist;
     },
     viewDay: function viewDay(_ref) {
-      var _this = this;
+      var _this2 = this;
 
       var date = _ref.date;
 
@@ -3690,7 +3713,7 @@ __webpack_require__.r(__webpack_exports__);
           this.$inertia.visit("/contapain/asientos/".concat(this.AsientosObjectos[index].id_asiento, "/registros"), {
             method: 'get'
           }).then(function (result) {
-            _this.$swal.close();
+            _this2.$swal.close();
           }); // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
           // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
 
@@ -4290,6 +4313,148 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["parsedRegistros"],
+  data: function data() {
+    return {
+      "rubros_registro": this.parsedRegistros,
+      "noMostrar": 0,
+      "deferDebe": "",
+      "deferHaber": ""
+    };
+  },
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    proximoDebe: function proximoDebe(indexRubro, indexRegistro) {
+      try {
+        var debe = this.rubros_registro[indexRubro].registros.find(function (registro, index) {
+          if (index > indexRegistro && registro.debe > 0) {
+            // nos aseguramos de que sea mayor al index que estamos pintando osea el current haber y que el debe sea mayor a cero
+            return registro; // retornamos el debe de este registro del current rubro
+          }
+        });
+
+        if (debe != undefined && debe.hasOwnProperty("debe")) {
+          this.noMostrar = debe.id_registro;
+
+          var _debeCopy = Object.assign({}, debe);
+
+          this.deferDebe = _debeCopy.debe;
+          return _debeCopy.id_asiento;
+        } else {
+          this.deferDebe = "";
+          return "";
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    proximoHaber: function proximoHaber(indexRubro, indexRegistro) {
+      try {
+        var haber = this.rubros_registro[indexRubro].registros.find(function (registro, index) {
+          if (index > indexRegistro && registro.haber > 0) {
+            // nos aseguramos de que sea mayor al index que estamos pintando osea el current haber y que el debe sea mayor a cero
+            return registro; // retornamos el debe de este registro del current rubro
+          }
+        });
+
+        if (haber != undefined && haber.hasOwnProperty("haber")) {
+          var haberCopy = Object.assign({}, haber);
+          this.deferHaber = debeCopy.haber;
+          return haberCopy.id_asiento;
+        } else {
+          this.deferHaber = "";
+          return "";
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    deleteRegistroFromRubro: function deleteRegistroFromRubro(indexRubro, id_registro) {
+      // no se utiliza esta funci
+      this.rubros_registro[indexRubro].registros = this.rubros_registro[indexRubro].registros.filter(function (reg) {
+        return reg.id_registro != id_registro;
+      });
+      return true;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Registros.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contapain/Registros.vue?vue&type=script&lang=js& ***!
@@ -4305,8 +4470,6 @@ var _name$props$data$comp;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -33110,7 +33273,21 @@ var render = function() {
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _c("v-spacer")
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      staticClass: "ma-2",
+                                      attrs: { outlined: "", color: "indigo" },
+                                      on: { click: _vm.goTo }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Mostrar Mayor informaciòn\n                                    "
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -33236,7 +33413,32 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-row", [_c("v-col", { attrs: { cols: "12" } })], 1),
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "text-center", attrs: { cols: "12" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "ma-2",
+                          attrs: { outlined: "", color: "indigo" },
+                          on: { click: _vm.goTo }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Mostrar Mayor informaciòn\n                            "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _vm.showDialog
                 ? _c(
@@ -33832,6 +34034,246 @@ var render = function() {
       )
     ],
     2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=template&id=953970c0&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=template&id=953970c0& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _vm._v(
+                    "\n                Mayorización y mas informacion del mes de \n            "
+                  )
+                ]
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c("div", { staticClass: "py-12" }, [
+        _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+          _c(
+            "div",
+            {
+              staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg",
+              attrs: { "data-app": "" }
+            },
+            [
+              _c(
+                "v-container",
+                [
+                  _c(
+                    "v-row",
+                    _vm._l(_vm.rubros_registro, function(rubro, index) {
+                      return _c(
+                        "v-col",
+                        {
+                          key: index,
+                          attrs: { lg: "4", md: "6", sm: "6", xs: "12" }
+                        },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c("v-card-title", [
+                                _vm._v(_vm._s(rubro.titulo))
+                              ]),
+                              _vm._v(" "),
+                              _c("v-card-subtitle", [
+                                _vm._v(
+                                  " " + _vm._s(rubro.id_detalle_concepto) + " "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-text",
+                                [
+                                  _c("v-simple-table", {
+                                    attrs: { dark: "" },
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "default",
+                                          fn: function() {
+                                            return [
+                                              _c("thead", [
+                                                _c("tr", [
+                                                  _c("th", [
+                                                    _vm._v("id asiento")
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass: "text-center"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                                    Debe\n                                                "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "th",
+                                                    {
+                                                      staticClass: "text-center"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                                    Haber\n                                                "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("th", [
+                                                    _vm._v("id asiento")
+                                                  ])
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "tbody",
+                                                _vm._l(
+                                                  rubro.registros,
+                                                  function(
+                                                    registro,
+                                                    indexRegistro
+                                                  ) {
+                                                    return _c(
+                                                      "tr",
+                                                      {
+                                                        key:
+                                                          registro.id_registro,
+                                                        class: {
+                                                          "d-none":
+                                                            _vm.noMostrar ==
+                                                            registro.id_registro
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("td", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              registro.debe > 0
+                                                                ? registro.id_asiento
+                                                                : _vm.proximoDebe(
+                                                                    index,
+                                                                    indexRegistro
+                                                                  )
+                                                            )
+                                                          )
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("td", [
+                                                          _vm._v(
+                                                            " " +
+                                                              _vm._s(
+                                                                registro.debe >
+                                                                  0
+                                                                  ? registro.debe
+                                                                  : _vm.deferDebe
+                                                              ) +
+                                                              "\n                                                    "
+                                                          )
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("td", [
+                                                          _vm._v(
+                                                            " " +
+                                                              _vm._s(
+                                                                registro.haber >
+                                                                  0
+                                                                  ? registro.haber
+                                                                  : _vm.proximoHaber(
+                                                                      index,
+                                                                      indexRegistro
+                                                                    )
+                                                              )
+                                                          )
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("td", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              registro.haber > 0
+                                                                ? registro.id_asiento
+                                                                : _vm.deferHaber
+                                                            )
+                                                          )
+                                                        ])
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    }),
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ]
   )
 }
 var staticRenderFns = []
@@ -95043,6 +95485,8 @@ var map = {
 	"./Contapain/Asientos/formAsiento.vue": "./resources/js/Pages/Contapain/Asientos/formAsiento.vue",
 	"./Contapain/Asientos/tablasAsiento": "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue",
 	"./Contapain/Asientos/tablasAsiento.vue": "./resources/js/Pages/Contapain/Asientos/tablasAsiento.vue",
+	"./Contapain/Mayorizacion": "./resources/js/Pages/Contapain/Mayorizacion.vue",
+	"./Contapain/Mayorizacion.vue": "./resources/js/Pages/Contapain/Mayorizacion.vue",
 	"./Contapain/Registros": "./resources/js/Pages/Contapain/Registros.vue",
 	"./Contapain/Registros.vue": "./resources/js/Pages/Contapain/Registros.vue",
 	"./Dashboard": "./resources/js/Pages/Dashboard.vue",
@@ -95437,6 +95881,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tablasAsiento_vue_vue_type_template_id_76bfe0a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Contapain/Mayorizacion.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/Pages/Contapain/Mayorizacion.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Mayorizacion_vue_vue_type_template_id_953970c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Mayorizacion.vue?vue&type=template&id=953970c0& */ "./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=template&id=953970c0&");
+/* harmony import */ var _Mayorizacion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Mayorizacion.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Mayorizacion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Mayorizacion_vue_vue_type_template_id_953970c0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Mayorizacion_vue_vue_type_template_id_953970c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Contapain/Mayorizacion.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Mayorizacion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Mayorizacion.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Mayorizacion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=template&id=953970c0&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=template&id=953970c0& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mayorizacion_vue_vue_type_template_id_953970c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Mayorizacion.vue?vue&type=template&id=953970c0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contapain/Mayorizacion.vue?vue&type=template&id=953970c0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mayorizacion_vue_vue_type_template_id_953970c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mayorizacion_vue_vue_type_template_id_953970c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

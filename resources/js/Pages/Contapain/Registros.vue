@@ -265,8 +265,6 @@
                             </tbody>
                             </template>
                         </v-simple-table>
-
-
                 </div>
             </div>
         </div>

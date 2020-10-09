@@ -52,6 +52,14 @@
                                                 {{ $refs.calendar.title }}
                                             </v-toolbar-title>
                                             <v-spacer></v-spacer>
+                                            <v-btn
+                                            class="ma-2"
+                                            outlined
+                                            color="indigo"
+                                            @click="goTo"
+                                            >
+                                            Mostrar Mayor informaciòn
+                                            </v-btn>
                                         </v-toolbar>
                                     </v-sheet>
                                     <!-- END HEADER -->
@@ -94,8 +102,15 @@
                                 </v-col>
                             </v-row>
                             <v-row>
-                                <v-col cols="12">
-
+                                <v-col cols="12" class="text-center">
+                                     <v-btn
+                                    class="ma-2"
+                                    outlined
+                                    color="indigo"
+                                    @click="goTo"
+                                    >
+                                    Mostrar Mayor informaciòn
+                                    </v-btn>
                                 </v-col>
                             </v-row>
                             <!--FULL SCREEN DIALOG-->
@@ -146,6 +161,12 @@ export default {
         fecha_inicio_selected: moment().format("YYYY-MM-DD")
     }),
     methods: {
+        goTo(){
+            this.loadingVisit();
+            this.$inertia.visit("/contapain/mayorizacion").then(()=>{
+                this.$swal.close();
+            });
+        },
         isAfterDate( date ){
             return moment( date ).isAfter( this.today );
         },
