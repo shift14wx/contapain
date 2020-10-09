@@ -98,6 +98,36 @@ export default {
         AppLayout,
     },
     methods:{
+        loadingVisit(){
+            let timerInterval = null;
+            this.$swal.fire({
+            title: 'Cargando espere',
+            html: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            willOpen: () => {
+                $swal.showLoading()
+                timerInterval = setInterval(() => {
+                /*const content = Swal.getContent()
+                if (content) {
+                    const b = content.querySelector('b')
+                    if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                    }
+                }*/
+                }, 100)
+            },
+            allowOutsideClick: () => false,
+            onClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            /*if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+            }*/
+            })
+        },
         momentSetLocale(){
             moment.locale('es', {
                 months : 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
@@ -162,10 +192,11 @@ export default {
         },
         
         goTo(rubro, registro, tipo){
+            this.loadingVisit();
             console.log( `#${tipo}${rubro}${registro}` );
             let idAsiento = parseInt(document.querySelector(`#${tipo}${rubro}${registro}`).textContent);
             this.$inertia.visit(`/contapain/asientos/${idAsiento}/registros`).then(()=>{
-
+                this.$swal.close();
             });
         },
         proximoDebe( indexRubro, indexRegistro ){

@@ -3132,6 +3132,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4214,10 +4221,6 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Concepto Detallado',
         value: 'concepto_detallado'
-      }, {
-        text: 'Acciones',
-        value: 'actions',
-        sortable: false
       }]
     };
   },
@@ -4370,6 +4373,9 @@ __webpack_require__.r(__webpack_exports__);
       this.totalHaberNeto = this.totalHaber.reduce(function (a, b) {
         return a + b;
       });
+    },
+    formatDate: function formatDate(date) {
+      return moment(date).format("dddd DD") + " del " + moment(date).format("YYYY");
     }
   },
   computed: {
@@ -4494,6 +4500,39 @@ __webpack_require__.r(__webpack_exports__);
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    loadingVisit: function loadingVisit() {
+      var timerInterval = null;
+      this.$swal.fire({
+        title: 'Cargando espere',
+        html: 'Espere por favor',
+        timer: 10000,
+        timerProgressBar: true,
+        willOpen: function willOpen() {
+          $swal.showLoading();
+          timerInterval = setInterval(function () {
+            /*const content = Swal.getContent()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }*/
+          }, 100);
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return false;
+        },
+        onClose: function onClose() {
+          clearInterval(timerInterval);
+        }
+      }).then(function (result) {
+        /* Read more about handling dismissals below */
+
+        /*if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }*/
+      });
+    },
     momentSetLocale: function momentSetLocale() {
       moment.locale('es', {
         months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
@@ -4559,9 +4598,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     goTo: function goTo(rubro, registro, tipo) {
+      var _this = this;
+
+      this.loadingVisit();
       console.log("#".concat(tipo).concat(rubro).concat(registro));
       var idAsiento = parseInt(document.querySelector("#".concat(tipo).concat(rubro).concat(registro)).textContent);
-      this.$inertia.visit("/contapain/asientos/".concat(idAsiento, "/registros")).then(function () {});
+      this.$inertia.visit("/contapain/asientos/".concat(idAsiento, "/registros")).then(function () {
+        _this.$swal.close();
+      });
     },
     proximoDebe: function proximoDebe(indexRubro, indexRegistro) {
       try {
@@ -4663,6 +4707,49 @@ var _name$props$data$comp;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4948,6 +5035,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: ["id_asiento", "selectedRegistros", "catalogo_cuentas", "selectedAsiento"],
   data: function data() {
     return {
+      "snack": false,
+      "snackLoading": false,
+      "snackbar": {
+        "text": "El saldo fue actualizado",
+        "color": "success"
+      },
       "totalHaber": 0.0,
       "totalDebe": 0.0,
       mandar: null,
@@ -5213,6 +5306,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             icon: 'success',
             timer: 1500
           });
+
+          _this4.cerrarAsientoSaldo();
         }
 
         _this4.close();
@@ -5358,7 +5453,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     cerrarAsientoSaldo: function cerrarAsientoSaldo() {
       var _this6 = this;
 
-      this.loadingVisit();
+      this.snackLoading = true;
       fetch("/contapain/cerrarasiento", {
         method: 'POST',
         headers: {
@@ -5371,10 +5466,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           "_token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
         })
       }).then(function () {
-        _this6.$swal.close();
-
-        _this6.$swal.fire("El asiento se ha cerrado correctamente", "correcto!", "success");
-      })["catch"](function () {});
+        _this6.snack = true;
+        setTimeout(function () {
+          _this6.snackLoading = false;
+        }, 1000);
+      })["catch"](function () {
+        _this6.snackLoading["false"];
+      });
     }
   }
 }, _defineProperty(_name$props$data$comp, "watch", {
@@ -5385,6 +5483,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _defineProperty(_name$props$data$comp, "components", {
   Input: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
   AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
+}), _defineProperty(_name$props$data$comp, "mounted", function mounted() {
+  console.log(_typeof(this.catalogo_cuentas));
 }), _defineProperty(_name$props$data$comp, "created", function created() {
   this.initialize();
   this.momentSetLocale();
@@ -32042,6 +32142,21 @@ var render = function() {
                       })
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-green-500 rounded"
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Version Alternativa\n                        "
+                      )
+                    ]
                   )
                 ],
                 1
@@ -32062,7 +32177,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            Dashboard\n                        "
+                        "\n                            Inicio\n                        "
                       )
                     ]
                   ),
@@ -32073,7 +32188,7 @@ var render = function() {
                       attrs: {
                         href: "/contapain/asientos",
                         active:
-                          _vm.$page.currentRouteName == "contapain.asientos"
+                          _vm.$page.currentRouteName == "/contapain/asientos"
                       },
                       on: { click: _vm.loadingVisit }
                     },
@@ -32456,7 +32571,19 @@ var render = function() {
                       active: _vm.$page.currentRouteName == "dashboard"
                     }
                   },
-                  [_vm._v("\n                    Dashboard\n                ")]
+                  [_vm._v("\n                    inicio\n                ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "jet-responsive-nav-link",
+                  {
+                    attrs: {
+                      href: "/contapain/asientos",
+                      active:
+                        _vm.$page.currentRouteName == "/contapain/asientos"
+                    }
+                  },
+                  [_vm._v("\n                    Asientos\n                ")]
                 )
               ],
               1
@@ -33537,7 +33664,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                    Mostrar Mayor informaciòn\n                                    "
+                                        "\n                                    Mostrar Mayorización\n                                    "
                                       )
                                     ]
                                   )
@@ -33682,7 +33809,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                            Mostrar Mayor informaciòn\n                            "
+                            "\n                            Mostrar Mayorización\n                            "
                           )
                         ]
                       )
@@ -33918,10 +34045,12 @@ var render = function() {
                               [
                                 _c("v-toolbar-title", [
                                   _vm._v(
-                                    "Registros de Asiento con id " +
+                                    "Asiento " +
                                       _vm._s(asiento.id_asiento) +
-                                      " del " +
-                                      _vm._s(asiento.fecha_inicio)
+                                      " " +
+                                      _vm._s(
+                                        _vm.formatDate(asiento.fecha_inicio)
+                                      )
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -34839,63 +34968,27 @@ var render = function() {
                                                 _c(
                                                   "v-row",
                                                   [
-                                                    _c(
-                                                      "v-col",
-                                                      [
-                                                        _vm.editedIndex > -1
-                                                          ? _c("v-text-field", {
-                                                              attrs: {
-                                                                disabled: "",
-                                                                label:
-                                                                  "Id de registro"
-                                                              },
-                                                              model: {
-                                                                value:
-                                                                  _vm.editedItem
-                                                                    .id_registro,
-                                                                callback: function(
-                                                                  $$v
-                                                                ) {
-                                                                  _vm.$set(
-                                                                    _vm.editedItem,
-                                                                    "id_registro",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                                expression:
-                                                                  "editedItem.id_registro"
-                                                              }
-                                                            })
-                                                          : _vm._e(),
-                                                        _vm._v(" "),
-                                                        _c("input", {
-                                                          attrs: {
-                                                            type: "hidden",
-                                                            name: "id_registro"
-                                                          },
-                                                          domProps: {
-                                                            value:
-                                                              _vm.editedItem
-                                                                .id_registro
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
+                                                    _c("v-col", [
+                                                      _c("input", {
+                                                        attrs: {
+                                                          type: "hidden",
+                                                          name: "id_registro"
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.editedItem
+                                                              .id_registro
+                                                        }
+                                                      })
+                                                    ]),
                                                     _vm._v(" "),
                                                     _c(
                                                       "v-col",
                                                       {
                                                         attrs: {
                                                           cols: "12",
-                                                          sm:
-                                                            _vm.editedIndex > -1
-                                                              ? 6
-                                                              : 12,
-                                                          md:
-                                                            _vm.editedIndex > -1
-                                                              ? 6
-                                                              : 12
+                                                          sm: 12,
+                                                          md: 12
                                                         }
                                                       },
                                                       [
@@ -35018,7 +35111,11 @@ var render = function() {
                                                                       type:
                                                                         "decimal",
                                                                       label:
-                                                                        "Debe"
+                                                                        "Debe",
+                                                                      "persistent-hint":
+                                                                        "",
+                                                                      hint:
+                                                                        "Si desea ver el campo de haber solo deje a cero este campo o vacio"
                                                                     },
                                                                     model: {
                                                                       value:
@@ -35121,7 +35218,11 @@ var render = function() {
                                                                       type:
                                                                         "decimal",
                                                                       label:
-                                                                        "Haber"
+                                                                        "Haber",
+                                                                      "persistent-hint":
+                                                                        "",
+                                                                      hint:
+                                                                        "Si desea ver el campo de debe solo deje a cero este campo o vacio"
                                                                     },
                                                                     model: {
                                                                       value:
@@ -35523,27 +35624,6 @@ var render = function() {
                             _c("td", [
                               _c("b", [_vm._v("$" + _vm._s(_vm.saldo) + " ")])
                             ])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c(
-                              "td",
-                              {
-                                staticClass: "text-center",
-                                attrs: { colspan: "3" }
-                              },
-                              [
-                                _c(
-                                  "v-btn",
-                                  {
-                                    attrs: { color: "success" },
-                                    on: { click: _vm.cerrarAsientoSaldo }
-                                  },
-                                  [_vm._v(" Cerrar Asiento ")]
-                                )
-                              ],
-                              1
-                            )
                           ])
                         ])
                       ]
@@ -35551,7 +35631,121 @@ var render = function() {
                     proxy: true
                   }
                 ])
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "v-snackbar",
+                {
+                  attrs: { color: "warning", left: "", bottom: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "action",
+                      fn: function(ref) {
+                        var attrs = ref.attrs
+                        return [
+                          _c(
+                            "v-btn",
+                            _vm._b(
+                              {
+                                attrs: { text: "" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.snackLoading = false
+                                  }
+                                }
+                              },
+                              "v-btn",
+                              attrs,
+                              false
+                            ),
+                            [
+                              _vm._v(
+                                "\n                        Close\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      }
+                    }
+                  ]),
+                  model: {
+                    value: _vm.snackLoading,
+                    callback: function($$v) {
+                      _vm.snackLoading = $$v
+                    },
+                    expression: "snackLoading"
+                  }
+                },
+                [
+                  _c("v-progress-circular", {
+                    attrs: { size: 50, color: "primary", indeterminate: "" }
+                  }),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s("cargando datos") +
+                      "\n\n                    "
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-snackbar",
+                {
+                  attrs: { color: _vm.snackbar.color, left: "", top: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "action",
+                      fn: function(ref) {
+                        var attrs = ref.attrs
+                        return [
+                          _c(
+                            "v-btn",
+                            _vm._b(
+                              {
+                                attrs: { text: "" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.snack = false
+                                  }
+                                }
+                              },
+                              "v-btn",
+                              attrs,
+                              false
+                            ),
+                            [
+                              _vm._v(
+                                "\n                        Close\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      }
+                    }
+                  ]),
+                  model: {
+                    value: _vm.snack,
+                    callback: function($$v) {
+                      _vm.snack = $$v
+                    },
+                    expression: "snack"
+                  }
+                },
+                [
+                  _c("v-icon", [
+                    _vm._v(
+                      "\n                        mdi-success\n                    "
+                    )
+                  ]),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.snackbar.text) +
+                      "\n\n                    "
+                  )
+                ],
+                1
+              )
             ],
             1
           )

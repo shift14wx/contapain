@@ -13,7 +13,7 @@
                                 <v-toolbar
                                     flat
                                 >
-                                    <v-toolbar-title>Registros de Asiento con id {{ asiento.id_asiento }} del {{asiento.fecha_inicio}}</v-toolbar-title>
+                                    <v-toolbar-title>Asiento {{ asiento.id_asiento }} {{ formatDate( asiento.fecha_inicio ) }}</v-toolbar-title>
                                     <v-divider
                                         class="mx-4"
                                         inset
@@ -188,7 +188,6 @@ export default {
                 { text: 'Debe', value: 'debe' },
                 { text: 'Haber', value: 'haber' },
                 { text: 'Concepto Detallado', value: 'concepto_detallado' },
-                { text: 'Acciones', value: 'actions', sortable: false },
             ],
 
         }
@@ -327,6 +326,9 @@ export default {
         },
         calcTotalesHaberNeto(){
             this.totalHaberNeto = this.totalHaber.reduce((a,b)=>a+b);
+        },
+        formatDate( date ){
+            return moment( date ).format( "dddd DD" )+ " del "+moment( date ).format( "YYYY" );
         }
 
     },

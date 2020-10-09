@@ -53,18 +53,12 @@
                                                 <v-container>
                                                     <v-row>
                                                         <v-col>
-                                                            <v-text-field
-                                                                v-model="editedItem.id_registro"
-                                                                disabled
-                                                                label="Id de registro"
-                                                                v-if="(editedIndex > -1)"
-                                                            ></v-text-field>
                                                             <input :value="editedItem.id_registro" type="hidden" name="id_registro">
                                                         </v-col>
                                                         <v-col
                                                             cols="12"
-                                                            :sm="(editedIndex > -1) ? 6 : 12"
-                                                            :md="(editedIndex > -1) ? 6 : 12"
+                                                            :sm="12"
+                                                            :md=" 12"
                                                         >
                                                             <v-autocomplete
                                                                 v-model="editedItem.id_detalle_concepto"
@@ -93,6 +87,8 @@
                                                                 :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
                                                                 type="decimal"
                                                                 label="Debe"
+                                                                persistent-hint
+                                                                :hint="'Si desea ver el campo de haber solo deje a cero este campo o vacio'"
                                                             ></v-text-field>
                                                         </v-col>
                                                         <v-col
@@ -111,6 +107,8 @@
                                                                  :rules="[ value => !!value || 'Este campo es necesario', value => !isNaN(parseFloat(value)) || 'Solo digitos' ]"
                                                                 type="decimal"
                                                                 label="Haber"
+                                                                persistent-hint
+                                                                :hint="'Si desea ver el campo de debe solo deje a cero este campo o vacio'"
                                                             ></v-text-field>
                                                         </v-col>
                                                         </v-row>
@@ -261,14 +259,57 @@
                                     <td></td>
                                 <td > <b>${{ saldo }} </b></td>
                                 </tr>
-                                <tr>
-                                    <td colspan="3" class="text-center">
-                                        <v-btn :color="'success'" @click="cerrarAsientoSaldo"> Cerrar Asiento </v-btn> 
-                                    </td>
-                                </tr>
                             </tbody>
                             </template>
                         </v-simple-table>
+                        <!-- LOADING SNACKBAR-->
+                        <v-snackbar
+                        color="warning"
+                        v-model="snackLoading"
+                        left
+                        bottom
+                        >
+                        <v-progress-circular
+                        :size="50"
+                        color="primary"
+                        indeterminate
+                        ></v-progress-circular>
+                        {{ "cargando datos" }}
+
+                        <template v-slot:action="{ attrs }">
+                            <v-btn
+                            text
+                            v-bind="attrs"
+                            @click="snackLoading = false"
+                            >
+                            Close
+                            </v-btn>
+                        </template>
+                        </v-snackbar>
+
+                        <!--SUCCESS SNACKBAR-->
+
+                           <v-snackbar
+                        :color="snackbar.color"
+                        v-model="snack"
+                        left
+                        top
+                        >
+                        <v-icon>
+                            mdi-success
+                        </v-icon>
+                        {{ snackbar.text }}
+
+                        <template v-slot:action="{ attrs }">
+                            <v-btn
+                            text
+                            v-bind="attrs"
+                            @click="snack = false"
+                            >
+                            Close
+                            </v-btn>
+                        </template>
+                        </v-snackbar>
                 </div>
             </div>
         </div>
@@ -286,6 +327,12 @@ export default {
     props: ["id_asiento","selectedRegistros","catalogo_cuentas","selectedAsiento"],
     data(){
         return {
+            "snack" : false,
+            "snackLoading": false,
+            "snackbar": {
+                "text": "El saldo fue actualizado",
+                "color" : "success",
+            },
             "totalHaber": 0.0,
             "totalDebe" : 0.0,
              mandar     : null,
@@ -521,6 +568,7 @@ export default {
                 icon: 'success',
                 timer:1500
                 })
+            this.cerrarAsientoSaldo();
             }
             
             this.close()  
@@ -656,7 +704,7 @@ export default {
             })
         },
         cerrarAsientoSaldo(){
-            this.loadingVisit();
+            this.snackLoading = true;
             fetch("/contapain/cerrarasiento",{
                         method: 'POST',
                         headers: {
@@ -669,14 +717,12 @@ export default {
                     "_token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
                      })
                     }).then(()=>{
-                        this.$swal.close();
-                this.$swal.fire(
-                    "El asiento se ha cerrado correctamente",
-                    "correcto!",
-                    "success"
-                )
+                        this.snack = true;
+                        setTimeout(() => {
+                        this.snackLoading = false;
+                        }, 1000);
             }).catch(()=>{
-
+                        this.snackLoading.false;
             });
         }
     },
@@ -688,6 +734,9 @@ export default {
     components:{
         Input,
         AppLayout
+    },
+    mounted(){
+        console.log( typeof( this.catalogo_cuentas ) );
     },
     created(){
         this.initialize();

@@ -58,7 +58,7 @@
                                             color="indigo"
                                             @click="goTo"
                                             >
-                                            Mostrar Mayor informaciòn
+                                            Mostrar Mayorización
                                             </v-btn>
                                         </v-toolbar>
                                     </v-sheet>
@@ -109,7 +109,7 @@
                                     color="indigo"
                                     @click="goTo"
                                     >
-                                    Mostrar Mayor informaciòn
+                                    Mostrar Mayorización
                                     </v-btn>
                                 </v-col>
                             </v-row>

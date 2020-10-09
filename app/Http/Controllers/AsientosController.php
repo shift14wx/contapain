@@ -67,6 +67,7 @@ class AsientosController extends Controller
         $rubros = Rubro::all()->toArray();
         $rubrosParseados = [];
         $this->parseRubros($rubros,$rubrosParseados);
+        //$rubrosParseados = collect( $rubrosParseados )->sortBy("id")->toArray();
         $asiento = Asiento::find( $id_asiento )->toArray();
         $registros = registro::where("id_asiento",$id_asiento)->get()->toArray();
         return \Inertia\Inertia::render('Contapain/Registros',[

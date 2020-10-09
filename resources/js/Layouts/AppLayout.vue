@@ -17,14 +17,18 @@
                                
                                 <jet-application-mark class="block h-9 w-auto" />
                             </a>
+                            <v-spacer />
+                            <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-green-500 rounded">
+                            Version Alternativa
+                            </button>
                         </div>
 
                             <!--Navigation Links-->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <jet-nav-link @click="loadingVisit" href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
-                                Dashboard
+                                Inicio
                             </jet-nav-link>
-                            <jet-nav-link @click="loadingVisit" href="/contapain/asientos" :active="$page.currentRouteName == 'contapain.asientos'">
+                            <jet-nav-link @click="loadingVisit" href="/contapain/asientos" :active="$page.currentRouteName == '/contapain/asientos'">
                                 Asientos
                             </jet-nav-link>
                         </div>
@@ -128,7 +132,10 @@
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
                     <jet-responsive-nav-link href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
-                        Dashboard
+                        inicio
+                    </jet-responsive-nav-link>
+                     <jet-responsive-nav-link href="/contapain/asientos" :active="$page.currentRouteName == '/contapain/asientos'">
+                        Asientos
                     </jet-responsive-nav-link>
                 </div>
 
