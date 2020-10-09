@@ -3167,6 +3167,39 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/logout').then(function (response) {
         window.location = '/';
       });
+    },
+    loadingVisit: function loadingVisit() {
+      var timerInterval = null;
+      this.$swal.fire({
+        title: 'Cargando espere',
+        html: 'Espere por favor',
+        timer: 10000,
+        timerProgressBar: true,
+        willOpen: function willOpen() {
+          $swal.showLoading();
+          timerInterval = setInterval(function () {
+            /*const content = Swal.getContent()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }*/
+          }, 100);
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return false;
+        },
+        onClose: function onClose() {
+          clearInterval(timerInterval);
+        }
+      }).then(function (result) {
+        /* Read more about handling dismissals below */
+
+        /*if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }*/
+      });
     }
   },
   computed: {
@@ -4257,8 +4290,42 @@ __webpack_require__.r(__webpack_exports__);
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
       if (id) {
+        this.loadingVisit();
         window.location.href = "/contapain/asientos/".concat(id, "/registros");
       }
+    },
+    loadingVisit: function loadingVisit() {
+      var timerInterval = null;
+      this.$swal.fire({
+        title: 'Cargando espere',
+        html: 'Espere por favor',
+        timer: 10000,
+        timerProgressBar: true,
+        willOpen: function willOpen() {
+          $swal.showLoading();
+          timerInterval = setInterval(function () {
+            /*const content = Swal.getContent()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }*/
+          }, 100);
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return false;
+        },
+        onClose: function onClose() {
+          clearInterval(timerInterval);
+        }
+      }).then(function (result) {
+        /* Read more about handling dismissals below */
+
+        /*if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }*/
+      });
     },
     showCorrectDebeHaber: function showCorrectDebeHaber(idConcepto, tipo) {
       var concepto = this.catalogo.find(function (catalogo) {
@@ -31834,7 +31901,8 @@ var render = function() {
                       attrs: {
                         href: "/dashboard",
                         active: _vm.$page.currentRouteName == "dashboard"
-                      }
+                      },
+                      on: { click: _vm.loadingVisit }
                     },
                     [
                       _vm._v(
@@ -31850,7 +31918,8 @@ var render = function() {
                         href: "/contapain/asientos",
                         active:
                           _vm.$page.currentRouteName == "contapain.asientos"
-                      }
+                      },
+                      on: { click: _vm.loadingVisit }
                     },
                     [
                       _vm._v(

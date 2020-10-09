@@ -21,10 +21,10 @@
 
                             <!--Navigation Links-->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <jet-nav-link href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
+                            <jet-nav-link @click="loadingVisit" href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
                                 Dashboard
                             </jet-nav-link>
-                            <jet-nav-link href="/contapain/asientos" :active="$page.currentRouteName == 'contapain.asientos'">
+                            <jet-nav-link @click="loadingVisit" href="/contapain/asientos" :active="$page.currentRouteName == 'contapain.asientos'">
                                 Asientos
                             </jet-nav-link>
                         </div>
@@ -262,6 +262,36 @@
                     window.location = '/';
                 })
             },
+            loadingVisit(){
+            let timerInterval = null;
+            this.$swal.fire({
+            title: 'Cargando espere',
+            html: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            willOpen: () => {
+                $swal.showLoading()
+                timerInterval = setInterval(() => {
+                /*const content = Swal.getContent()
+                if (content) {
+                    const b = content.querySelector('b')
+                    if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                    }
+                }*/
+                }, 100)
+            },
+            allowOutsideClick: () => false,
+            onClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            /*if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+            }*/
+            })
+        }
         },
 
         computed: {

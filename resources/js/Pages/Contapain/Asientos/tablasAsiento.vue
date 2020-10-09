@@ -258,8 +258,39 @@ export default {
         },
         goTo(id = null){
             if(id){
+                this.loadingVisit();
                 window.location.href = `/contapain/asientos/${id}/registros`;
             }
+        },
+        loadingVisit(){
+            let timerInterval = null;
+            this.$swal.fire({
+            title: 'Cargando espere',
+            html: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            willOpen: () => {
+                $swal.showLoading()
+                timerInterval = setInterval(() => {
+                /*const content = Swal.getContent()
+                if (content) {
+                    const b = content.querySelector('b')
+                    if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                    }
+                }*/
+                }, 100)
+            },
+            allowOutsideClick: () => false,
+            onClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            /*if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+            }*/
+            })
         },
         showCorrectDebeHaber(idConcepto, tipo){
             let concepto = this.catalogo.find( ( catalogo ) => catalogo.id == idConcepto );
