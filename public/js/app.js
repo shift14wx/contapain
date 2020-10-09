@@ -3685,7 +3685,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loadingVisit();
-      this.$inertia.visit("/contapain/mayorizacion").then(function () {
+      this.$inertia.visit("/contapain/mayorizacion", {
+        method: 'get',
+        data: {
+          month: this.focus
+        }
+      }).then(function () {
         _this.$swal.close();
       });
     },
@@ -4767,7 +4772,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_name$props$data$comp = {
@@ -4795,7 +4799,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         text: 'Id',
         align: 'start',
         sortable: true,
-        value: 'id_registro'
+        value: 'id_detalle_concepto'
       }, {
         text: 'Detalle o concepto',
         value: 'titulo'

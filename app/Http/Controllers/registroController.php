@@ -65,7 +65,7 @@ class registroController extends AppBaseController
             'id_rubro'=> 'required',
             'id_asiento' => 'required']
         ); 
-        $input = $request->only("id_detalle_concepto","id_rubro","debe","haber","id_rubro","id_asiento");
+        $input = $request->only("id_detalle_concepto","id_rubro","debe","haber","id_rubro","id_asiento","concepto_detallado");
 
         $registro = $this->registroRepository->create($input);
 

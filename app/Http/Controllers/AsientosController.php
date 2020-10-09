@@ -105,6 +105,8 @@ class AsientosController extends Controller
         if($date == null)
         {
             $date = Carbon::now()->toDate()->format("Y-m");
+        }else{
+            $date = Carbon::createFromFormat("Y-m-d",$date)->format("Y-m");
         }
         return Asiento::where("fecha_inicio","LIKE","%$date%")->where("id_user", Auth::user()->getAuthIdentifier() )->get()->toArray();
     }

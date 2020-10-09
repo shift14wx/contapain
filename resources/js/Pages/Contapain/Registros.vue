@@ -9,7 +9,6 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" data-app>
-
                         <v-data-table
                             :headers="headers"
                             :items="registros"
@@ -297,7 +296,7 @@ export default {
                     text: 'Id',
                     align: 'start',
                     sortable: true,
-                    value: 'id_registro',
+                    value: 'id_detalle_concepto',
                 },
                 { text: 'Detalle o concepto', value: 'titulo' },
                 { text: 'Debe', value: 'debe' },

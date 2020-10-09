@@ -163,7 +163,12 @@ export default {
     methods: {
         goTo(){
             this.loadingVisit();
-            this.$inertia.visit("/contapain/mayorizacion").then(()=>{
+            this.$inertia.visit(`/contapain/mayorizacion`,{
+                    method: 'get',
+                    data: {
+                        month: this.focus,
+                    },
+                    }).then(()=>{
                 this.$swal.close();
             });
         },
