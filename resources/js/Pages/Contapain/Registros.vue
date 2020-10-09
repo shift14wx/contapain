@@ -37,6 +37,7 @@
                                                 class="mb-2"
                                                 v-bind="attrs"
                                                 v-on="on"
+                                                @click="setDefaultToAddForm"
                                             >
                                             <v-icon> mdi-plus </v-icon> &nbsp;
                                                 Agregar Registro
@@ -442,6 +443,9 @@ export default {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
             })
+        },
+        setDefaultToAddForm(){
+                this.editedItem = Object.assign({}, this.defaultItem)
         },
 
         save() {

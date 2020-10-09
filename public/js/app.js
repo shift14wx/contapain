@@ -5028,6 +5028,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_name$props$data$comp = {
@@ -5163,6 +5164,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         _this2.editedItem = Object.assign({}, _this2.defaultItem);
         _this2.editedIndex = -1;
       });
+    },
+    setDefaultToAddForm: function setDefaultToAddForm() {
+      this.editedItem = Object.assign({}, this.defaultItem);
     },
     save: function save() {
       var _this3 = this;
@@ -34906,6 +34910,9 @@ var render = function() {
                                                 attrs: {
                                                   color: "success",
                                                   dark: ""
+                                                },
+                                                on: {
+                                                  click: _vm.setDefaultToAddForm
                                                 }
                                               },
                                               "v-btn",
