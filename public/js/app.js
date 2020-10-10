@@ -4666,11 +4666,9 @@ __webpack_require__.r(__webpack_exports__);
 
         if (debe != undefined && debe.hasOwnProperty("debe")) {
           this.noMostrar = debe.id_registro;
-
-          var _debeCopy = Object.assign({}, debe);
-
-          this.deferDebe = "$" + _debeCopy.debe;
-          return _debeCopy.id_asiento;
+          var debeCopy = Object.assign({}, debe);
+          this.deferDebe = "$" + debeCopy.debe;
+          return debeCopy.id_asiento;
         } else {
           this.deferDebe = "";
           return "";
@@ -4690,8 +4688,9 @@ __webpack_require__.r(__webpack_exports__);
 
         if (haber != undefined && haber.hasOwnProperty("haber")) {
           var haberCopy = Object.assign({}, haber);
-          this.deferHaber = "$" + debeCopy.haber;
-          return haberCopy.id_asiento;
+          this.noMostrar = haber.id_registro;
+          this.deferHaber = haberCopy.id_asiento;
+          return haberCopy.haber;
         } else {
           this.deferHaber = "";
           return "";
@@ -4708,7 +4707,6 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     calcularTotales: function calcularTotales(indexRubro) {
-      console.log(indexRubro);
       this.totales[indexRubro] = {
         "debe": 0,
         "haber": 0
@@ -4720,10 +4718,10 @@ __webpack_require__.r(__webpack_exports__);
         return reg.haber;
       });
       this.totales[indexRubro]["debe"] = debe.reduce(function (a, b) {
-        return a + b;
+        return parseFloat(a) + parseFloat(b);
       });
       this.totales[indexRubro]["haber"] = haber.reduce(function (a, b) {
-        return a + b;
+        return parseFloat(a) + parseFloat(b);
       });
     }
   },

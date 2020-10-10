@@ -280,8 +280,9 @@ export default {
 
             if( haber != undefined && haber.hasOwnProperty( "haber" ) ){
                 let haberCopy = Object.assign({},haber);
-                this.deferHaber = "$"+debeCopy.haber;
-                return haberCopy.id_asiento;
+                this.noMostrar = haber.id_registro;
+                this.deferHaber = haberCopy.id_asiento;
+                return haberCopy.haber;
             }else{
                 this.deferHaber = "";
                 return "";
@@ -297,15 +298,14 @@ export default {
             return true;
         },
         calcularTotales( indexRubro ){
-            console.log(indexRubro);
             this.totales[ indexRubro ] = {
                 "debe": 0,
                 "haber": 0
             };
             let debe = this.rubros_registro[ indexRubro ].registros.map( (reg)=> reg.debe );
             let haber = this.rubros_registro[ indexRubro ].registros.map( (reg)=> reg.haber );
-            this.totales[ indexRubro ]["debe"] = debe.reduce( (a,b)=>a+b);
-            this.totales[ indexRubro ]["haber"] =  haber.reduce( (a,b)=>a+b);
+            this.totales[ indexRubro ]["debe"] = debe.reduce( (a,b)=>parseFloat(a)+parseFloat(b));
+            this.totales[ indexRubro ]["haber"] =  haber.reduce( (a,b)=>parseFloat(a)+parseFloat(b));
         }
     },
     computed:{
