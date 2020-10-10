@@ -56,11 +56,11 @@
                                 <template #content>
                                     <!-- Account Management -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Manage Account
+                                        Administrar cuenta
                                     </div>
 
                                     <jet-dropdown-link href="/user/profile">
-                                        Profile
+                                        Perfil
                                     </jet-dropdown-link>
 
                                     <jet-dropdown-link href="/user/api-tokens" v-if="$page.jetstream.hasApiFeatures">
@@ -108,7 +108,7 @@
                                     <!-- Authentication -->
                                     <form @submit.prevent="logout">
                                         <jet-dropdown-link as="button">
-                                            Logout
+                                            Cerrar sesión
                                         </jet-dropdown-link>
                                     </form>
                                 </template>
@@ -154,7 +154,7 @@
 
                     <div class="mt-3 space-y-1">
                         <jet-responsive-nav-link href="/user/profile" :active="$page.currentRouteName == 'profile.show'">
-                            Profile
+                            Perfil
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link href="/user/api-tokens" :active="$page.currentRouteName == 'api-tokens.index'" v-if="$page.jetstream.hasApiFeatures">
@@ -164,7 +164,7 @@
                         <!-- Authentication -->
                         <form method="POST" @submit.prevent="logout">
                             <jet-responsive-nav-link as="button">
-                                Logout
+                                Cerrar sesión
                             </jet-responsive-nav-link>
                         </form>
 

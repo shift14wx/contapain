@@ -32387,7 +32387,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                    Manage Account\n                                "
+                                    "\n                                    Administrar cuenta\n                                "
                                   )
                                 ]
                               ),
@@ -32397,7 +32397,7 @@ var render = function() {
                                 { attrs: { href: "/user/profile" } },
                                 [
                                   _vm._v(
-                                    "\n                                    Profile\n                                "
+                                    "\n                                    Perfil\n                                "
                                   )
                                 ]
                               ),
@@ -32572,7 +32572,7 @@ var render = function() {
                                     { attrs: { as: "button" } },
                                     [
                                       _vm._v(
-                                        "\n                                        Logout\n                                    "
+                                        "\n                                        Cerrar sesión\n                                    "
                                       )
                                     ]
                                   )
@@ -32729,7 +32729,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Profile\n                    "
+                        "\n                        Perfil\n                    "
                       )
                     ]
                   ),
@@ -32769,7 +32769,7 @@ var render = function() {
                         { attrs: { as: "button" } },
                         [
                           _vm._v(
-                            "\n                            Logout\n                        "
+                            "\n                            Cerrar sesión\n                        "
                           )
                         ]
                       )
