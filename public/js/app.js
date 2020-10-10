@@ -4530,6 +4530,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["parsedRegistros", "month"],
@@ -35033,7 +35034,7 @@ var render = function() {
                                                                   index
                                                                 ]["haber"]
                                                               ).toFixed(2)
-                                                          : "$00.00"
+                                                          : "00.00"
                                                       ) +
                                                       " "
                                                   )
@@ -35050,7 +35051,7 @@ var render = function() {
                                                               _vm.totales[
                                                                 index
                                                               ]["haber"]
-                                                          : "$00.00"
+                                                          : "00.00"
                                                       ) +
                                                       " "
                                                   )

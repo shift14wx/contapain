@@ -99,8 +99,9 @@
                                                                 <td class="text-center">{{ rubro.titulo }}</td>
                                                                 <td> ${{  totales[ index ][ "debe" ]  }} </td>
                                                                 <td> ${{  totales[ index ][ "haber" ]  }} </td>
-                                                                <td> ${{  rubro.debeRubro ? ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) : '$00.00'  }} </td>
-                                                                <td> ${{  rubro.haberRubro ? totales[ index ][ "debe" ] - totales[ index ][ "haber" ] : '$00.00'   }} </td>
+                                                                <!--TOTALES-->
+                                                                <td> ${{  rubro.debeRubro ? ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) : '00.00'  }} </td>
+                                                                <td> ${{  rubro.haberRubro ? totales[ index ][ "debe" ] - totales[ index ][ "haber" ] : '00.00'   }} </td>
                                                           </tr>
 
                                                         </tbody>
