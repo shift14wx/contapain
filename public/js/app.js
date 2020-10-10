@@ -36183,14 +36183,14 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Delete Account\n    ")]
+          return [_vm._v("\n                Borrar Cuenta\n    ")]
         },
         proxy: true
       },
       {
         key: "description",
         fn: function() {
-          return [_vm._v("\n        Permanently delete your account.\n    ")]
+          return [_vm._v("\n        Elimina permanentemente tu cuenta.\n    ")]
         },
         proxy: true
       },
@@ -36200,7 +36200,7 @@ var render = function() {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
-                "\n            Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.\n        "
+                "\n            Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar.\n        "
               )
             ]),
             _vm._v(" "),
@@ -36217,7 +36217,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Delete Account\n            ")]
+                  [_vm._v("\n                Borrar Cuenta\n            ")]
                 )
               ],
               1
@@ -36235,7 +36235,7 @@ var render = function() {
                   key: "title",
                   fn: function() {
                     return [
-                      _vm._v("\n                Delete Account\n            ")
+                      _vm._v("\n                Borrar Cuenta\n            ")
                     ]
                   },
                   proxy: true
@@ -36245,7 +36245,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.\n\n                "
+                        "\n            ¿Estás seguro de que deseas eliminar tu cuenta? Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta.\n\n                "
                       ),
                       _c(
                         "div",
@@ -36310,7 +36310,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Nevermind\n                "
+                            "\n                    Olvidalo\n                "
                           )
                         ]
                       ),
@@ -36329,7 +36329,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Delete Account\n                "
+                            "\n                    Borrar Cuenta\n                "
                           )
                         ]
                       )
@@ -36373,7 +36373,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Browser Sessions\n    ")]
+          return [_vm._v("\n        Sesiones del navegador\n    ")]
         },
         proxy: true
       },
@@ -36382,7 +36382,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Manage and logout your active sessions on other browsers and devices.\n    "
+              "\n        Administre y cierre la sesión de sus sesiones activas en otros navegadores y dispositivos.\n    "
             )
           ]
         },
@@ -36394,7 +36394,7 @@ var render = function() {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
-                "\n            If necessary, you may logout of all of your other browser sessions across all of your devices. If you feel your account has been compromised, you should also update your password.\n        "
+                "\n            Si es necesario, puede cerrar la sesión de todas las demás sesiones de su navegador en todos sus dispositivos. Si cree que su cuenta se ha visto comprometida, también debe actualizar su contraseña.\n        "
               )
             ]),
             _vm._v(" "),
@@ -36486,7 +36486,7 @@ var render = function() {
                                   {
                                     staticClass: "text-green-500 font-semibold"
                                   },
-                                  [_vm._v("This device")]
+                                  [_vm._v("Este Dispositivo")]
                                 )
                               : _c("span", [
                                   _vm._v(
@@ -36517,7 +36517,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                Logout Other Browser Sessions\n            "
+                      "\n                Cerrar sesión en otras sesiones del navegador\n            "
                     )
                   ]
                 ),
@@ -36547,7 +36547,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                Logout Other Browser Sessions\n            "
+                        "\n                Cerrar sesión en otras sesiones del navegador\n            "
                       )
                     ]
                   },
@@ -36558,7 +36558,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.\n\n                "
+                        "\n                Ingrese su contraseña para confirmar que desea cerrar la sesión de sus otras sesiones de navegador en todos sus dispositivos.\n\n                "
                       ),
                       _c(
                         "div",
@@ -36695,7 +36695,7 @@ var render = function() {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight"
                 },
-                [_vm._v("\n            Profiles\n        ")]
+                [_vm._v("\n            Perfiles\n        ")]
               )
             ]
           },
@@ -36776,7 +36776,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Two Factor Authentication\n    ")]
+          return [_vm._v("\n        Autenticación de dos factores\n    ")]
         },
         proxy: true
       },
@@ -36785,7 +36785,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Add additional security to your account using two factor authentication.\n    "
+              "\n        Agregue seguridad adicional a su cuenta mediante la autenticación de dos factores.\n    "
             )
           ]
         },
@@ -36798,19 +36798,19 @@ var render = function() {
             _vm.twoFactorEnabled
               ? _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
                   _vm._v(
-                    "\n            You have enabled two factor authentication.\n        "
+                    "\n            Ha habilitado la autenticación de dos factores.\n        "
                   )
                 ])
               : _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
                   _vm._v(
-                    "\n            You have not enabled two factor authentication.\n        "
+                    "\n            No ha habilitado la autenticación de dos factores.\n        "
                   )
                 ]),
             _vm._v(" "),
             _c("div", { staticClass: "mt-3 max-w-xl text-sm text-gray-600" }, [
               _c("p", [
                 _vm._v(
-                  "\n                When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.\n            "
+                  "\n               Cuando la autenticación de dos factores está habilitada, se le pedirá un token aleatorio seguro durante la autenticación. Puede recuperar este token de la aplicación Google Authenticator de su teléfono.\n            "
                 )
               ])
             ]),
@@ -36827,7 +36827,7 @@ var render = function() {
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
-                                "\n                        Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.\n                    "
+                                "\n                        La autenticación de dos factores ahora está habilitada. Escanee el siguiente código QR utilizando la aplicación de autenticación de su teléfono.\n                    "
                               )
                             ])
                           ]
@@ -36850,7 +36850,7 @@ var render = function() {
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
-                                "\n                        Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.\n                    "
+                                "\n                        Guarde estos códigos de recuperación en un administrador de contraseñas seguro. Se pueden utilizar para recuperar el acceso a su cuenta si pierde su dispositivo de autenticación de dos factores.\n                    "
                               )
                             ])
                           ]
@@ -36897,7 +36897,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                        Enable\n                    "
+                                "\n                        habilitar\n                    "
                               )
                             ]
                           )
@@ -36920,7 +36920,7 @@ var render = function() {
                                 { staticClass: "mr-3" },
                                 [
                                   _vm._v(
-                                    "\n                        Regenerate Recovery Codes\n                    "
+                                    "\n                        Regenerar códigos de recuperación\n                    "
                                   )
                                 ]
                               )
@@ -36939,7 +36939,7 @@ var render = function() {
                                 { staticClass: "mr-3" },
                                 [
                                   _vm._v(
-                                    "\n                        Show Recovery Codes\n                    "
+                                    "\n                        Mostrar códigos de recuperación\n                    "
                                   )
                                 ]
                               )
@@ -36962,7 +36962,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                        Disable\n                    "
+                                "\n                        Deshabilitado\n                    "
                               )
                             ]
                           )
@@ -37008,7 +37008,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Update Password\n    ")]
+          return [_vm._v("\n        Actualiza contraseña\n    ")]
         },
         proxy: true
       },
@@ -37017,7 +37017,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Ensure your account is using a long, random password to stay secure.\n    "
+              "\n        Asegúrese de que su cuenta esté usando una contraseña larga y aleatoria para mantenerse seguro.\n    "
             )
           ]
         },
@@ -37032,7 +37032,7 @@ var render = function() {
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "current_password", value: "Current Password" }
+                  attrs: { for: "current_password", value: "Contraseña actual" }
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -37065,7 +37065,7 @@ var render = function() {
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "password", value: "New Password" }
+                  attrs: { for: "password", value: "Nueva Contraseña" }
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -37099,7 +37099,7 @@ var render = function() {
                 _c("jet-label", {
                   attrs: {
                     for: "password_confirmation",
-                    value: "Confirm Password"
+                    value: "Confirmar Contraseña"
                   }
                 }),
                 _vm._v(" "),
@@ -37140,7 +37140,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v("\n            Almacenado.\n        ")]
             ),
             _vm._v(" "),
             _c(
@@ -37149,7 +37149,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v("\n            Almacenar\n        ")]
             )
           ]
         },
@@ -37186,7 +37186,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Profile Information\n    ")]
+          return [_vm._v("\n        Informacion de Perfil\n    ")]
         },
         proxy: true
       },
@@ -37195,7 +37195,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Update your account's profile information and email address.\n    "
+              "\n        Actualice la información de perfil y la dirección de correo electrónico de su cuenta.\n    "
             )
           ]
         },
@@ -37217,9 +37217,7 @@ var render = function() {
                       on: { change: _vm.updatePhotoPreview }
                     }),
                     _vm._v(" "),
-                    _c("jet-label", {
-                      attrs: { for: "photo", value: "Photo" }
-                    }),
+                    _c("jet-label", { attrs: { for: "photo", value: "Foto" } }),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -37283,7 +37281,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                Select A New Photo\n            "
+                          "\n                Seleccione una nueva foto\n            "
                         )
                       ]
                     ),
@@ -37303,7 +37301,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                Remove Photo\n            "
+                              "\n                Eliminar foto\n            "
                             )
                           ]
                         )
@@ -37322,7 +37320,7 @@ var render = function() {
               "div",
               { staticClass: "col-span-6 sm:col-span-4" },
               [
-                _c("jet-label", { attrs: { for: "name", value: "Name" } }),
+                _c("jet-label", { attrs: { for: "name", value: "Nombre" } }),
                 _vm._v(" "),
                 _c("jet-input", {
                   staticClass: "mt-1 block w-full",
@@ -37383,7 +37381,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v("\n            Almacenado.\n        ")]
             ),
             _vm._v(" "),
             _c(
@@ -37392,7 +37390,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v("\n            Almacenar\n        ")]
             )
           ]
         },
