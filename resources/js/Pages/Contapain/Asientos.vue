@@ -310,6 +310,7 @@ export default {
             html: 'Espere por favor',
             timer: 10000,
             timerProgressBar: true,
+            showConfirmButton: false ,
             willOpen: () => {
                 $swal.showLoading()
                 timerInterval = setInterval(() => {

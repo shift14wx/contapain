@@ -19,6 +19,11 @@
                                         <v-card-text>
                                              <v-simple-table dark>
                                                 <template v-slot:default>
+                                                    <tr>
+                                                        <td>
+
+                                                        </td>
+                                                    </tr>
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">id asiento</th>
@@ -153,6 +158,7 @@ export default {
             html: 'Espere por favor',
             timer: 10000,
             timerProgressBar: true,
+            showConfirmButton: false,
             willOpen: () => {
                 $swal.showLoading()
                 timerInterval = setInterval(() => {
