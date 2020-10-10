@@ -39,19 +39,38 @@
     import AppLayout from './../Layouts/AppLayout'
     import Welcome from './../Jetstream/Welcome'
     import tablasAsientos from "./Contapain/Asientos/tablasAsiento"
-
+    import lineChart from "../Components/charts/LineChart";
     export default {
-        props:["Asientos", "catalogo_cuentas" ],
+        props:["Asientos", "catalogo_cuentas", "meses" ],
         data(){
             return{
                 asientos:this.Asientos,
-                catalogoDeCuentas : this.catalogo_cuentas
+                catalogoDeCuentas : this.catalogo_cuentas,
+                months : null,
+                optionsChart:{
+                    width : "100px",
+                    height : "100px"
+                }
             }
         },
         components: {
             AppLayout,
             Welcome,
-            tablasAsientos
+            tablasAsientos,
+            lineChart
         },
+        mounted(){
+            this.months={
+        labels: this.meses.map(m=>m.mes),
+        datasets: [
+            {
+            label: '2020',
+            backgroundColor: '#f87979',
+            data: this.meses.map(m=>m.data)
+          }
+        ]
+      }
+            console.log(this.months);
+        }
     }
 </script>

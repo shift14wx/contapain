@@ -32,7 +32,9 @@
         "vuetifyjs-mix-extension": "0.0.14"
     },
     "dependencies": {
+        "chart.js": "^2.9.3",
         "cookie": "^0.4.1",
+        "vue-chartjs": "^3.5.1",
         "vue-resource": "^1.5.1",
         "vue-sweetalert2": "^3.0.8"
     }

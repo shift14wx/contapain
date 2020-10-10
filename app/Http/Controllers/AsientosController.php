@@ -97,6 +97,7 @@ class AsientosController extends Controller
 
     public function Dashboard()
     {
+        $meses = $this->getMonthsForChart();
         $rubros = Rubro::all()->toArray();
         $rubrosParseados = [];
         $this->parseRubros($rubros,$rubrosParseados);
@@ -104,6 +105,7 @@ class AsientosController extends Controller
         return \Inertia\Inertia::render('Dashboard',[
             "Asientos" => $asientos,
             "catalogo_cuentas" => $rubrosParseados,
+            "meses" => $meses
         ]);
     }
 
@@ -192,6 +194,31 @@ class AsientosController extends Controller
 
     }
 
+    public function getMonthsForChart()
+    {
+        $date = Carbon::now()->toDate()->format("Y"); // tomamos el ano current
+        $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where("id_user", Auth::user()->getAuthIdentifier() )->get()->toArray();
+        //$asientosCollect = collect( $asientos );
+        $mesesDelanoCorriente = [];
+        foreach ($asientos as $key => $value) {
+            $month = Carbon::createFromFormat("Y-m-d", $value["fecha_inicio"] )->format("M");
+            array_push($mesesDelanoCorriente,["mes"=>$month,"data"=>0]);
+        } // obtenemos el mes de los resultados del ano
+        $mesesDelanoCorriente = array_unique( $mesesDelanoCorriente, SORT_REGULAR ); // purgamos los meses repetidos del ano
+        // volveremos a recorrer el array de $asientosCollect debido a que purgamos los repetidos asi que tenemos que contar
+        
+        foreach ($asientos as $key => $value) {
+            $month = Carbon::createFromFormat("Y-m-d", $value["fecha_inicio"] )->format("M");
+            foreach ($mesesDelanoCorriente as $key => $mes) {
+                if( $mes["mes"] == $month ){
+                    $mesesDelanoCorriente[$key]["data"] +=1; 
+                }
+            }
+        }
+        //dd( $mesesDelanoCorriente );
+        return $mesesDelanoCorriente;
+
+    }
 
 
     public function parseRubros( $rubros, &$parsedRubros, $rubroActivos = [] )
