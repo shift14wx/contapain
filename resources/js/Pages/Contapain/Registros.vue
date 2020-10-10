@@ -382,7 +382,7 @@ export default {
             return this.totalDebe - this.totalHaber;
         },
         computedDate(){
-            return moment( this.asiento.fecha_inicio ).locale("es").format("DD dddd MMMM YYYY");
+            return moment( this.asiento.fecha_inicio ).locale("es").format("dddd DD MMMM YYYY");
         },
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo registro' : 'Editar registro'
@@ -477,7 +477,7 @@ export default {
                 autocapitalize: 'off'
             },
             showCancelButton: true,
-            confirmButtonText: 'Simon',
+            confirmButtonText: 'Si',
             showLoaderOnConfirm: true,
             preConfirm: () => {
                 if( this.METHODS.POST == method && index == -1 ){ // desea almacenar

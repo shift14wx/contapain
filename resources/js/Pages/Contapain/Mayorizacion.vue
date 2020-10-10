@@ -246,12 +246,16 @@ export default {
         },
         
         goTo(rubro, registro, tipo){
-            this.loadingVisit();
-            console.log( `#${tipo}${rubro}${registro}` );
             let idAsiento = parseInt(document.querySelector(`#${tipo}${rubro}${registro}`).textContent);
-            this.$inertia.visit(`/contapain/asientos/${idAsiento}/registros`).then(()=>{
+            if(idAsiento){
+            this.loadingVisit();
+             this.$inertia.visit(`/contapain/asientos/${idAsiento}/registros`).then(()=>{
+                this.$swal.close();
+            }).catch(()=>{
                 this.$swal.close();
             });
+            }
+           
         },
         proximoDebe( indexRubro, indexRegistro ){
             try {
