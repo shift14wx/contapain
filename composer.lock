@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63d8852b2f605b2893d88e3193c80c7e",
+    "content-hash": "7471fa3c87529f39e94679a255f4773c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1581,6 +1581,47 @@
             ],
             "description": "Easy flash notifications",
             "time": "2020-09-07T13:25:35+00:00"
+        },
+        {
+            "name": "laravel-lang/lang",
+            "version": "7.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravel-Lang/lang.git",
+                "reference": "7bed46cb9befef29660fb20f921a5e7b41aeaaa3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/7bed46cb9befef29660fb20f921a5e7b41aeaaa3",
+                "reference": "7bed46cb9befef29660fb20f921a5e7b41aeaaa3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "suggest": {
+                "andrey-helldar/laravel-lang-publisher": "Easy installation and update of translation files for your project",
+                "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5",
+                "overtrue/laravel-lang": "Command to add languages in your project"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Laravel-Lang Team"
+                }
+            ],
+            "description": "Languages for Laravel",
+            "keywords": [
+                "lang",
+                "languages",
+                "laravel",
+                "lpm"
+            ],
+            "time": "2020-10-02T16:55:34+00:00"
         },
         {
             "name": "laravel/fortify",
@@ -8291,13 +8332,13 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "infyomlabs/laravel-generator": 20,
-        "infyomlabs/coreui-templates": 20
+        "infyomlabs/coreui-templates": 20,
+        "infyomlabs/laravel-generator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3"
+        "php": "^7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
