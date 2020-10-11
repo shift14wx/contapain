@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <base href="./">
+    <link rel="icon" href="images/tivo/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -30,7 +31,7 @@
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
                         <h1>Reset Password</h1>
-                        <p class="text-muted">Enter email and new password</p>
+                        <p class="text-muted">Ingrese correo electrónico y contraseña nueva</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">@</span>

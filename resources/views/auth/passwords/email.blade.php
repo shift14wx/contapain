@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <base href="./">
+    <link rel="icon" href="images/tivo/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -33,8 +34,8 @@
                         @endif
                         <form method="post" action="{{ url('/password/email') }}">
                             @csrf
-                            <h1>Reset Your Password</h1>
-                            <p class="text-muted">Enter Email to reset password</p>
+                            <h1>Restablece tu contraseña</h1>
+                            <p class="text-muted">Ingrese email para poder resetear su contraseña</p>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -53,7 +54,7 @@
                             <div class="row">
                                 <div class="col-6 offset-6">
                                     <button class="btn btn-block btn-primary" type="submit">
-                                        <i class="fa fa-btn fa-envelope"></i> Send Password Reset Link
+                                        <i class="fa fa-btn fa-envelope"></i> Enviar enlace de restablecimiento de contraseña
                                     </button>
                                 </div>
                             </div>

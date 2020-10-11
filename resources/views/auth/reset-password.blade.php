@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <img src="/images/logodashboard.png" alt="contapainSecondaryLogo" class="rounded-full h-20 w-20 object-cover">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -17,18 +17,18 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label value="{{ __('Password') }}" />
+                <x-jet-label value="{{ __('Contraseña') }}" />
                 <x-jet-input class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <x-jet-label value="{{ __('Confirm Password') }}" />
+                <x-jet-label value="{{ __('Confirmar contraseña') }}" />
                 <x-jet-input class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-jet-button>
-                    {{ __('Reset Password') }}
+                    {{ __('Reestablecer contraseña') }}
                 </x-jet-button>
             </div>
         </form>
