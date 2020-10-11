@@ -140,13 +140,13 @@
 
 
 <!-- Customers -->
-<div class="slider-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+<!-- <div class="slider-1"> -->
+    <!-- <div class="container"> -->
+        <!-- <div class="row"> -->
+            <!-- <div class="col-lg-12"> -->
 
                 <!-- Image Slider -->
-                <div class="slider-container">
+                <!-- <div class="slider-container">
                     <div class="swiper-container image-slider">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
@@ -166,16 +166,16 @@
                             </div>
                             <div class="swiper-slide">
                                 <img class="img-fluid" src="images/tivo/customer-logo-6.png" alt="alternative">
-                            </div>
-                        </div> <!-- end of swiper-wrapper -->
-                    </div> <!-- end of swiper container -->
-                </div> <!-- end of slider-container -->
+                            </div> -->
+                        <!--</div> <!-- end of swiper-wrapper -->
+                    <!--</div> <!-- end of swiper container -->
+                <!--</div> <!-- end of slider-container -->
                 <!-- end of image slider -->
 
-            </div> <!-- end of col -->
-        </div> <!-- end of row -->
-    </div> <!-- end of container -->
-</div> <!-- end of slider-1 -->
+            <!--</div> <!-- end of col -->
+        <!--</div> <!-- end of row -->
+    <!--</div> <!-- end of container -->
+<!--</div> <!-- end of slider-1 -->
 <!-- end of customers -->
 
 
@@ -762,7 +762,10 @@
                     <!-- Newsletter Form -->
                     <form id="newsletterForm" data-toggle="validator" data-focus="false">
                         <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">Contactar</button>
+                            
+                            <button type="submit" class="form-control-submit-button">
+                            <a href="mailto:cpltcplt2020@gmail.com" style="text-decoration: none; color:white">Contactar</a>
+                            </button>
                         </div>
                         <div class="form-message">
                             <div id="nmsgSubmit" class="h3 text-center hidden"></div>
@@ -777,33 +780,27 @@
             <div class="col-lg-12">
                 <div class="icon-container">
                         <span class="fa-stack">
-                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
+                            <a target="__blank" href="https://www.facebook.com/diego.cortesmoreno.1">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-facebook-f fa-stack-1x"></i>
                             </a>
                         </span>
                     <span class="fa-stack">
-                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
+                            <a target="__blank" href="https://github.com/raulpenate">
                                 <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x"></i>
+                                <i class="fab fa-github fa-stack-1x"></i>
                             </a>
                         </span>
                     <span class="fa-stack">
-                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
+                            <a target="__blank" href="https://www.facebook.com/kevin.lara.77377692">
                                 <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-pinterest-p fa-stack-1x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
                             </a>
                         </span>
                     <span class="fa-stack">
-                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
+                            <a target="__blank" href="https://www.reddit.com/user/Ac-04">
                                 <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-instagram fa-stack-1x"></i>
-                            </a>
-                        </span>
-                    <span class="fa-stack">
-                            <a href="https://www.facebook.com/diego.cortesmoreno.1">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                                <i class="fab fa-reddit fa-stack-1x"></i>
                             </a>
                         </span>
                 </div> <!-- end of col -->
@@ -822,7 +819,7 @@
             <div class="col-md-4">
                 <div class="footer-col first">
                     <h4>Acerca de ContaPainLess T</h4>
-                    <p class="p-small">Somos unos seres sobreexplotados por Diego Córtez, CEO de ContaPainLess</p>
+                    <p class="p-small">Pequeña pero potenciadora herramienta de contabilidad</p>
                 </div>
             </div> <!-- end of col -->
             <div class="col-md-4">
@@ -831,12 +828,8 @@
                     <ul class="list-unstyled li-space-lg p-small">
                         <li class="media">
                             <i class="fas fa-square"></i>
-                            <div class="media-body">Si desea donar ya que nuestro compañero <a class="white"
-                                                                                          href="https://www.facebook
-                                                                                          .com/raul.penate
-                                                                                          .39108">Raul Peñate</a>
-                                Sufrio de un derrame de vesicula cuando se encontraba laborando, Diego Cortez
-                                nuestro CEO no quizo pagarle la quincena debido a que mancho equipo de la empresa</div>
+                            <div class="media-body">Unos de los CEO de contapainless
+                                <a class="white" href="https://www.facebook.com/raul.penate.39108">Raul Peñate</a></div>
                         </li>
 
                     </ul>
@@ -848,7 +841,7 @@
                     <ul class="list-unstyled li-space-lg p-small">
                         <li class="media">
                             <i class="fas fa-map-marker-alt"></i>
-                            <div class="media-body">Col las amarguras</div>
+                            <div class="media-body">Internet</div>
                         </li>
                     </ul>
                 </div>
@@ -864,7 +857,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Somos Diego Cortez</a></p>
+                <p class="p-small">Copyright © 2020 <a href="#">#WeareWhoWeAre</a></p>
             </div> <!-- end of col -->
         </div> <!-- enf of row -->
     </div> <!-- end of container -->
