@@ -74,11 +74,11 @@
 
                 <template #footer>
                     <jet-secondary-button @click.native="confirmingLogout = false">
-                        Nevermind
+                        Olvidalo
                     </jet-secondary-button>
 
                     <jet-button class="ml-2" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Logout Other Browser Sessions
+                        Cerrar sesión en otras sesiones del navegador
                     </jet-button>
                 </template>
             </jet-dialog-modal>
