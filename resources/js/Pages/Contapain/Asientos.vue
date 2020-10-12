@@ -83,7 +83,7 @@
                                                             height="100%"
                                                             tile
                                                         >
-                                                            <h1 class="text-center">Saldo: $ {{ AsientosObjectos[ existAsiento(date) ].saldo }} </h1>
+                                                            <h1 class="text-center">Asientos presentes </h1>
                                                         </v-sheet>
                                                     </template>
                                                      <template v-if=" isAfterDate( date ) ">
@@ -144,7 +144,7 @@ export default {
         showDialog:false,
         focus: '',
         AsientosObjectos: null,
-        colors: ['#ffc107', '#fb8c00', '#000000'],
+        colors: ['#0724ff', '#fb8c00', '#000000'],
         category: ['Development', 'Meetings', 'Slacking'],
         showFormularioAgregar : false,
         selectedAsiento: "",
@@ -223,7 +223,7 @@ export default {
 
         },
         getColor( index ){
-            return this.AsientosObjectos[ index ].saldo != null ? this.colors[1] : this.colors[0];
+            return this.AsientosObjectos[ index ] != undefined && this.AsientosObjectos[ index ] != null  ? this.colors[1] : this.colors[0];
         },
         rnd (a, b) {
             return Math.floor((b - a + 1) * Math.random()) + a

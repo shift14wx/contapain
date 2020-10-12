@@ -4,6 +4,10 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     Mayorización y mas informacion del mes de&nbsp;{{ computedDate }}
                 </h2>
+                <br>
+                <a href="#balanceGeneral" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                Mostrar Balance de comprobación
+                </a>
             </template>
 
             <div class="py-12">
@@ -77,7 +81,7 @@
                                     </v-card>
                                 </v-col>
                             </v-row>
-                                <v-col cols="12">
+                                <v-col cols="12" id="balanceGeneral">
                                      <v-card>
                                         <v-card-title>Balance de comprobación</v-card-title>
                                         <v-card-subtitle>  </v-card-subtitle>
@@ -85,7 +89,15 @@
                                              <v-simple-table light>
                                                     <template v-slot:default>
                                                         <thead>
-                                                            <tr>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th colspan="2" class="text-center indigo darken-4 white--text">MOVIMIENTOS</th>
+                                                            <th colspan="2" class="text-center deep-purple darken-4 white--text">SALDOS</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                             <tr>
                                                                 <th class="text-center ">Codigo</th>
                                                             <th class="text-center">Descripción</th>
                                                             <th class="text-center indigo darken-4 white--text">DEUDOR</th>
@@ -93,8 +105,6 @@
                                                             <th class="text-center deep-purple darken-4 white--text">DEUDOR</th>
                                                                 <th class="text-center deep-purple darken-4 white--text">ACREEDOR</th>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
 
                                                           <tr
                                                             v-for="( rubro, index ) in rubros_registro"
@@ -108,7 +118,13 @@
                                                                 <td> {{  ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) >= 0.0 ? "$"+( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) )  : ''  }} </td>
                                                                 <td> {{  ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) <= 0.0 ? "$"+ Math.abs( ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) ) : ''  }} </td>
                                                           </tr>
-
+                                                        <tr>
+                                                            <td colspan="2" class="text-center"> <b>Total</b></td>
+                                                            <td class="text-center"><b>${{ totDebMov }} </b></td>
+                                                            <td class="text-center"><b>${{ totHabMov }} </b></td>
+                                                            <td class="text-center"><b>${{ totDebSal }} </b></td>
+                                                            <td class="text-center"><b>${{ totHabSal }} </b></td>
+                                                        </tr>
                                                         </tbody>
                                                     </template>
                                              </v-simple-table>
@@ -144,13 +160,45 @@ export default {
             "noMostrar" : 0,
             "deferDebe": "",
             "deferHaber": "",
-            "mes" : this.month
+            "mes" : this.month,
+            totDebMov:0.0,
+            totDebSal:0.0,
+            totHabMov:0.0,
+            totHabSal:0.0
         }
     },
     components:{
         AppLayout,
     },
     methods:{
+        isFloat(n){
+            return Number(n) === n && n % 1 !== 0;
+        }, 
+        // esta funcion se encargara de hacer las sumas del balance de comprobación
+        calcularTotalesMovSal(){
+
+            // MOVIMIENTOS
+            this.totales.forEach( (a)=>{
+                this.totDebMov += Number(a.debe) ? parseFloat(  a.debe ) : 0.0;
+                this.totHabMov += Number(a.haber) ? parseFloat( a.haber )  : 0.0;
+            } );
+            this.totDebMov = this.totDebMov.toFixed(2);
+            this.totHabMov = this.totHabMov.toFixed(2);
+
+            // saldos
+            this.totales.forEach(( tot )=>{
+                let result = tot.debe - tot.haber;
+                if( result>= 0.0 ){
+                    console.log( parseFloat(result).toFixed(2) );
+                    this.totDebSal += parseFloat(result);
+                }else{
+                    this.totHabSal += parseFloat(result);
+                }
+            });
+           this.totDebSal = parseFloat(this.totDebSal).toFixed(2);
+           this.totHabSal = parseFloat(this.totHabSal).toFixed(2);
+           this.totHabSal = Math.abs( this.totHabSal );
+        },
         loadingVisit(){
             let timerInterval = null;
             this.$swal.fire({
@@ -326,6 +374,11 @@ export default {
     created(){
         this.momentSetLocale();
         moment.locale("es");
+    },
+    mounted(){
+        setTimeout(() => {
+        this.calcularTotalesMovSal();
+        }, 1000);
     }
 }
 </script>
