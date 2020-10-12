@@ -60,7 +60,8 @@
             lineChart
         },
         mounted(){
-            this.months={
+          /**
+           *   this.months={
         labels: this.meses.map(m=>m.mes),
         datasets: [
             {
@@ -71,6 +72,7 @@
         ]
       }
             console.log(this.months);
+           */
         }
     }
 </script>

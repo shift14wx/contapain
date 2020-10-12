@@ -144,8 +144,6 @@
                                     </thead>
                                     <tbody>
                                         <div class="d-none">
-                                            {{ calcTotalesDebeNeto() }}
-                                            {{ calcTotalesHaberNeto() }}
                                         </div>
                                         <tr
                                         class="white--text"
@@ -323,10 +321,12 @@ export default {
             this.totalHaber[index] = haber.toFixed(2);
         },
         calcTotalesDebeNeto(){
-            this.totalDebeNeto = this.totalDebe.reduce((a,b)=>a+b);
+            this.totalDebeNeto = this.totalDebe.reduce((a,b)=>Number(a) ?? 0.0+Number(b) ?? 0.0);
+            this.totalDebeNeto = parseFloat( this.totalDebeNeto ).toFixed(2);
         },
         calcTotalesHaberNeto(){
-            this.totalHaberNeto = this.totalHaber.reduce((a,b)=>a+b);
+            this.totalHaberNeto = this.totalHaber.reduce((a,b)=>Number(a) ?? 0.0+Number(b) ?? 0.0);
+            this.totalHaberNeto = parseFloat( this.totalHaberNeto ).toFixed(2);
         },
         formatDate( date ){
             return moment( date ).format( "dddd DD" )+ " del "+moment( date ).format( "YYYY" );
@@ -341,6 +341,12 @@ export default {
     created(){
         this.momentSetLocale();
         moment.locale("es");
+    },
+    mounted(){
+        setTimeout(() => {
+            this.calcTotalesDebeNeto();
+            this.calcTotalesHaberNeto();
+        }, 1000);
     }
 }
 </script>
