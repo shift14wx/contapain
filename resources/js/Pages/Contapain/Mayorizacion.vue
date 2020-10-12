@@ -115,8 +115,9 @@
                                                                 <td> ${{  totales[ index ][ "debe" ]  }} </td>
                                                                 <td> ${{  totales[ index ][ "haber" ]  }} </td>
                                                                 <!--TOTALES-->
-                                                                <td> {{  ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) >= 0.0 ? "$"+( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) )  : ''  }} </td>
-                                                                <td> {{  ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) <= 0.0 ? "$"+ Math.abs( ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ) ) : ''  }} </td>
+                                                                <td> {{  ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ) ) >= 0.0 ? "$"+( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ) ).toFixed(2)  : ''  }} </td>
+
+                                                                <td> {{  ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ) ) <= 0.0 ? "$"+ Math.abs( ( parseFloat( totales[ index ][ "debe" ] ) - parseFloat( totales[ index ][ "haber" ] ).toFixed(2) ).toFixed(2) ) : ''  }} </td>
                                                           </tr>
                                                         <tr>
                                                             <td colspan="2" class="text-center"> <b>Total</b></td>
