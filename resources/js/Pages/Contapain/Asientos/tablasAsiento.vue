@@ -52,7 +52,7 @@
                                 color="grey darken-2"
                                 text-color="white"
                                 >
-                                -${{item.debe}}
+                                ${{item.debe}}
                                 </v-chip>
                             </template>
 
@@ -72,7 +72,7 @@
                                 color="grey darken-2"
                                 text-color="white"
                                 >
-                                -${{item.haber}}
+                                ${{item.haber}}
                                 </v-chip>
                             </template>
                             <template v-slot:no-data>
