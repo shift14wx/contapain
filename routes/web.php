@@ -44,8 +44,6 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->get('/contapain/asientos',[AsientosController::class,"show"])
     ->name('/contapain/asientos');
 
-
-
 Route::middleware(['auth:sanctum', 'verified'])
     ->post('/contapain/asientos/agregar',[AsientosController::class,"store"])
     ->name('/contapain/asientos/agregar');
@@ -55,9 +53,7 @@ Route::middleware(['auth:sanctum', 'verified'])
 ->name('/contapain/asientos');
 
 Route::middleware(['auth:sanctum', 'verified'])
-->delete('/contapain/asientos',[AsientosController::class,"destroy"])
-->name('/contapain/asientos');
-
+->delete('/contapain/asientos/{id}',[AsientosController::class,"destroy"]);
 
 Route::middleware(['auth:sanctum', 'verified'])
 ->get('contapain/asientos/all',[AsientosController::class,"index"]);

@@ -185,7 +185,12 @@ class AsientosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $asiento =Asiento::destroy($id);
+
+        return response()->json([
+            "msg" => "done"
+        ],JsonResponse::HTTP_OK);
+
     }
 
 

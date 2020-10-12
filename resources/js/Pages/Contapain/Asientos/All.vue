@@ -404,13 +404,14 @@ export default {
                         )
                     })
                 }else if( this.METHODS.DELETE == method && index >= 0 ) { // desea elimnar
+                    this.editedItem._token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
                 return fetch(`/contapain/asientos/${this.editedItem.id_asiento}`,{
                         method: 'DELETE',
                         headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({"json":true})
+                        body: JSON.stringify(this.editedItem)
                     })
                     .then(response => {
                         if (!response.ok) {
