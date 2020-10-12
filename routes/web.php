@@ -51,6 +51,18 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->name('/contapain/asientos/agregar');
 
 Route::middleware(['auth:sanctum', 'verified'])
+->patch('/contapain/asientos',[AsientosController::class,"update"])
+->name('/contapain/asientos');
+
+Route::middleware(['auth:sanctum', 'verified'])
+->delete('/contapain/asientos',[AsientosController::class,"destroy"])
+->name('/contapain/asientos');
+
+
+Route::middleware(['auth:sanctum', 'verified'])
+->get('contapain/asientos/all',[AsientosController::class,"index"]);
+
+Route::middleware(['auth:sanctum', 'verified'])
     ->get('contapain/asientos/{id_asiento}/registros',[AsientosController::class,"showRegistros"]);
 
 

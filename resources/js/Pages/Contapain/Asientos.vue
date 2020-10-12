@@ -113,16 +113,6 @@
                                     </v-btn>
                                 </v-col>
                             </v-row>
-                            <!--FULL SCREEN DIALOG-->
-                            <dialog-fullscreen v-if="showDialog" v-model="showDialog" >
-                                <template v-slot:title>
-                                    <p>Asiento {{ selectedAsiento || 'nuevo' }}</p>
-                                </template>Asiento
-                                <template v-slot:content>
-                                    <form-asiento :selected_fecha_inicio="fecha_inicio_selected"></form-asiento>
-                                </template>
-                            </dialog-fullscreen>
-
 
                     </div>
                 </div>
@@ -185,24 +175,21 @@ export default {
                 
                 this.fecha_inicio_selected = date;
                 let index = this.existAsiento(date);
-                if( index >= 0 ){
-                    this.loadingVisit();
-                    this.$inertia.visit(`/contapain/asientos/${ this.AsientosObjectos[ index ].id_asiento }/registros`, {
-                        method: 'get'
-                    }).then((result)=>{
-                        this.$swal.close();
-                    });
-                    // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
-                    // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
-                    this.selectedAsiento = moment(this.AsientosObjectos[ index ].fecha_inicio).format("DD dddd MM YYYY");
-                    let exitsSaldo = this.AsientosObjectos[ index ].saldo != null;
-                }else{
-                    this.selectedAsiento = "";
-                    // si no se encuentra entonces en ese dia no se ha agregado un asiento
-                    // se presentara el formulario
-                    this.showFormularioAgregar = true;
-                    this.showDialog = true;
-                }
+
+                this.loadingVisit();
+                this.$inertia.visit(`/contapain/asientos/all`, {
+                    method: 'get',
+                    data: {
+                        "day":date
+                    },
+                }).then((result)=>{
+                    this.$swal.close();
+                });
+                // esta validacion es apra saber que mostrar en el fullscreen modal si el saldo existe entonces
+                // solo se mostrara el formulario pero sin poder editarlo junto con los registros del mismo
+                this.selectedAsiento = moment(this.AsientosObjectos[ index ].fecha_inicio).format("DD dddd MM YYYY");
+                let exitsSaldo = this.AsientosObjectos[ index ].saldo != null;
+            
                 this.focus = date
                 //this.type = 'day'
 

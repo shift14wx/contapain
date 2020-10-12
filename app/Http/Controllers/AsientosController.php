@@ -15,13 +15,20 @@ use Illuminate\Support\Facades\DB;
 class AsientosController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of asientos fo the selected day.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
-        //
+        $date = $request->get("day");
+        $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where("id_user", Auth::user()->getAuthIdentifier() )->get()->toArray();
+        return \Inertia\Inertia::render('Contapain/Asientos/All',[
+            "selectedAsientos" => $asientos,
+            "day" => $date,
+            "statusCode" => JsonResponse::HTTP_OK
+        ]);
+
     }
 
     public function cerrarAsiento( Request $request )
@@ -55,10 +62,18 @@ class AsientosController extends Controller
             ]
         );
         $asientoNuevo["id_user"] = Auth::user()->getAuthIdentifier();
-        $asiento = new Asiento($asientoNuevo);
-        $asiento->save();
+        $asiento = Asiento::updateOrCreate(["concepto_general" => $request->get("concepto_general") ], $asientoNuevo);
+        #$asiento = new Asiento($asientoNuevo);
+        #$asiento->save();
         $id_asiento =$asiento->id_asiento;
+        
+        if( $request->has("json") && $request->get("json") ){
+            return response()->json([
+                "id_asiento" => $id_asiento
+            ],JsonResponse::HTTP_CREATED);
+        }else{
         return redirect("contapain/asientos/$id_asiento/registros");
+        }
     }
 
     public function showRegistros( $id_asiento )
@@ -138,9 +153,28 @@ class AsientosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $date = $request->get("fecha_inicio");
+        $statusCode = JsonResponse::HTTP_OK;
+        $asiento = Asiento::find($request->get("id_asiento"));
+        $foundSameName = Asiento::where([
+            ["concepto_general","=",$request->get("concepto_general")],
+            ["fecha_inicio","=",$date],
+            ["id_user","=", Auth::user()->getAuthIdentifier()],
+            [ "id_asiento", "!=", $request->get("id_asiento") ]
+        ])->get()->toArray();
+        if( $foundSameName ){
+            $statusCode = JsonResponse::HTTP_UNPROCESSABLE_ENTITY;
+        }else{
+            $asiento->concepto_general = $request->get("concepto_general");
+            $asiento->save();
+        }
+
+        return response()->json([
+            "asiento" => $asiento,
+            "statusCode" => $statusCode
+        ],JsonResponse::HTTP_OK);
     }
 
     /**
