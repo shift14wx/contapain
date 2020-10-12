@@ -321,11 +321,19 @@ export default {
             this.totalHaber[index] = haber.toFixed(2);
         },
         calcTotalesDebeNeto(){
-            this.totalDebeNeto = this.totalDebe.reduce((a,b)=>Number(a) ?? 0.0+Number(b) ?? 0.0);
+            console.log("totalDebe: ",this.totalDebe);
+            //this.totalDebeNeto = this.totalDebe.reduce((a,b)=>Number(a) ?? 0.0+Number(b) ?? 0.0);
+            this.totalDebe.forEach((a)=>{
+                this.totalDebeNeto += Number(a) ?? 0.0;
+            });
             this.totalDebeNeto = parseFloat( this.totalDebeNeto ).toFixed(2);
         },
         calcTotalesHaberNeto(){
-            this.totalHaberNeto = this.totalHaber.reduce((a,b)=>Number(a) ?? 0.0+Number(b) ?? 0.0);
+            console.log("totalHaber: ",this.totalHaber);
+            //this.totalHaberNeto = this.totalHaber.reduce((a,b)=>Number(a) ?? 0.0+Number(b) ?? 0.0);
+            this.totalHaber.forEach((a)=>{
+                this.totalHaberNeto += Number( a ) ?? 0.0;
+            });
             this.totalHaberNeto = parseFloat( this.totalHaberNeto ).toFixed(2);
         },
         formatDate( date ){
