@@ -63,4 +63,9 @@ class User extends Authenticatable
     public function getAsientos(){
         return $this->hasMany(Asiento::class, 'id_user');
     }
+
+    public function getCompanies()
+    {
+        return $this->hasMany(Company::class, 'id_user');
+    }
 }

@@ -13,7 +13,7 @@
                                 <v-toolbar
                                     flat
                                 >
-                                    <v-toolbar-title>Asiento {{ asiento.id_asiento }} {{ formatDate( asiento.fecha_inicio ) }}</v-toolbar-title>
+                                    <v-toolbar-title>Asiento: <b>{{ asiento.concepto_general }}</b> {{ formatDate( asiento.fecha_inicio ) }}</v-toolbar-title>
                                     <v-divider
                                         class="mx-4"
                                         inset

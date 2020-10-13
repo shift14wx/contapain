@@ -22,12 +22,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',[ AsientosController::class, 'Dashboard' ])->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',[ AsientosController::class, 'Dashboard' ])->middleware('companyCookie')->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/mayorizacion',[ AsientosController::class, 'mayorizacionAndStuff' ])->name('mayorizacion');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/contapain/cerrarasiento',[ AsientosController::class, 'cerrarAsiento' ])->name('cerrarasiento');
 
+// COMPANY ROUTES
+
+Route::resource('company', App\Http\Controllers\companyController::class)->middleware(['auth:sanctum', 'verified']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/company/select/{id}',[ App\Http\Controllers\companyController::class,"create"]);
+
+
+Route::middleware(['auth:sanctum', 'verified'])->patch('/company/',[ App\Http\Controllers\companyController::class,"update"]);
+
+// END COMPANY ROUTES
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
     return Inertia\Inertia::render('Contapain/Asientos');
@@ -38,7 +48,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', func
 
 // Route::get('/contapain/registro/create', [registroController::class, 'create']);
 
-Route::resource('registros', App\Http\Controllers\registroController::class);
+Route::resource('registros', App\Http\Controllers\registroController::class)->middleware(['auth:sanctum', 'verified']);
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/contapain/asientos',[AsientosController::class,"show"])
