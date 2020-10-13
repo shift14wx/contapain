@@ -38,12 +38,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/company/select/{id}',[ Ap
 Route::middleware(['auth:sanctum', 'verified'])->patch('/company/',[ App\Http\Controllers\companyController::class,"update"]);
 
 // END COMPANY ROUTES
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/contapain/asientos', function () {
-    return Inertia\Inertia::render('Contapain/Asientos');
-})->name('/contapain/asientos');
-
-
 // Route::get('/contapain/registro', [registroController::class, 'index']);
 
 // Route::get('/contapain/registro/create', [registroController::class, 'create']);

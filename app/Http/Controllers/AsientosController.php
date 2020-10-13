@@ -22,7 +22,10 @@ class AsientosController extends Controller
     public function index( Request $request )
     {
         $date = $request->get("day");
-        $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where("id_user", Auth::user()->getAuthIdentifier() )->get()->toArray();
+        $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where( [
+            [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
+            ["id_company","=",$request->cookie('company') ]
+        ] )->get()->toArray();
         return \Inertia\Inertia::render('Contapain/Asientos/All',[
             "selectedAsientos" => $asientos,
             "day" => $date,
@@ -62,6 +65,7 @@ class AsientosController extends Controller
             ]
         );
         $asientoNuevo["id_user"] = Auth::user()->getAuthIdentifier();
+        $asientoNuevo["id_company"] = $request->cookie("company");
         $asiento = Asiento::updateOrCreate(["concepto_general" => $request->get("concepto_general") ], $asientoNuevo);
         #$asiento = new Asiento($asientoNuevo);
         #$asiento->save();
@@ -98,11 +102,13 @@ class AsientosController extends Controller
      * Display the specified resource.
      *
      */
-    public function show()
-    {
+    public function show(Request $request)
+    { 
         $userModel = new User();
-        $Asientos =  $userModel->find( Auth::user()->getAuthIdentifier() )->getAsientos()->get();
-
+        $Asientos = Asiento::where( [
+            [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
+            ["id_company","=",$request->cookie('company') ]
+        ]  )->get()->toArray();
             return \Inertia\Inertia::render('Contapain/Asientos',[
                 "Asientos" => $Asientos,
                 "statusCode" => JsonResponse::HTTP_OK
@@ -110,13 +116,13 @@ class AsientosController extends Controller
     }
 
 
-    public function Dashboard()
+    public function Dashboard(Request $request)
     {
-        $meses = $this->getMonthsForChart();
+        $meses = $this->getMonthsForChart($request);
         $rubros = Rubro::all()->toArray();
         $rubrosParseados = [];
         $this->parseRubros($rubros,$rubrosParseados);
-        $asientos = $this->getAsientosFromADate();
+        $asientos = $this->getAsientosFromADate($request);
         return \Inertia\Inertia::render('Dashboard',[
             "Asientos" => $asientos,
             "catalogo_cuentas" => $rubrosParseados,
@@ -124,7 +130,7 @@ class AsientosController extends Controller
         ]);
     }
 
-    public function getAsientosFromADate( $date= null)
+    public function getAsientosFromADate( Request $request, $date= null)
     {
         if($date == null)
         {
@@ -132,7 +138,10 @@ class AsientosController extends Controller
         }else{
             $date = Carbon::createFromFormat("Y-m-d",$date)->format("Y-m");
         }
-        return Asiento::where("fecha_inicio","LIKE","%$date%")->where("id_user", Auth::user()->getAuthIdentifier() )->get()->toArray();
+        return Asiento::where("fecha_inicio","LIKE","%$date%")->where( [
+            [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
+            ["id_company","=",$request->cookie('company') ]
+        ]  )->get()->toArray();
     }
 
     /**
@@ -201,7 +210,7 @@ class AsientosController extends Controller
         if( $request->has("month") ){
             $date = $request->get("month");
         }
-        $asientos = $this->getAsientosFromADate($date);
+        $asientos = $this->getAsientosFromADate($request,$date);
         $this->extractRegistros($asientos,$parsedRegistros);
 
         return \Inertia\Inertia::render('Contapain/Mayorizacion',[
@@ -233,10 +242,13 @@ class AsientosController extends Controller
 
     }
 
-    public function getMonthsForChart()
+    public function getMonthsForChart($request)
     {
         $date = Carbon::now()->toDate()->format("Y"); // tomamos el ano current
-        $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where("id_user", Auth::user()->getAuthIdentifier() )->get()->toArray();
+        $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where( [
+            [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
+            ["id_company","=",$request->cookie('company') ]
+        ]  )->get()->toArray();
         //$asientosCollect = collect( $asientos );
         $mesesDelanoCorriente = [];
         foreach ($asientos as $key => $value) {
