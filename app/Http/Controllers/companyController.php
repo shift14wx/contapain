@@ -32,7 +32,7 @@ class companyController extends Controller
     public function create($id)
     {
         $cookie = cookie('company', $id, 60000);
-        $response = new Response('<h1 style=" text-align: center;">hecho</h1><img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" src="https://media.tenor.com/images/299e012cd5c961b226c94dfd92491276/tenor.gif"> <h2 style=" text-align: center;">Sera redirigido a su pantalla de inicio, bien hecho!</h2>');
+        $response = new Response('<h1 style=" text-align: center;">hecho</h1><img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" src="https://i.pinimg.com/originals/3d/20/ab/3d20ab286d279f3aa920175793b54e0e.gif"> <h2 style=" text-align: center;">Sera redirigido a su pantalla de inicio, bien hecho!</h2>');
 
         //Call the withCookie() method with the response method
         $response->withCookie($cookie);
