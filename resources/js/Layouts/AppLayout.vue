@@ -31,6 +31,9 @@
                             <jet-nav-link @click="loadingVisit" href="/contapain/asientos" :active="$page.currentRouteName == '/contapain/asientos'">
                                 Asientos
                             </jet-nav-link>
+                            <jet-nav-link @click="loadingVisit" href="/company" :active="$page.currentRouteName == '/company'">
+                                Compañias
+                            </jet-nav-link>
                         </div>
                     </div>
                     <!-- Settings Dropdown -->
@@ -137,6 +140,9 @@
                      <jet-responsive-nav-link href="/contapain/asientos" :active="$page.currentRouteName == '/contapain/asientos'">
                         Asientos
                     </jet-responsive-nav-link>
+                    <jet-nav-link @click="loadingVisit" href="/company" :active="$page.currentRouteName == '/company'">
+                        Compañias
+                    </jet-nav-link>
                 </div>
 
                 <!-- Responsive Settings Options -->
