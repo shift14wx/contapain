@@ -71,7 +71,7 @@
                                                              <v-autocomplete
                                                                 prepend-inner-icon="mdi-chart-line"
                                                                 v-model="editedItem.giro"
-                                                                :items="['Ventas','Compras']"
+                                                                :items="['Comercial', 'Industrial', 'Servicios' ]"
                                                                 :rules="[ value => !!value || 'Este campo es necesario' ]"
                                                                 label="Giro de la empresa"
                                                             ></v-autocomplete>
