@@ -26,7 +26,7 @@ class CreateRegistroTable extends Migration
             $table->integer('id_detalle_concepto')->nullable()->comment('este puede ser cualquier sub rubro del BC de CATALOGO DE CUENTAS');
             $table->decimal('debe')->nullable();
             $table->decimal('haber')->nullable();
-            $table->string('concepto_detallado', 45)->nullable();
+            $table->string('concepto_detallado', 255)->nullable();
             $table->integer('id_rubro');
             $table->integer('id_asiento');
 

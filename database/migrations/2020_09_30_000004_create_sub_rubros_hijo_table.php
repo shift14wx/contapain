@@ -23,7 +23,7 @@ class CreateSubRubrosHijoTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id_sub_rubro_hijo');
-            $table->string('titulo', 45)->nullable();
+            $table->string('titulo', 255)->nullable();
             $table->integer('id_sub_rubro_padre');
 
             $table->index(["id_sub_rubro_padre"], 'fk_sub_rubro_hijo_sub_rubro1_idx');

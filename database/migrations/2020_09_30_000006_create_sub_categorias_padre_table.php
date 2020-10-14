@@ -24,7 +24,7 @@ class CreateSubCategoriasPadreTable extends Migration
             $table->engine = 'InnoDB';
             $table->integer('id_categoria');
             $table->increments('is_sub_categoria_padre');
-            $table->string('titulo', 45)->nullable();
+            $table->string('titulo', 255)->nullable();
 
             $table->index(["id_categoria"], 'fk_sub_categorias_sub_rubro_hijo_categorias1_idx');
 
