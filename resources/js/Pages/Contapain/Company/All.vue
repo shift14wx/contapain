@@ -332,7 +332,7 @@ export default {
                     titulo = "procesar";
                 }
           this.$swal.fire({  
-              title: `¿Esta seguro de ${titulo} este compañia}?`,
+              title: `¿Esta seguro de ${titulo} este compañia?`,
             inputAttributes: {
                 autocapitalize: 'off'
             },
