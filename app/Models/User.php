@@ -68,4 +68,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Company::class, 'id_user');
     }
+
+    public function ownsCompany( int $id ){
+        return $this->getCompanies->filter(
+            function($company) use ( $id ) { 
+            return $company->id_company  == $id; 
+        } 
+        )->all();
+    }
 }

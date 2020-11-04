@@ -5,6 +5,8 @@ use App\Http\Controllers\CatalogodeCuentasController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\registroController;
+
+use App\Http\Controllers\balanceGeneralController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,3 +77,10 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->get('/contapain/asientos/agregar',[AsientosController::class,"store"])
     ->middleware('companyCookie')
     ->name('/contapain/asientos/agregar');
+
+    // Balance general
+
+
+Route::middleware(['auth:sanctum', 'verified'])
+->middleware('companyCookie')
+    ->get('/contapain/balancegeneral',[balanceGeneralController::class,"balancegeneral"]);

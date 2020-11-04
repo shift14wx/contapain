@@ -18,9 +18,7 @@
                                 <jet-application-mark class="block h-9 w-auto" />
                             </a>
                             <v-spacer />
-                            <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-green-500 rounded">
-                            Version Alternativa
-                            </button>
+                            
                         </div>
 
                             <!--Navigation Links-->
@@ -33,6 +31,9 @@
                             </jet-nav-link>
                             <jet-nav-link @click="loadingVisit" href="/company" :active="$page.currentRouteName == '/company'">
                                 Compañias
+                            </jet-nav-link>
+                            <jet-nav-link @click="loadingVisit" href="/contapain/balancegeneral" :active="$page.currentRouteName == '/contapain/balancegeneral'">
+                                Balance General 
                             </jet-nav-link>
                         </div>
                     </div>
@@ -118,7 +119,7 @@
                             </jet-dropdown>
                         </div>
                     </div>
-
+                    <v-spacer/>
                     <!-- Hamburger -->
                     <div class="-mr-2 flex items-center sm:hidden">
                         <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -140,9 +141,10 @@
                      <jet-responsive-nav-link href="/contapain/asientos" :active="$page.currentRouteName == '/contapain/asientos'">
                         Asientos
                     </jet-responsive-nav-link>
-                    <jet-nav-link @click="loadingVisit" href="/company" :active="$page.currentRouteName == '/company'">
+                    <jet-responsive-nav-link href="/company" :active="$page.currentRouteName == '/company'">
                         Compañias
-                    </jet-nav-link>
+                    </jet-responsive-nav-link>
+                    
                 </div>
 
                 <!-- Responsive Settings Options -->
