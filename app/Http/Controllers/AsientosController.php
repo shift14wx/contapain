@@ -22,6 +22,10 @@ class AsientosController extends Controller
     public function index( Request $request )
     {
         $date = $request->get("day");
+        // si envian una peticion sin el dia, entonces se regresara a el calendario
+        if( $date == null ){
+            return redirect("/contapain/asientos");
+        }
         $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where( [
             [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
             ["id_company","=",$request->cookie('company') ]

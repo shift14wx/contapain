@@ -49,7 +49,7 @@
                                             </v-card-title>
 
                                             <v-card-text>
-                                                <v-form v-model="mandar">
+                                                <v-form v-model="mandar" @submit.prevent="">
                                                     
                                                 <v-container>
                                                     <v-row>
