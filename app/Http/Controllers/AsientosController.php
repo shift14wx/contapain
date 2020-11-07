@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\helpers\contracts\Ihelpers;
 use App\Models\Asiento;
 use App\Models\registro;
 use App\Models\Rubro;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\DB;
 
 class AsientosController extends Controller
 {
+
+    private Ihelpers $helpers;
+
+    public function __construct( Ihelpers $helper ) {
+        $this->helpers = $helper;
+    }
+
     /**
      * Display a listing of asientos fo the selected day.
      *
@@ -89,7 +97,7 @@ class AsientosController extends Controller
 
         $rubros = Rubro::all()->toArray();
         $rubrosParseados = [];
-        $this->parseRubros($rubros,$rubrosParseados);
+        $this->helpers->parseRubros($rubros,$rubrosParseados);
         //$rubrosParseados = collect( $rubrosParseados )->sortBy("id")->toArray();
         $asiento = Asiento::find( $id_asiento )->toArray();
         $registros = registro::where("id_asiento",$id_asiento)->get()->toArray();
@@ -122,30 +130,16 @@ class AsientosController extends Controller
 
     public function Dashboard(Request $request)
     {
-        $meses = $this->getMonthsForChart($request);
+        $meses = $this->helpers->getMonthsForChart($request);
         $rubros = Rubro::all()->toArray();
         $rubrosParseados = [];
-        $this->parseRubros($rubros,$rubrosParseados);
-        $asientos = $this->getAsientosFromADate($request);
+        $this->helpers->parseRubros($rubros,$rubrosParseados);
+        $asientos = $this->helpers->getAsientosFromADate($request);
         return \Inertia\Inertia::render('Dashboard',[
             "Asientos" => $asientos,
             "catalogo_cuentas" => $rubrosParseados,
             "meses" => $meses
         ]);
-    }
-
-    public function getAsientosFromADate( Request $request, $date= null, $anually = false)
-    {
-        if($date == null)
-        {
-            $date = Carbon::now()->toDate()->format("Y-m");
-        }else{
-            $date = $anually ? Carbon::createFromFormat("Y-m-d",$date)->format("Y")  : Carbon::createFromFormat("Y-m-d",$date)->format("Y-m");
-        }
-        return Asiento::where("fecha_inicio","LIKE","%$date%")->where( [
-            [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
-            ["id_company","=",$request->cookie('company') ]
-        ]  )->get()->toArray();
     }
 
     /**
@@ -214,8 +208,8 @@ class AsientosController extends Controller
         if( $request->has("month") ){
             $date = $request->get("month");
         }
-        $asientos = $this->getAsientosFromADate($request,$date, true);
-        $this->extractRegistros($asientos,$parsedRegistros);
+        $asientos = $this->helpers->getAsientosFromADate($request,$date, true);
+        $this->helpers->extractRegistros($asientos,$parsedRegistros);
 
         return \Inertia\Inertia::render('Contapain/Mayorizacion',[
             "parsedRegistros" => $parsedRegistros,
@@ -223,77 +217,6 @@ class AsientosController extends Controller
         ]);
     }
 
-    public function extractRegistros( $asientos,&$parsedRubros )
-    {
-        $registros = [];
-        /** extraemos los registros de los asientos */
-        foreach ($asientos as $key => $registro) {
-            $collectionRegistro = collect($registro);
-            if( $collectionRegistro->has("registros") ){
-                $registros = array_merge( $registros, $collectionRegistro->get("registros") );
-            }
-        }
-        /** TOMAR EL ID y titulo de robro DE RUBRO */
-       $parsedRubros = array_unique( array_map(function($reg){  return [ "debeRubro" => $reg["debeRubro"], "haberRubro" => $reg["haberRubro"], "titulo" => $reg["titulo"],"id_detalle_concepto" => $reg["id_detalle_concepto"],"registros"=>[] ]; },$registros), SORT_REGULAR );
-       /** AHORA PONER LOS REGISTROS ORDENADOS POR ID */
-       foreach ($registros as $key => $registro) {
-            foreach ($parsedRubros as $key => $rubro) {
-                if( $rubro["id_detalle_concepto"] == $registro["id_detalle_concepto"] ){
-                    array_push($parsedRubros[$key]["registros"],$registro);
-                }
-            }
-        }
-
-    }
-
-    public function getMonthsForChart($request)
-    {
-        $date = Carbon::now()->toDate()->format("Y"); // tomamos el ano current
-        $asientos = Asiento::where("fecha_inicio","LIKE","%$date%")->where( [
-            [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
-            ["id_company","=",$request->cookie('company') ]
-        ]  )->get()->toArray();
-        //$asientosCollect = collect( $asientos );
-        $mesesDelanoCorriente = [];
-        foreach ($asientos as $key => $value) {
-            $month = Carbon::createFromFormat("Y-m-d", $value["fecha_inicio"] )->format("M");
-            array_push($mesesDelanoCorriente,["mes"=>$month,"data"=>0]);
-        } // obtenemos el mes de los resultados del ano
-        $mesesDelanoCorriente = array_unique( $mesesDelanoCorriente, SORT_REGULAR ); // purgamos los meses repetidos del ano
-        // volveremos a recorrer el array de $asientosCollect debido a que purgamos los repetidos asi que tenemos que contar
-        
-        foreach ($asientos as $key => $value) {
-            $month = Carbon::createFromFormat("Y-m-d", $value["fecha_inicio"] )->format("M");
-            foreach ($mesesDelanoCorriente as $key => $mes) {
-                if( $mes["mes"] == $month ){
-                    $mesesDelanoCorriente[$key]["data"] +=1; 
-                }
-            }
-        }
-        //dd( $mesesDelanoCorriente );
-        return $mesesDelanoCorriente;
-
-    }
-
-
-    public function parseRubros( $rubros, &$parsedRubros, $rubroActivos = [] )
-    {
-        foreach ($rubros as $key => $rubro)
-        {
-            if( $rubro["tabla"] == "rubro" ) {
-                $rubroActivos = [
-                    "debe" => $rubro["debe"],
-                    "haber" => $rubro["haber"]
-                ];
-            }
-            if( array_key_exists( "sub", $rubro ) && count( $rubro["sub"] ) >= 1 ) {
-                $this->parseRubros( $rubro["sub"], $parsedRubros,$rubroActivos );
-            }
-            unset($rubro["sub"]);
-            $rubro = array_merge($rubro, $rubroActivos);
-            array_push( $parsedRubros, $rubro );
-        }
-        $parsedRubros = array_unique( $parsedRubros, SORT_REGULAR );
-    }
+    
 
 }

@@ -44,7 +44,7 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-$app->register(Ihelpers::class,Helpers::class);
+$app->bind(Ihelpers::class,Helpers::class);
 
 /*
 |--------------------------------------------------------------------------

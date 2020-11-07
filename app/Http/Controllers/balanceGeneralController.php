@@ -10,6 +10,8 @@ class balanceGeneralController extends Controller
     
     public function balancegeneral()
     {
+
+
       return \Inertia\Inertia::render("Contapain/Balance/General");   
     }
 
