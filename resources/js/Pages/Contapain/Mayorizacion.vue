@@ -2,7 +2,7 @@
     <app-layout>
             <template #header>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Mayorización y mas informacion del mes de&nbsp;{{ computedDate }}
+                    Mayorización y mas informacion del {{ anually ? '' : 'mes' }} de&nbsp;{{ computedDate }}
                 </h2>
                 <br>
                 <a href="#balanceGeneral" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
@@ -153,7 +153,7 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 export default {
-    props:["parsedRegistros","month"],
+    props:["parsedRegistros","month", "anually"],
     data(){
         return{
             "totales":[],
@@ -162,6 +162,7 @@ export default {
             "deferDebe": "",
             "deferHaber": "",
             "mes" : this.month,
+            "anual" : this.anually,
             totDebMov:0.0,
             totDebSal:0.0,
             totHabMov:0.0,
@@ -369,7 +370,7 @@ export default {
     },
     computed:{
         computedDate(){
-            return moment(this.mes).format("MMMM YYYY");
+            return moment(this.mes).format(this.anually ? "YYYY" : "MMMM YYYY");
         }
     },
     created(){

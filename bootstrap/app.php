@@ -11,6 +11,9 @@
 |
 */
 
+use App\helpers\contracts\Ihelpers;
+use App\helpers\Helpers;
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
@@ -40,6 +43,8 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
+
+$app->register(Ihelpers::class,Helpers::class);
 
 /*
 |--------------------------------------------------------------------------

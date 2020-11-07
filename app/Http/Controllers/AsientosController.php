@@ -134,13 +134,13 @@ class AsientosController extends Controller
         ]);
     }
 
-    public function getAsientosFromADate( Request $request, $date= null)
+    public function getAsientosFromADate( Request $request, $date= null, $anually = false)
     {
         if($date == null)
         {
             $date = Carbon::now()->toDate()->format("Y-m");
         }else{
-            $date = Carbon::createFromFormat("Y-m-d",$date)->format("Y-m");
+            $date = $anually ? Carbon::createFromFormat("Y-m-d",$date)->format("Y")  : Carbon::createFromFormat("Y-m-d",$date)->format("Y-m");
         }
         return Asiento::where("fecha_inicio","LIKE","%$date%")->where( [
             [ "id_user","=",Auth::user()->getAuthIdentifier() ], 
@@ -214,7 +214,7 @@ class AsientosController extends Controller
         if( $request->has("month") ){
             $date = $request->get("month");
         }
-        $asientos = $this->getAsientosFromADate($request,$date);
+        $asientos = $this->getAsientosFromADate($request,$date, true);
         $this->extractRegistros($asientos,$parsedRegistros);
 
         return \Inertia\Inertia::render('Contapain/Mayorizacion',[
