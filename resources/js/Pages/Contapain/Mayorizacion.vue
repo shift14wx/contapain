@@ -2,7 +2,7 @@
     <app-layout>
             <template #header>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Mayorización y mas informacion del {{ anually ? '' : 'mes' }} de&nbsp;{{ computedDate }}
+                    Mayorización y mas informacion del {{ anually ? '' : 'mes de' }} &nbsp;{{ computedDate }}
                 </h2>
                 <br>
                 <a href="#balanceGeneral" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">

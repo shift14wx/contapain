@@ -411,6 +411,7 @@
                             "id_sub_rubro_hijo": "2102",
                             "titulo": "Proveedores",
                             "tabla": "sub_rubro_hijo",
+                            "id_clasificacion" : 3,
                             "id_sub_rubro_padre": "22",
                             "subrubro": [
                                 {
@@ -774,6 +775,7 @@
         {
             "id_rubro": "4",
             "titulo": "Cuenta de resultado acreedoras",
+            "id_clasificacion" : 3,
             "tabla": "rubro",
             "haber" : true,
             "debe" : false,

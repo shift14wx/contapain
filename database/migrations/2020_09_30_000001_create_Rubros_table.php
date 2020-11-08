@@ -28,6 +28,8 @@ class CreateRubrosTable extends Migration
 ');
             $table->tinyInteger('haber')->nullable()->comment('Este campo es necesario para satisfacer la necesidad de saber si en la tabla de registros se encuentra el ID de uno de sub rubros, puede disminuir o BAJAR');
             $table->softDeletes();
+            $table->unsignedInteger("id_clasificacion")->nullable();
+            $table->foreign("id_clasificacion")->on("clasificacions")->references("id");
             $table->timestamps();
         });
     }

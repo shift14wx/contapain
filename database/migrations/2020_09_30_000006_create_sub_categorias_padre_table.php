@@ -33,6 +33,8 @@ class CreateSubCategoriasPadreTable extends Migration
                 ->references('id_categorias')->on('categorias')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
+            $table->unsignedInteger("id_clasificacion")->nullable();
+            $table->foreign("id_clasificacion")->on("clasificacions")->references("id");
             $table->timestamps();
             $table->softDeletes();
         });

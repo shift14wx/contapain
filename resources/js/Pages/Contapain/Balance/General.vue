@@ -1,6 +1,6 @@
 <template>
 
-<mayorizacion :parsedRegistros="parsedRegistros" :month="month" :anually="true" >
+<mayorizacion :parsedRegistros="parsedRegistros" :month="monthIn" :anually="true" >
 
 </mayorizacion>
 
@@ -16,7 +16,7 @@ export default{
     data(){
         return{
             "registros": this.parsedRegistros,
-            "month" : this.month,
+            "monthIn" : this.month,
         }
     },
     components:{

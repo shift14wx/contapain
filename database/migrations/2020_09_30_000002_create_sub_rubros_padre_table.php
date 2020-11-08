@@ -33,6 +33,10 @@ class CreateSubRubrosPadreTable extends Migration
                 ->references('id_rubro')->on('Rubros')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
+
+            $table->unsignedInteger("id_clasificacion")->nullable();
+            $table->foreign("id_clasificacion")->on("clasificacions")->references("id");
+            
             $table->timestamps();
             $table->softDeletes();
         });
