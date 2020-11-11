@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CategoriasTableSeeder::class,
             SubCategoriasPadreTableSeeder::class,
             AsientoTableSeeder::class,
+            ClasificacionsSeeder::class
         ]);
     }
 }
