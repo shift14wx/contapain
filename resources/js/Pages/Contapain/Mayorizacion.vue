@@ -378,9 +378,18 @@ export default {
         moment.locale("es");
     },
     mounted(){
+
         setTimeout(() => {
         this.calcularTotalesMovSal();
+            this.$emit("dataSet",{
+                "totales": this.totales,
+                "totDebMov" : this.totDebMov,
+                "totDebSal" : this.totDebSal,
+                "totHabMov" : this.totHabMov,
+                "totHabSal" : this.totHabSal
+            });
         }, 1000);
+        
     }
 }
 </script>
