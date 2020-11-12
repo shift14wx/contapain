@@ -2,11 +2,14 @@
     <app-layout>
             <template #header>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Mayorización y mas informacion del {{ anually ? '' : 'mes de' }} &nbsp;{{ computedDate }}
+                    {{ title || 'Mayorización y mas informacion'}} del {{ anually ? '' : 'mes de' }} &nbsp;{{ computedDate }}
                 </h2>
                 <br>
-                <a href="#balanceGeneral" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                Mostrar Balance de comprobación
+                <a href="#balanceComprobacion" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                Ir a Balance de comprobación
+                </a> &nbsp;
+                <a href="#balanceGeneral" v-if="title" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                Ir a Balance General 
                 </a>
             </template>
 
@@ -81,7 +84,7 @@
                                     </v-card>
                                 </v-col>
                             </v-row>
-                                <v-col cols="12" id="balanceGeneral">
+                                <v-col cols="12" id="balanceComprobacion">
                                      <v-card>
                                         <v-card-title>Balance de comprobación</v-card-title>
                                         <v-card-subtitle>  </v-card-subtitle>
@@ -153,7 +156,7 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 export default {
-    props:["parsedRegistros","month", "anually"],
+    props:["parsedRegistros","month", "anually","titleProp"],
     data(){
         return{
             "totales":[],
@@ -166,7 +169,8 @@ export default {
             totDebMov:0.0,
             totDebSal:0.0,
             totHabMov:0.0,
-            totHabSal:0.0
+            totHabSal:0.0,
+            title: this.titleProp || null
         }
     },
     components:{
