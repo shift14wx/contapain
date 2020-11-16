@@ -78,9 +78,13 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->middleware('companyCookie')
     ->name('/contapain/asientos/agregar');
 
-    // Balance general
+    // Balance general y estado de resultado
 
 
 Route::middleware(['auth:sanctum', 'verified'])
 ->middleware('companyCookie')
     ->get('/contapain/balancegeneral',[balanceGeneralController::class,"balancegeneral"]);
+
+Route::middleware(["auth:sanctum", 'verified'])
+->middleware("companyCookie")
+    ->get('/contapain/estadoresultado',[ balanceGeneralController::class, "estadoDeResultado" ]);

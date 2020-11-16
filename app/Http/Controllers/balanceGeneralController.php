@@ -31,4 +31,19 @@ class balanceGeneralController extends Controller
         ]);   
     }
 
+    public function estadoDeResultado( Request $request ){
+
+        $parsedRegistros= [];
+        $date = null;
+
+        $asientos = $this->helpers->getAsientosFromADate($request,$date, true);
+        $this->helpers->extractRegistros($asientos,$parsedRegistros);
+
+      return \Inertia\Inertia::render("Contapain/EstadoResultado/EstadoDeResultado",[
+            "parsedRegistros" => $parsedRegistros,
+            "month" => $date == null ? Carbon::now()->toDate()->format("Y-m-d") : $date
+        ]);
+
+    }
+
 }

@@ -35,6 +35,9 @@
                             <jet-nav-link @click="loadingVisit" href="/contapain/balancegeneral" :active="$page.currentRouteName == '/contapain/balancegeneral'">
                                 Balance General 
                             </jet-nav-link>
+                            <jet-nav-link @click="loadingVisit" href="/contapain/estadoresultado" :active="$page.currentRouteName == '/contapain/estadoresultado'">
+                                Estado de Resultado 
+                            </jet-nav-link>
                         </div>
                     </div>
                     <!-- Settings Dropdown -->
@@ -144,7 +147,12 @@
                     <jet-responsive-nav-link href="/company" :active="$page.currentRouteName == '/company'">
                         Compañias
                     </jet-responsive-nav-link>
-                    
+                    <jet-responsive-nav-link href="/contapain/balancegeneral" :active="$page.currentRouteName == '/contapain/balancegeneral'">
+                       Balance General 
+                    </jet-responsive-nav-link>
+                    <jet-responsive-nav-link href="/contapain/estadoresultado" :active="$page.currentRouteName == '/contapain/estadoresultado'">
+                       Estado de Resultado 
+                    </jet-responsive-nav-link>
                 </div>
 
                 <!-- Responsive Settings Options -->
