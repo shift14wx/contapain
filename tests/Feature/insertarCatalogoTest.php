@@ -1337,11 +1337,13 @@ class insertarCatalogoTest extends TestCase
 					"id_sub_rubro_padre"=> "61",
 					"titulo"=> "Cuenta liquidadora",
 					"tabla"=> "sub_rubro_padre",
+					"id_clasificacion"=> "6",
 					"id_rubro"=> "6",
 					"subrubro"=> [
 						[
 							"id_sub_rubro_hijo"=> "6101",
 							"titulo"=> "Pérdidas y ganancias",
+							"id_clasificacion"=> "6",
 							"tabla"=> "sub_rubro_hijo",
 							"id_sub_rubro_padre"=> "61"
 						]
