@@ -16,7 +16,7 @@
                         <template v-slot:default>
                         <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">Detalle</th>
+                            <th rowspan="2" class="text-center">Detalles</th>
                             <th colspan="2" class="text-center deep-purple darken-4 white--text">Sumas</th>
                         </tr>
                         </thead>
@@ -57,7 +57,7 @@
                             <tr
                             v-for="(rubro, index) in registros"
                             :key="'rubroRegistroActCorr'+index"
-                            v-if="rubro.id_clasificacion == 2"
+                            v-if="rubro.id_clasificacion == 3"
                             >
                             <td>{{ rubro.titulo }}</td>
                             <td class="text-center">{{ haberOdeber( index ) }}</td>
@@ -69,7 +69,7 @@
                             <tr
                             v-for="(rubro, index) in registros"
                             :key="'rubroRegistroActCorr'+index"
-                            v-if="rubro.id_clasificacion == 2"
+                            v-if="rubro.id_clasificacion == 4"
                             >
                             <td>{{ rubro.titulo }}</td>
                             <td class="text-center">{{ haberOdeber( index ) }}</td>
@@ -78,10 +78,24 @@
                                 <td colspan="2" class="font-weight-black">Patrimonio</td>
                                 <td class="font-weight-black"> ${{ patrimonioTotal }} </td>
                             </tr>
+                            <tr>
+                            <td colspan="2" class="font-weight-black"> patrimonio contribuido </td>
+                            <tr>
                             <tr
                             v-for="(rubro, index) in registros"
                             :key="'rubroRegistroActCorr'+index"
-                            v-if="rubro.id_clasificacion == 2"
+                            v-if="rubro.id_clasificacion == 5"
+                            >
+                            <td>{{ rubro.titulo }}</td>
+                            <td class="text-center">{{ haberOdeber( index ) }}</td>
+                            </tr>
+                            <tr>
+                            <td colspan="2" class="font-weight-black"> patrimonio ganado </td>
+                            <tr>
+                            <tr
+                            v-for="(rubro, index) in registros"
+                            :key="'rubroRegistroActCorr'+index"
+                            v-if="rubro.id_clasificacion == 6"
                             >
                             <td>{{ rubro.titulo }}</td>
                             <td class="text-center">{{ haberOdeber( index ) }}</td>
@@ -156,7 +170,7 @@ export default{
         },
         pasivoCorrienteTotal(){
             if(this.dataset){
-                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 2 );
+                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 3 );
                 return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
             }else{
                 return null;
@@ -164,7 +178,7 @@ export default{
         },
         pasivoNoCorrienteTotal(){
             if(this.dataset){
-                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 2 );
+                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 4 );
                 return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
             }else{
                 return null;
@@ -172,7 +186,7 @@ export default{
         },
         patrimonioTotal(){
             if(this.dataset){
-                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 2 );
+                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion > 4 );
                 return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
             }else{
                 return null;
