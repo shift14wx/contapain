@@ -24,7 +24,7 @@ public function extractRegistros( $asientos,&$parsedRubros )
             }
         }
         /** TOMAR EL ID y titulo de robro DE RUBRO */
-       $parsedRubros = array_unique( array_map(function($reg){  return [ "debeRubro" => $reg["debeRubro"], "haberRubro" => $reg["haberRubro"], "titulo" => $reg["titulo"],"id_detalle_concepto" => $reg["id_detalle_concepto"],"registros"=>[] ]; },$registros), SORT_REGULAR );
+       $parsedRubros = array_unique( array_map(function($reg){  return [ "debeRubro" => $reg["debeRubro"], "haberRubro" => $reg["haberRubro"], "titulo" => $reg["titulo"],"id_detalle_concepto" => $reg["id_detalle_concepto"], "id_clasificacion"=>$reg["id_clasificacion"],"registros"=>[] ]; },$registros), SORT_REGULAR );
        /** AHORA PONER LOS REGISTROS ORDENADOS POR ID */
        foreach ($registros as $key => $registro) {
             foreach ($parsedRubros as $key => $rubro) {
