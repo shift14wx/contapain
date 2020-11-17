@@ -13,22 +13,43 @@
                         <v-container>
                             <v-row>
                               <v-col>
-                                 <v-simple-table dark>
+                                 <v-simple-table >
                                     <template v-slot:default>
                                        <thead>
                                        <tr>
-                                          <th class="text-left">
-                                             
-                                          </th>
-                                          <th class="text-left">
-                                             Calories
+                                          <th colspan="3" class="text-center">
+                                             {{company}}<br/>
+                                             Estados de resultado <br/>
+                                             del primero de Enero al 31 de diciembre del {{year}}
                                           </th>
                                        </tr>
                                        </thead>
                                        <tbody>
-                                       <tr>
-
-                                       </tr>
+                                          <tr>
+                                             <td class="font-weight-black">Ventas</td>
+                                             <td></td>
+                                             <td class="font-weight-black">${{totalDeVentas.toFixed(2)}}</td>
+                                          </tr>
+                                          <tr>
+                                             <td>menos</td>
+                                             <td></td>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <td class="font-weight-black">Costo de Ventas</td>
+                                             <td></td>
+                                             <td class="font-weight-black"> 
+                                                ${{totalCostosDeVentas.toFixed(2)}}
+                                                <hr style="background-color:black;"/>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td class="font-weight-black">utilidad Bruta</td>
+                                             <td></td>
+                                             <td class="font-weight-black"> 
+                                                  ${{ ( parseFloat( totalDeVentas - totalCostosDeVentas ).toFixed(2) ) }}
+                                             </td>
+                                          </tr>
                                        </tbody>
                                     </template>
                                  </v-simple-table>
@@ -45,7 +66,7 @@
 <script>
 import AppLayout from "../../../Layouts/AppLayout";
 export default {
-   props:["ventas","parsedRegistros","otrosGastos","otrosProductos","gastosOperativos"],
+   props:["ventas","parsedRegistros","otrosGastos","otrosProductos","gastosOperativos","totalDeVentas","company","year","totalCostosDeVentas"],
  components:{
         AppLayout,
     },   

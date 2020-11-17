@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\helpers\contracts\Ihelpers;
+use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -77,6 +78,9 @@ class balanceGeneralController extends Controller
                 break;
             }
         });
+        // sacando el total de ventas en lugar de hacearlo en el front-end
+        $totalVentas = 0.0;
+        if( count($ventas) >0 ){
         $totalVentas = collect($ventas[0]["registros"]);
         $totalVentas = $totalVentas->reduce( function ($carry,$registroDeVenta)
             {
@@ -91,8 +95,28 @@ class balanceGeneralController extends Controller
                }
             } 
         );
-        dump("total de ventas");
-        dd($totalVentas);
+    }
+        // suma total de costo de ventas
+        $totalVentascostos = 0.0;
+    if( count($costoDeVenta) > 0 ){
+        $totalVentascostos = collect($costoDeVenta[0]["registros"]);
+        $totalVentascostos = $totalVentascostos->reduce( function ($carry,$registroDeVenta)
+            {
+               if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                    return $carry + $registroDeVenta["debe"];
+               }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                   return $carry - $registroDeVenta["debe"];
+               } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                    return $carry + $registroDeVenta["haber"];
+               }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                    return $carry - $registroDeVenta["haber"];
+               }
+            } 
+        );
+    }
+// tomando nombre de la compañia selecionada mediante la cookie
+
+$company = Company::find( $request->cookie("company") )->get()[0]["titulo"];
 
       return \Inertia\Inertia::render("Contapain/EstadoResultado/EstadoDeResultado",[
             "parsedRegistros" => $parsedRegistros,
@@ -100,7 +124,11 @@ class balanceGeneralController extends Controller
             "otrosGastos" => $otrosGastos,
             "otrosProductos" => $otrosProductos,
             "gastosOperativos" => $gastosOperativos,
-            "totalDeVentas" => $totalVentas
+            "totalDeVentas" => $totalVentas,
+            "costosDeVentas" => $costoDeVenta,
+            "totalCostosDeVentas" => $totalVentascostos,
+            "company" => $company,
+            "year" => Carbon::now()->toDate()->format("Y")
         ]);
 
     }
