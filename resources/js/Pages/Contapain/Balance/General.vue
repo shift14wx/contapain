@@ -143,7 +143,7 @@ export default{
             this.dataset = val;    
         },
         haberOdeber( index ){
-            var debeOhaber = parseFloat( this.dataset.totales[index].debe ) || parseFloat( this.dataset.totales[index].haber );
+            var debeOhaber = parseFloat( this.dataset.totales[index].debe ) + parseFloat( this.dataset.totales[index].haber );
             return "$"+debeOhaber.toFixed(2)
         }
     },
