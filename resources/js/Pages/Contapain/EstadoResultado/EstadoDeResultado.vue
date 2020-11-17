@@ -58,46 +58,45 @@
                                           <tr>
                                              <td class="font-weight-black"> Gastos de Operacion </td>
                                              <td></td>
-                                             <td> {{ gastosDeOperacionTotal }} </td>
+                                             <td class="font-weight-black"> ${{ gastosDeOperacionTotal }} </td>
                                           </tr>
                                           <!--GASTOS DE ADMINISTRACION-->
                                           <tr v-if="operacioGastosAdministracion.length > 0">
-                                             <td class="font-weight-black">Gastos de Administracion</td>
-                                             <td></td>
-                                             <td>{{ totalGastosDeAdministracion }}</td>
+                                             <td >Gastos de Administracion  <br/> <hr/></td>
+                                             <td>${{ totalGastosDeAdministracion }}</td>
                                           </tr>
                                           <tr v-if="operacioGastosAdministracion.length > 0" v-for="( gasto, index ) in operacioGastosAdministracion" :key="'gastosOperacion'+index">
                                              <td>{{gasto["titulo"]}}</td>
-                                             <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
+                                             <td>${{ totalPorCuenta( gasto["registros"] ) }}</td>
                                              <td></td>
                                           </tr>
                                           <!--GASTOS DE VENTA-->
                                           <tr v-if="operacionGastosDeVenta.length > 0">
-                                             <td class="font-weight-black">Gastos de Administracion</td>
+                                             <td>Gastos de Venta <br/> <hr/></td>
                                              <td></td>
-                                             <td>{{ totalGastosDeVenta }}</td>
+                                             <td>${{ totalGastosDeVenta }}</td>
                                           </tr>
                                           <tr v-if="operacionGastosDeVenta.length > 0" v-for="( gasto, index ) in operacionGastosDeVenta" :key="'gastosdeventa'+index">
                                               <td>{{gasto["titulo"]}}</td>
-                                             <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
-                                             <td></td
+                                             <td>${{ totalPorCuenta( gasto["registros"] ) }}</td>
+                                             <td></td>
                                           </tr>
 
                                           <!--GASTOS DE REBAJA Y DEVOLUCIONES SOBRE VENTAS-->
                                           <tr v-if="operacionesRebajaYDevolucionesSobreVentas.length > 0">
-                                             <td class="font-weight-black">Gastos de Administracion</td>
+                                             <td >Rebaja y devolución sobre las ventas <br/> <hr/></td>
                                              <td></td>
-                                             <td>{{ totalGastosDeVenta }}</td>
+                                             <td>${{ totalGastosDeVenta }}</td>
                                           </tr>
                                           <tr v-if="operacionesRebajaYDevolucionesSobreVentas.length > 0" v-for="( gasto, index ) in operacionesRebajaYDevolucionesSobreVentas" :key="'rebaja'+index">
                                              <td>{{gasto["titulo"]}}</td>
-                                             <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
+                                             <td>${{ totalPorCuenta( gasto["registros"] ) }}</td>
                                              <td></td>
                                           </tr>
 
                                           <!--DESCUENTOS SOBRE VENTA-->
                                           <tr v-if="operacionDescuentoSobreVentas.length > 0">
-                                             <td class="font-weight-black">Gastos de Administracion</td>
+                                             <td>Descuento Sobre Ventas <br/> <hr/></td>
                                              <td></td>
                                              <td>{{ totalDescuentoSobreVentas }}</td>
                                           </tr>
@@ -105,6 +104,12 @@
                                              <td>{{gasto["titulo"]}}</td>
                                              <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
                                              <td></td>
+                                          </tr>
+
+                                          <tr>
+                                             <td class="font-weight-black">Utilidad de Operación</td>
+                                             <td></td>
+                                             <td class="font-weight-black"> {{ ( utilidadBruta -gastosDeOperacionTotal ).toFixed(2) }} </td>
                                           </tr>
  
                                        </tbody>

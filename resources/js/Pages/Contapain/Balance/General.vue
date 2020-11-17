@@ -102,7 +102,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="font-weight-black"> Total Pasivo + Patrimonio</td>
-                                <td class="font-weight-black"> ${{ ( pasivoCorrienteTotal+pasivoNoCorrienteTotal+patrimonioTotal ).toFixed(2) }} </td>
+                                <td class="font-weight-black"> ${{ ( parseFloat(pasivoCorrienteTotal)+parseFloat(pasivoNoCorrienteTotal)+parseFloat(patrimonioTotal) ).toFixed(2) }} </td>
                             </tr>
                         </tbody>
                         </template>
@@ -165,16 +165,24 @@ export default{
         },
         activoNoCorrienteTotal(){
             if(this.dataset){
-                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 2 );
-                return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
+                 var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 2 );
+                var totales = 0.0;
+                activosCorrientes.forEach(registro => {
+                    totales+=( parseFloat( registro["debe"] ) + parseFloat( registro["haber"] ) );
+                });
+                return totales.toFixed(2);
             }else{
                 return null;
             }
         },
         pasivoCorrienteTotal(){
             if(this.dataset){
-                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 3 );
-                return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
+               var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 3 );
+                var totales = 0.0;
+                activosCorrientes.forEach(registro => {
+                    totales+=( parseFloat( registro["debe"] ) + parseFloat( registro["haber"] ) );
+                });
+                return totales.toFixed(2);
             }else{
                 return null;
             }
@@ -182,15 +190,23 @@ export default{
         pasivoNoCorrienteTotal(){
             if(this.dataset){
                 var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 4 );
-                return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
+                var totales = 0.0;
+                activosCorrientes.forEach(registro => {
+                    totales+=( parseFloat( registro["debe"] ) + parseFloat( registro["haber"] ) );
+                });
+                return totales.toFixed(2);
             }else{
                 return null;
             }
         },
         patrimonioTotal(){
             if(this.dataset){
-                var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion > 4 );
-                return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
+                 var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 5 );
+                var totales = 0.0;
+                activosCorrientes.forEach(registro => {
+                    totales+=( parseFloat( registro["debe"] ) + parseFloat( registro["haber"] ) );
+                });
+                return totales.toFixed(2);
             }else{
                 return null;
             }
