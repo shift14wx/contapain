@@ -63,9 +63,10 @@ class registroController extends AppBaseController
             'debe' => 'required',
             'haber'=> 'required',
             'id_rubro'=> 'required',
-            'id_asiento' => 'required']
+            'id_asiento' => 'required'
+            ]
         ); 
-        $input = $request->only("id_detalle_concepto","id_rubro","debe","haber","id_rubro","id_asiento","concepto_detallado");
+        $input = $request->only("id_detalle_concepto","id_rubro","debe","haber","id_rubro","id_asiento","concepto_detallado","id_clasificacion");
 
         $registro = $this->registroRepository->create($input);
 
@@ -141,7 +142,7 @@ class registroController extends AppBaseController
             return redirect(route('registros.index'));
         }
 
-        $registro = $this->registroRepository->update($request->only("id_rubro", "id_registro", "id_detalle_concepto", "id_asiento", "debe", "haber", "concepto_detallado"), $id);
+        $registro = $this->registroRepository->update($request->only("id_rubro", "id_registro", "id_detalle_concepto", "id_asiento", "debe", "haber", "concepto_detallado","id_clasificacion"), $id);
 
         if( $request->exists("json") && $request->get("json") == true ){
             return response()->json(["msg"=>"done"], JsonResponse::HTTP_OK );

@@ -31,7 +31,7 @@
                                              <td class="font-weight-black">${{totalDeVentas.toFixed(2)}}</td>
                                           </tr>
                                           <tr>
-                                             <td>menos</td>
+                                             <td>menos:</td>
                                              <td></td>
                                              <td></td>
                                           </tr>
@@ -47,9 +47,66 @@
                                              <td class="font-weight-black">utilidad Bruta</td>
                                              <td></td>
                                              <td class="font-weight-black"> 
-                                                  ${{ ( parseFloat( totalDeVentas - totalCostosDeVentas ).toFixed(2) ) }}
+                                                  ${{ utilidadBruta }}
                                              </td>
                                           </tr>
+                                          <tr>
+                                             <td>menos:</td>
+                                             <td></td>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <td class="font-weight-black"> Gastos de Operacion </td>
+                                             <td></td>
+                                             <td> {{ gastosDeOperacionTotal }} </td>
+                                          </tr>
+                                          <!--GASTOS DE ADMINISTRACION-->
+                                          <tr v-if="operacioGastosAdministracion.length > 0">
+                                             <td class="font-weight-black">Gastos de Administracion</td>
+                                             <td></td>
+                                             <td>{{ totalGastosDeAdministracion }}</td>
+                                          </tr>
+                                          <tr v-if="operacioGastosAdministracion.length > 0" v-for="( gasto, index ) in operacioGastosAdministracion" :key="'gastosOperacion'+index">
+                                             <td>{{gasto["titulo"]}}</td>
+                                             <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
+                                             <td></td>
+                                          </tr>
+                                          <!--GASTOS DE VENTA-->
+                                          <tr v-if="operacionGastosDeVenta.length > 0">
+                                             <td class="font-weight-black">Gastos de Administracion</td>
+                                             <td></td>
+                                             <td>{{ totalGastosDeVenta }}</td>
+                                          </tr>
+                                          <tr v-if="operacionGastosDeVenta.length > 0" v-for="( gasto, index ) in operacionGastosDeVenta" :key="'gastosdeventa'+index">
+                                              <td>{{gasto["titulo"]}}</td>
+                                             <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
+                                             <td></td
+                                          </tr>
+
+                                          <!--GASTOS DE REBAJA Y DEVOLUCIONES SOBRE VENTAS-->
+                                          <tr v-if="operacionesRebajaYDevolucionesSobreVentas.length > 0">
+                                             <td class="font-weight-black">Gastos de Administracion</td>
+                                             <td></td>
+                                             <td>{{ totalGastosDeVenta }}</td>
+                                          </tr>
+                                          <tr v-if="operacionesRebajaYDevolucionesSobreVentas.length > 0" v-for="( gasto, index ) in operacionesRebajaYDevolucionesSobreVentas" :key="'rebaja'+index">
+                                             <td>{{gasto["titulo"]}}</td>
+                                             <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
+                                             <td></td>
+                                          </tr>
+
+                                          <!--DESCUENTOS SOBRE VENTA-->
+                                          <tr v-if="operacionDescuentoSobreVentas.length > 0">
+                                             <td class="font-weight-black">Gastos de Administracion</td>
+                                             <td></td>
+                                             <td>{{ totalDescuentoSobreVentas }}</td>
+                                          </tr>
+                                          <tr v-if="operacionDescuentoSobreVentas.length > 0" v-for="( gasto, index ) in operacionDescuentoSobreVentas" :key="'descuentos'+index">
+                                             <td>{{gasto["titulo"]}}</td>
+                                             <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
+                                             <td></td>
+                                          </tr>
+ 
                                        </tbody>
                                     </template>
                                  </v-simple-table>
@@ -66,9 +123,36 @@
 <script>
 import AppLayout from "../../../Layouts/AppLayout";
 export default {
-   props:["ventas","parsedRegistros","otrosGastos","otrosProductos","gastosOperativos","totalDeVentas","company","year","totalCostosDeVentas"],
+   props:["ventas","parsedRegistros","otrosGastos","otrosProductos","gastosOperativos","totalDeVentas","company","year","totalCostosDeVentas", "totalGastosDeAdministracion","totalGastoDeOperacion","totalGastosDeVenta","totalRebajayDevolucionSobreVenta","totalDescuentoSobreVentas", "gastosDeOperacion","operacioGastosAdministracion","operacionGastosDeVenta","operacionesRebajaYDevolucionesSobreVentas","operacionDescuentoSobreVentas"],
  components:{
         AppLayout,
     },   
+    methods:{
+       totalPorCuenta( registros ){
+
+          let carry = 0.0; 
+          registros.forEach(registroDeVenta => {
+             console.log( registroDeVenta["debeRubro"]);
+           if( parseFloat(registroDeVenta["debe"]) > 0.0 && registroDeVenta["debeRubro"] ==1 ){
+                     carry += parseFloat( registroDeVenta["debe"] );
+               }else if( parseFloat(registroDeVenta["debe"]) > 0.0 && registroDeVenta["debeRubro"] == 0 ){
+                     carry -= parseFloat(registroDeVenta["debe"] );
+               } else if( parseFloat( registroDeVenta["haber"] ) > 0.0 && registroDeVenta["haberRubro"] == 1 ){
+                     carry += parseFloat( registroDeVenta["haber"] );
+               }else if ( parseFloat( registroDeVenta["haber"] ) > 0.0 && registroDeVenta["haberRubro"] == 0 ){
+                     carry -= parseFloat( registroDeVenta["haber"] );
+               }  
+          });
+          return carry.toFixed( 2 );
+       }
+    },
+   computed:{
+      utilidadBruta(){
+         return ( parseFloat( this.totalDeVentas - this.totalCostosDeVentas ).toFixed(2) );
+      },
+      gastosDeOperacionTotal(){
+         return ( this.totalGastoDeOperacion + this.totalGastosDeAdministracion + this.totalGastosDeVenta+ this.totalRebajayDevolucionSobreVenta + this.totalDescuentoSobreVentas ).toFixed(2);
+      }
+   }
 }
 </script>

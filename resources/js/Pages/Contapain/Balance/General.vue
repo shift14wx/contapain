@@ -32,7 +32,7 @@
                            </tr> 
                             <tr
                             v-for="(rubro, index) in registros"
-                            :key="'rubroRegistroActCorr'+index"
+                            :key="'activocorrientetotal'+index"
                             v-if="rubro.id_clasificacion == 1"
                             >
                             <td>{{ rubro.titulo }}</td>
@@ -44,7 +44,7 @@
                            </tr> 
                            <tr
                             v-for="(rubro, index) in registros"
-                            :key="'rubroRegistroActCorr'+index"
+                            :key="'activonocorrientetotal'+index"
                             v-if="rubro.id_clasificacion == 2"
                             >
                             <td>{{ rubro.titulo }}</td>
@@ -56,7 +56,7 @@
                             </tr>
                             <tr
                             v-for="(rubro, index) in registros"
-                            :key="'rubroRegistroActCorr'+index"
+                            :key="'pc'+index"
                             v-if="rubro.id_clasificacion == 3"
                             >
                             <td>{{ rubro.titulo }}</td>
@@ -68,7 +68,7 @@
                             </tr>
                             <tr
                             v-for="(rubro, index) in registros"
-                            :key="'rubroRegistroActCorr'+index"
+                            :key="'pasivocirreinte'+index"
                             v-if="rubro.id_clasificacion == 4"
                             >
                             <td>{{ rubro.titulo }}</td>
@@ -83,7 +83,7 @@
                             <tr>
                             <tr
                             v-for="(rubro, index) in registros"
-                            :key="'rubroRegistroActCorr'+index"
+                            :key="'patrimoniocontribuido'+index"
                             v-if="rubro.id_clasificacion == 5"
                             >
                             <td>{{ rubro.titulo }}</td>
@@ -94,7 +94,7 @@
                             <tr>
                             <tr
                             v-for="(rubro, index) in registros"
-                            :key="'rubroRegistroActCorr'+index"
+                            :key="'patrimonio'+index"
                             v-if="rubro.id_clasificacion == 6"
                             >
                             <td>{{ rubro.titulo }}</td>
@@ -140,8 +140,7 @@ export default{
         // una vez el componente mayorizacion termine de realizar todas las tareas necesarias para armar el balance de comprobacion, entonces enviara los datos a este componente parsedRegistros
         // asin se podra hacer el balance general en este componente
         catchDataSet(val){
-            this.dataset = val;
-            console.log("info:",val);      
+            this.dataset = val;    
         },
         haberOdeber( index ){
             var debeOhaber = parseFloat( this.dataset.totales[index].debe ) || parseFloat( this.dataset.totales[index].haber );
@@ -155,7 +154,7 @@ export default{
         activoCorrienteTotal(){
             if(this.dataset){
                 var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 1 );
-                return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ).toFixed(2) : 0.0
+                return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ) : 0.0
             }else{
                 return null;
             }

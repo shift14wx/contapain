@@ -16,10 +16,10 @@
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" data-app>
-
+                            {{rubros_registro.length}}
                         <v-container>
                             <v-row>
-                                <v-col v-for="( rubro, index ) in rubros_registro" :key="index" lg="4" md="6" sm="6" xs="12">
+                                <v-col v-for="( rubro, index ) in rubros_registro" :key="'rubro'+index" lg="4" md="6" sm="6" xs="12">
                                     <v-card>
                                         <v-card-title>{{rubro.titulo}}</v-card-title>
                                         <v-card-subtitle> {{ rubro.id_detalle_concepto }} </v-card-subtitle>
@@ -46,7 +46,7 @@
                                                 <tbody>
                                                     <tr
                                                     v-for="(registro, indexRegistro) in rubro.registros"
-                                                    :key="registro.id_registro"
+                                                    :key="indexRegistro+registro.id_registro"
                                                     :class="{'d-none':( noMostrar == registro.id_registro )}"
                                                     >
                                                     <td>
@@ -111,7 +111,7 @@
 
                                                           <tr
                                                             v-for="( rubro, index ) in rubros_registro"
-                                                            :key="rubro.id_detalle_concepto"
+                                                            :key="index+rubro.id_detalle_concepto"
                                                             >
                                                                 <td class="text-center">{{ rubro.id_detalle_concepto }}</td>
                                                                 <td class="text-center">{{ rubro.titulo }}</td>

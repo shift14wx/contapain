@@ -50,9 +50,14 @@ class balanceGeneralController extends Controller
         $ventas = [];
         $otrosGastos = [];
         $otrosProductos = [];
-        $gastosOperativos = [];
+        $gastosFinancieros = [];
+        $gastosDeOperacion = [];
+        $subOperacionGastosVentas = [];
+        $subOperacionesGastosAdministracion=[];
+        $subOperacionesRebajaYDevolucionesSobreVentas=[];
+        $SubOperacionDescuentoSobreVentas = [];
 
-        $registrosCollection->each(function ($registro) use ( &$ventas, &$costoDeVenta, &$otrosGastos, &$otrosProductos, &$gastosOperativos )
+        $registrosCollection->each(function ($registro) use ( &$ventas, &$costoDeVenta, &$otrosGastos, &$otrosProductos, &$gastosFinancieros, &$gastosDeOperacion, &$subOperacionGastosVentas, &$subOperacionesGastosAdministracion, &$subOperacionesRebajaYDevolucionesSobreVentas, &$SubOperacionDescuentoSobreVentas )
         {
             
             switch ($registro["id_detalle_concepto"]) {
@@ -70,14 +75,129 @@ class balanceGeneralController extends Controller
                 break;
                 case 5201:
                     array_push( $otrosProductos, $registro );
+                case $this->helpers->startsWith($registro["id_detalle_concepto"],"4301"):
+                    array_push( $gastosFinancieros, $registro );
+                break;
+                case 42:
+                    array_push( $gastosDeOperacion, $registro );
+                break;
+                case $this->helpers->startsWith($registro["id_detalle_concepto"],"4201"):
+                    array_push( $subOperacionesGastosAdministracion ,$registro );
+                break;
+                case 4202:
+                    array_push( $subOperacionGastosVentas, $registro );
+                break;
+                case 4203:
+                    array_push( $subOperacionesRebajaYDevolucionesSobreVentas, $registro );
+                break;
+                case 4204:
+                    array_push( $SubOperacionDescuentoSobreVentas, $registro );
+                break;
                 
                 default:
-                    if( $this->helpers->startsWith( strval( $registro["id_detalle_concepto"] ), "42" ) ){
-                        array_push( $gastosOperativos, $registro);
-                    }
                 break;
             }
-        });
+        })
+        ;// sacando gastos de operacion pero con sus padres e hijos para los totales y la muestra total en el estado de EstadoDeResultado
+        
+        $totalGastoDeOperacion =0.0;
+        if( count( $gastosDeOperacion ) >0  ){
+            
+        $totalGastoDeOperacion = collect($gastosDeOperacion[0]["registros"]);
+        $totalGastoDeOperacion = $totalGastoDeOperacion->reduce( function ($carry,$registroDeVenta)
+            {
+               if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                    return $carry + $registroDeVenta["debe"];
+               }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                   return $carry - $registroDeVenta["debe"];
+               } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                    return $carry + $registroDeVenta["haber"];
+               }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                    return $carry - $registroDeVenta["haber"];
+               }
+            } 
+        );
+
+        }
+        $totalGastosAdministracion =0.0;
+        if( count( $subOperacionesGastosAdministracion ) >0  ){
+            
+        $totalGastosAdministracion = collect($subOperacionesGastosAdministracion[0]["registros"]);
+        $totalGastosAdministracion = $totalGastosAdministracion->reduce( function ($carry,$registroDeVenta)
+            {
+               if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                    return $carry + $registroDeVenta["debe"];
+               }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                   return $carry - $registroDeVenta["debe"];
+               } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                    return $carry + $registroDeVenta["haber"];
+               }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                    return $carry - $registroDeVenta["haber"];
+               }
+            } 
+        );
+
+        }
+
+        $totalGastosDeVenta =0.0;
+        if( count( $subOperacionGastosVentas ) >0  ){
+            
+        $totalGastosDeVenta = collect($subOperacionGastosVentas[0]["registros"]);
+        $totalGastosDeVenta = $totalGastosDeVenta->reduce( function ($carry,$registroDeVenta)
+            {
+               if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                    return $carry + $registroDeVenta["debe"];
+               }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                   return $carry - $registroDeVenta["debe"];
+               } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                    return $carry + $registroDeVenta["haber"];
+               }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                    return $carry - $registroDeVenta["haber"];
+               }
+            } 
+        );
+
+        }
+
+        $totalRebajaYDevolucionesSobreVenta =0.0;
+        if( count( $subOperacionesRebajaYDevolucionesSobreVentas) >0  ){
+            
+        $totalRebajaYDevolucionesSobreVenta = collect($ventas[0]["registros"]);
+        $totalRebajaYDevolucionesSobreVenta = $totalRebajaYDevolucionesSobreVenta->reduce( function ($carry,$registroDeVenta)
+            {
+               if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                    return $carry + $registroDeVenta["debe"];
+               }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                   return $carry - $registroDeVenta["debe"];
+               } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                    return $carry + $registroDeVenta["haber"];
+               }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                    return $carry - $registroDeVenta["haber"];
+               }
+            } 
+        );
+
+        }
+
+        $totalDescuentoSobreVentas =0.0;
+        if( count( $SubOperacionDescuentoSobreVentas ) >0  ){
+            
+        $totalDescuentoSobreVentas = collect($ventas[0]["registros"]);
+        $totalDescuentoSobreVentas = $totalDescuentoSobreVentas->reduce( function ($carry,$registroDeVenta)
+            {
+               if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                    return $carry + $registroDeVenta["debe"];
+               }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                   return $carry - $registroDeVenta["debe"];
+               } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                    return $carry + $registroDeVenta["haber"];
+               }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                    return $carry - $registroDeVenta["haber"];
+               }
+            } 
+        );
+
+        }
         // sacando el total de ventas en lugar de hacearlo en el front-end
         $totalVentas = 0.0;
         if( count($ventas) >0 ){
@@ -114,6 +234,7 @@ class balanceGeneralController extends Controller
             } 
         );
     }
+
 // tomando nombre de la compañia selecionada mediante la cookie
 
 $company = Company::find( $request->cookie("company") )->get()[0]["titulo"];
@@ -123,10 +244,23 @@ $company = Company::find( $request->cookie("company") )->get()[0]["titulo"];
             "ventas" => $ventas,
             "otrosGastos" => $otrosGastos,
             "otrosProductos" => $otrosProductos,
-            "gastosOperativos" => $gastosOperativos,
+            "gastosOperativos" => $gastosDeOperacion,
             "totalDeVentas" => $totalVentas,
             "costosDeVentas" => $costoDeVenta,
             "totalCostosDeVentas" => $totalVentascostos,
+
+            "gastosDeOperacion" => $gastosDeOperacion,
+            "operacioGastosAdministracion" => $subOperacionesGastosAdministracion,
+            "operacionGastosDeVenta" => $subOperacionGastosVentas,
+            "operacionesRebajaYDevolucionesSobreVentas" => $subOperacionesRebajaYDevolucionesSobreVentas,
+            "operacionDescuentoSobreVentas" => $SubOperacionDescuentoSobreVentas,
+
+            "totalGastosDeAdministracion" => $totalGastosAdministracion,
+            "totalGastoDeOperacion" => $totalGastoDeOperacion,
+            "totalGastosDeVenta" => $totalGastosDeVenta,
+            "totalRebajayDevolucionSobreVenta" => $totalRebajaYDevolucionesSobreVenta,
+            "totalDescuentoSobreVentas" => $totalDescuentoSobreVentas,
+
             "company" => $company,
             "year" => Carbon::now()->toDate()->format("Y")
         ]);

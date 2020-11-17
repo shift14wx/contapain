@@ -22,7 +22,7 @@ class CatalogodeCuentasController extends Controller
 
             $tabla = $catalogoCollection->get('tabla');
 
-            $objectWhitTable = $catalogoCollection->only("titulo", "tabla", "id_$tabla", "haber", "debe" );
+            $objectWhitTable = $catalogoCollection->only("titulo", "tabla", "id_$tabla", "haber", "debe", "id_clasificacion" );
             $this->insertInRepectiveTable( $objectWhitTable );
 
             $id = $catalogoCollection->get("id_$tabla");
@@ -116,6 +116,7 @@ class CatalogodeCuentasController extends Controller
          if( $model!=null && strtolower( $object->get("tabla") ) != "rubro" ){
             $realObject = $object->except("tabla");
             $realObject = $realObject->all();
+            //dd($realObject);
             $model->updateOrCreate(  $object->only("titulo")->toArray() , $realObject );
            
          }
