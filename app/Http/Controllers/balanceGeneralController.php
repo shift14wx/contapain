@@ -275,7 +275,8 @@ class balanceGeneralController extends Controller
 
 // tomando nombre de la compañia selecionada mediante la cookie
 
-$company = Company::find( $request->cookie("company") )->get()[0]["titulo"];
+$company = Company::find( $request->cookie("company") )->titulo;
+
 
       return \Inertia\Inertia::render("Contapain/EstadoResultado/EstadoDeResultado",[
             "parsedRegistros" => $parsedRegistros,
