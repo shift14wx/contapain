@@ -13,4 +13,6 @@ public function parseRubros( $rubros, &$parsedRubros, $rubroActivos = [] );
 
 public function getAsientosFromADate( Request $request, $date= null, $anually = false);
 
+public function startsWith ($string, $startString);
+
 }

@@ -99,4 +99,11 @@ public function extractRegistros( $asientos,&$parsedRubros )
             ["id_company","=",$request->cookie('company') ]
         ]  )->get()->toArray();
     }
+
+    
+    function startsWith ($string, $startString) 
+    { 
+        $len = strlen($startString); 
+        return (substr($string, 0, $len) === $startString); 
+    } 
 }
