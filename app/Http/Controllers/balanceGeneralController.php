@@ -162,7 +162,7 @@ class balanceGeneralController extends Controller
         $totalRebajaYDevolucionesSobreVenta =0.0;
         if( count( $subOperacionesRebajaYDevolucionesSobreVentas) >0  ){
             
-        $totalRebajaYDevolucionesSobreVenta = collect($ventas[0]["registros"]);
+        $totalRebajaYDevolucionesSobreVenta = collect($subOperacionesRebajaYDevolucionesSobreVentas[0]["registros"]);
         $totalRebajaYDevolucionesSobreVenta = $totalRebajaYDevolucionesSobreVenta->reduce( function ($carry,$registroDeVenta)
             {
                if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
@@ -182,7 +182,7 @@ class balanceGeneralController extends Controller
         $totalDescuentoSobreVentas =0.0;
         if( count( $SubOperacionDescuentoSobreVentas ) >0  ){
             
-        $totalDescuentoSobreVentas = collect($ventas[0]["registros"]);
+        $totalDescuentoSobreVentas = collect($SubOperacionDescuentoSobreVentas[0]["registros"]);
         $totalDescuentoSobreVentas = $totalDescuentoSobreVentas->reduce( function ($carry,$registroDeVenta)
             {
                if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
@@ -235,6 +235,44 @@ class balanceGeneralController extends Controller
         );
     }
 
+    // otros gastos
+        $otrosGastosTotal = 0.0;
+    if( count($otrosGastos) > 0 ){
+        $otrosGastosTotal = collect($otrosGastos[0]["registros"]);
+        $otrosGastosTotal = $otrosGastosTotal->reduce( function ($carry,$registroDeVenta)
+            {
+               if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                    return $carry + $registroDeVenta["debe"];
+               }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                   return $carry - $registroDeVenta["debe"];
+               } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                    return $carry + $registroDeVenta["haber"];
+               }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                    return $carry - $registroDeVenta["haber"];
+               }
+            } 
+        );
+    }
+
+     // otros productos
+     $otrosProductostotal = 0.0;
+     if( count($otrosProductos) > 0 ){
+         $otrosProductostotal = collect($otrosProductos[0]["registros"]);
+         $otrosProductostotal = $otrosProductostotal->reduce( function ($carry,$registroDeVenta)
+             {
+                if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] ){
+                     return $carry + $registroDeVenta["debe"];
+                }else if( floatval($registroDeVenta["debe"]) > 0.0 && $registroDeVenta["debeRubro"] == 0 ){
+                    return $carry - $registroDeVenta["debe"];
+                } else if( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] ){
+                     return $carry + $registroDeVenta["haber"];
+                }else if ( floatval( $registroDeVenta["haber"] ) > 0.0 && $registroDeVenta["haberRubro"] == 0 ){
+                     return $carry - $registroDeVenta["haber"];
+                }
+             } 
+         );
+     }
+
 // tomando nombre de la compañia selecionada mediante la cookie
 
 $company = Company::find( $request->cookie("company") )->get()[0]["titulo"];
@@ -260,6 +298,10 @@ $company = Company::find( $request->cookie("company") )->get()[0]["titulo"];
             "totalGastosDeVenta" => $totalGastosDeVenta,
             "totalRebajayDevolucionSobreVenta" => $totalRebajaYDevolucionesSobreVenta,
             "totalDescuentoSobreVentas" => $totalDescuentoSobreVentas,
+
+
+            "otrosGastosTotal" => $otrosGastosTotal,
+            "otrosProductostotal" => $otrosProductostotal,
 
             "company" => $company,
             "year" => Carbon::now()->toDate()->format("Y")

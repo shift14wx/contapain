@@ -112,6 +112,67 @@
                                              <td class="font-weight-black"> {{ ( utilidadBruta -gastosDeOperacionTotal ).toFixed(2) }} </td>
                                           </tr>
  
+                                          <tr>
+                                             <td class="font-weight-black">Otros gastos y/o Productos</td>
+                                             <td></td>
+                                             <td class="font-weight-black"> ${{ (otrosGastosTotal + otrosProductostotal).toFixed(2) }} </td>
+                                          </tr>
+
+                                          <tr>
+                                             <td>Otros Productos</td>
+                                             <td>${{ otrosProductostotal.toFixed(2) }}</td>
+                                          </tr>
+
+                                          <tr>
+                                             <td>Otros Gastos</td>
+                                             <td>${{ otrosGastosTotal.toFixed(2) }}</td>
+                                          </tr>
+
+                                          <tr>
+                                             <td class="font-weight-black">Utilidad antes de impuesto y reserva (UAIR)</td>
+                                             <td></td>
+                                             <td class="font-weight-black"><hr/> <br/> ${{ ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ).toFixed(2) }}</td>
+                                          </tr>
+
+                                          <tr>
+                                             <td>menos:</td>
+                                             <td></td>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <td class="font-weight-black">Reserva legal (7% * Utilidad antes de impuesto + reserva (UAIR))</td>
+                                             <td></td>
+                                             <td class="font-weight-black"> ${{ ( 0.07 * ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) ).toFixed(2) }} </td>
+                                          </tr>
+
+                                          <tr>
+                                             <td class="font-weight-black">Utilidad antes de impuesto (UAI)</td>
+                                             <td></td>
+                                             <td class="font-weight-black"><hr/><br/>${{( ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) -  ( 0.07 * ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) ) ).toFixed(2)}} </td>
+                                          </tr>
+
+                                          <tr>
+                                             <td>menos:</td>
+                                             <td></td>
+                                             <td></td>
+                                          </tr>
+
+                                          <tr>
+                                             <td class="font-weight-black">ISR ( 30% * Utilidad antes de impuesto (UAI) )</td>
+                                             <td></td>
+                                             <td class="font-weight-black">
+
+                                                {{ ( ( ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) -  ( 0.07 * ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) ) ) * 0.3).toFixed(2) }}
+
+                                             </td>
+                                          </tr>
+
+                                          <tr>
+                                             <td class="font-weight-black">Utilidad del ejercicio</td>
+                                             <td></td>
+                                             <td class="font-weight-black"><hr/> <br/> ${{ ( ( ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) -  ( 0.07 * ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) ) ) - ( ( ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) -  ( 0.07 * ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ) ) ) * 0.3) ) .toFixed(2) }} </td>
+                                          </tr>
+
                                        </tbody>
                                     </template>
                                  </v-simple-table>
@@ -128,7 +189,7 @@
 <script>
 import AppLayout from "../../../Layouts/AppLayout";
 export default {
-   props:["ventas","parsedRegistros","otrosGastos","otrosProductos","gastosOperativos","totalDeVentas","company","year","totalCostosDeVentas", "totalGastosDeAdministracion","totalGastoDeOperacion","totalGastosDeVenta","totalRebajayDevolucionSobreVenta","totalDescuentoSobreVentas", "gastosDeOperacion","operacioGastosAdministracion","operacionGastosDeVenta","operacionesRebajaYDevolucionesSobreVentas","operacionDescuentoSobreVentas"],
+   props:["ventas","parsedRegistros","otrosGastos","otrosGastosTotal","otrosProductostotal","otrosProductos","gastosOperativos","totalDeVentas","company","year","totalCostosDeVentas", "totalGastosDeAdministracion","totalGastoDeOperacion","totalGastosDeVenta","totalRebajayDevolucionSobreVenta","totalDescuentoSobreVentas", "gastosDeOperacion","operacioGastosAdministracion","operacionGastosDeVenta","operacionesRebajaYDevolucionesSobreVentas","operacionDescuentoSobreVentas"],
  components:{
         AppLayout,
     },   
