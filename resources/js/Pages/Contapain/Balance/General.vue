@@ -28,7 +28,7 @@
                             </tr>
                            <tr>
                                 <td colspan="2" class="font-weight-black">Activo Corriente</td>
-                                <td class="font-weight-black"> ${{ activoCorrienteTotal }} </td>
+                                <td class="font-weight-black">${{ activoCorrienteTotal }} </td>
                            </tr> 
                             <tr
                             v-for="(rubro, index) in registros"
@@ -154,7 +154,11 @@ export default{
         activoCorrienteTotal(){
             if(this.dataset){
                 var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 1 );
-                return activosCorrientes.length > 0 ? activosCorrientes.reduce( (a,b)=> [ ( parseFloat(a.debe) || parseFloat(a.haber) ) ] + [ ( parseFloat(b.haber) || parseFloat(b.debe) ) ] ) : 0.0
+                var totales = 0.0;
+                activosCorrientes.forEach(registro => {
+                    totales+=( parseFloat( registro["debe"] ) + parseFloat( registro["haber"] ) );
+                });
+                return totales.toFixed(2);
             }else{
                 return null;
             }
