@@ -155,7 +155,7 @@ export default{
     },
     computed:{
         match(){
-            return 
+            return (this.activoCorrienteTotal+ this.activoNoCorrienteTotal) == ( this.pasivoCorrienteTotal+ this.pasivoNoCorrienteTotal + this.patrimonioTotal ); 
         },
         activoCorrienteTotal(){
             if(this.dataset){
