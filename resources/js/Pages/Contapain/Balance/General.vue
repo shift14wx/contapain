@@ -12,6 +12,7 @@
                 <v-card-title>Balance General</v-card-title>
                 <v-card-subtitle>  </v-card-subtitle>
                 <v-card-text>
+                    {{registros}}
                     <v-simple-table id="balanceGeneral">
                         <template v-slot:default>
                         <thead>

@@ -493,8 +493,9 @@ export default {
              this.editedItem.json = true; // esto es para que en el endpoint entienda que necesitamos una respuesta json, esto es mannual no lo hace laravel
              this.editedItem.id_rubro = this.editedItem.id_detalle_concepto.toString().substr(0,1);
              this.editedItem.id_asiento = this.idAsiento;
-             let index = this.catalogoCuentasParsed.findIndex(cuenta=>cuenta.id == 11);
+             let index = this.catalogoCuentasParsed.findIndex(cuenta=>cuenta.id == this.editedItem.id_detalle_concepto );
              this.editedItem.id_clasificacion = this.catalogo_cuentas[ index ].id_clasificacion;
+             console.log( this.editedItem );
                 return fetch('/registros',{
                         method: 'POST',
                         headers: {
@@ -519,8 +520,10 @@ export default {
                     this.editedItem.json = true; // esto es para que en el endpoint entienda que necesitamos una respuesta json, esto es mannual no lo hace laravel
                     this.editedItem.id_rubro = this.editedItem.id_detalle_concepto.toString().substr(0,1);
                     this.editedItem.id_asiento = this.idAsiento;
-                    let index = this.catalogoCuentasParsed.findIndex(cuenta=>cuenta.id == 11);
+                    let index = this.catalogoCuentasParsed.findIndex(cuenta=>cuenta.id == this.editedItem.id_detalle_concepto);
+                    console.log( this.editedItem.id_detalle_concepto );
                     this.editedItem.id_clasificacion = this.catalogo_cuentas[ index ].id_clasificacion;
+                    console.log(this.editedItem );
                 return fetch(`/registros/${this.editedItem.id_registro}`,{
                         method: 'PATCH',
                         headers: {
