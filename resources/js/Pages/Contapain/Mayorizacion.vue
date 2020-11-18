@@ -16,7 +16,6 @@
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" data-app>
-                            {{rubros_registro.length}}
                         <v-container>
                             <v-row>
                                 <v-col v-for="( rubro, index ) in rubros_registro" :key="'rubro'+index" lg="4" md="6" sm="6" xs="12">
