@@ -28,7 +28,7 @@
                                           <tr>
                                              <td class="font-weight-black">Ventas</td>
                                              <td></td>
-                                             <td class="font-weight-black">${{totalDeVentas.toFixed(2)}}</td>
+                                             <td class="font-weight-black"> ${{totalDeVentas.toFixed(2)}}</td>
                                           </tr>
                                           <tr>
                                              <td>menos:</td>

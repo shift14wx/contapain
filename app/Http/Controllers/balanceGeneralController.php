@@ -284,7 +284,7 @@ $company = Company::find( $request->cookie("company") )->titulo;
             "otrosGastos" => $otrosGastos,
             "otrosProductos" => $otrosProductos,
             "gastosOperativos" => $gastosDeOperacion,
-            "totalDeVentas" => $totalVentas,
+            "totalDeVentas" => abs( $totalVentas ),
             "costosDeVentas" => abs( $costoDeVenta ),
             "totalCostosDeVentas" => abs( $totalVentascostos ),
 
