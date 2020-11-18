@@ -853,7 +853,7 @@
 						},
 						{
 							"id_sub_rubro_hijo": "3104",
-							"titulo": "Utilidades del ejercico",
+							"titulo": "Utilidades del ejercicio",
 							"tabla": "sub_rubro_hijo",
 							"id_clasificacion": "5",
 							"id_sub_rubro_padre": "31"

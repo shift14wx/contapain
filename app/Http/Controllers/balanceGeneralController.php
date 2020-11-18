@@ -285,24 +285,24 @@ $company = Company::find( $request->cookie("company") )->titulo;
             "otrosProductos" => $otrosProductos,
             "gastosOperativos" => $gastosDeOperacion,
             "totalDeVentas" => $totalVentas,
-            "costosDeVentas" => $costoDeVenta,
-            "totalCostosDeVentas" => $totalVentascostos,
+            "costosDeVentas" => abs( $costoDeVenta ),
+            "totalCostosDeVentas" => abs( $totalVentascostos ),
 
-            "gastosDeOperacion" => $gastosDeOperacion,
-            "operacioGastosAdministracion" => $subOperacionesGastosAdministracion,
-            "operacionGastosDeVenta" => $subOperacionGastosVentas,
-            "operacionesRebajaYDevolucionesSobreVentas" => $subOperacionesRebajaYDevolucionesSobreVentas,
-            "operacionDescuentoSobreVentas" => $SubOperacionDescuentoSobreVentas,
+            "gastosDeOperacion" => abs( $gastosDeOperacion ),
+            "operacioGastosAdministracion" => abs( $subOperacionesGastosAdministracion ),
+            "operacionGastosDeVenta" => abs( $subOperacionGastosVentas ),
+            "operacionesRebajaYDevolucionesSobreVentas" => abs( $subOperacionesRebajaYDevolucionesSobreVentas),
+            "operacionDescuentoSobreVentas" => abs( $SubOperacionDescuentoSobreVentas ),
 
-            "totalGastosDeAdministracion" => $totalGastosAdministracion,
-            "totalGastoDeOperacion" => $totalGastoDeOperacion,
-            "totalGastosDeVenta" => $totalGastosDeVenta,
-            "totalRebajayDevolucionSobreVenta" => $totalRebajaYDevolucionesSobreVenta,
-            "totalDescuentoSobreVentas" => $totalDescuentoSobreVentas,
+            "totalGastosDeAdministracion" => abs( $totalGastosAdministracion ),
+            "totalGastoDeOperacion" =>abs( $totalGastoDeOperacion ),
+            "totalGastosDeVenta" => abs($totalGastosDeVenta ),
+            "totalRebajayDevolucionSobreVenta" =>abs( $totalRebajaYDevolucionesSobreVenta ),
+            "totalDescuentoSobreVentas" => abs($totalDescuentoSobreVentas ),
 
 
-            "otrosGastosTotal" => $otrosGastosTotal,
-            "otrosProductostotal" => $otrosProductostotal,
+            "otrosGastosTotal" =>abs( $otrosGastosTotal ),
+            "otrosProductostotal" =>abs( $otrosProductostotal ),
 
             "company" => $company,
             "year" => Carbon::now()->toDate()->format("Y")
