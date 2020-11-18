@@ -31,6 +31,9 @@
                                              <td class="font-weight-black"> ${{totalDeVentas.toFixed(2)}}</td>
                                           </tr>
                                           <tr>
+                                             <td class="grey--text">Total de Ventas: &nbsp; ${{ totalDeVentas.toFixed(2) }}</td>
+                                          </tr>
+                                          <tr>
                                              <td>menos:</td>
                                              <td></td>
                                              <td></td>
@@ -42,6 +45,9 @@
                                                 ${{totalCostosDeVentas.toFixed(2)}}
                                                 <hr style="background-color:black;"/>
                                              </td>
+                                          </tr>
+                                          <tr>
+                                             <td class="grey--text">Total de Costo de Ventas: &nbsp; ${{totalCostosDeVentas.toFixed(2)}}</td>
                                           </tr>
                                           <tr>
                                              <td class="font-weight-black">utilidad Bruta</td>
@@ -70,6 +76,9 @@
                                              <td>${{ totalPorCuenta( gasto["registros"] ) }}</td>
                                              <td></td>
                                           </tr>
+                                          <tr  v-if="operacioGastosAdministracion.length > 0">
+                                             <td class="grey--text">total de Gastos de Administración: &nbsp; ${{ totalGastosDeAdministracion }}</td>
+                                          </tr>
                                           <!--GASTOS DE VENTA-->
                                           <tr v-if="operacionGastosDeVenta.length > 0">
                                              <td>Gastos de Venta <br/> <hr/></td>
@@ -81,12 +90,14 @@
                                              <td>${{ totalPorCuenta( gasto["registros"] ) }}</td>
                                              <td></td>
                                           </tr>
-
+                                          <tr v-if="operacionGastosDeVenta.length > 0">
+                                             <td class="grey--text">Total de Gastos de Ventas: &nbsp; ${{ totalGastosDeVenta }}</td>
+                                          </tr>
                                           <!--GASTOS DE REBAJA Y DEVOLUCIONES SOBRE VENTAS-->
                                           <tr v-if="operacionesRebajaYDevolucionesSobreVentas.length > 0">
                                              <td >Rebaja y devolución sobre las ventas <br/> <hr/></td>
                                              <td></td>
-                                             <td>${{ totalGastosDeVenta }}</td>
+                                             <td>${{ totalRebajayDevolucionSobreVenta }}</td>
                                           </tr>
                                           <tr v-if="operacionesRebajaYDevolucionesSobreVentas.length > 0" v-for="( gasto, index ) in operacionesRebajaYDevolucionesSobreVentas" :key="'rebaja'+index">
                                              <td>{{gasto["titulo"]}}</td>
@@ -94,6 +105,9 @@
                                              <td></td>
                                           </tr>
 
+                                          <tr v-if="operacionesRebajaYDevolucionesSobreVentas.length > 0">
+                                             <td class="grey--text">Total de Rebaja y devoluciones sobre Ventas: &nbsp; ${{ totalRebajayDevolucionSobreVenta }}</td>
+                                          </tr>
                                           <!--DESCUENTOS SOBRE VENTA-->
                                           <tr v-if="operacionDescuentoSobreVentas.length > 0">
                                              <td>Descuento Sobre Ventas <br/> <hr/></td>
@@ -105,7 +119,9 @@
                                              <td>{{ totalPorCuenta( gasto["registros"] ) }}</td>
                                              <td></td>
                                           </tr>
-
+                                          <tr v-if="operacionDescuentoSobreVentas.length > 0">
+                                             <td>Total de Descuentos sobre Ventas: &nbsp; ${{ totalDescuentoSobreVentas }}</td>
+                                          </tr>
                                           <tr>
                                              <td class="font-weight-black">Utilidad de Operación</td>
                                              <td></td>
@@ -133,7 +149,9 @@
                                              <td></td>
                                              <td class="font-weight-black"><hr/> <br/> ${{ ( ( utilidadBruta -gastosDeOperacionTotal ) - ( otrosGastosTotal + otrosProductostotal ) ).toFixed(2) }}</td>
                                           </tr>
-
+                                          <tr>
+                                             <td class="grey--text">Total de Otros Gastos y/o Productos: &nbsp; ${{ (otrosGastosTotal+ otrosProductostotal).toFixed(2)}}</td>
+                                          </tr>
                                           <tr>
                                              <td>menos:</td>
                                              <td></td>
