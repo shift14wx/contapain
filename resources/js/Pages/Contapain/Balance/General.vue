@@ -12,7 +12,6 @@
                 <v-card-title>Balance General</v-card-title>
                 <v-card-subtitle>  </v-card-subtitle>
                 <v-card-text>
-                    {{registros}}
                     <v-simple-table id="balanceGeneral">
                         <template v-slot:default>
                         <thead>
@@ -105,6 +104,9 @@
                                 <td colspan="2" class="font-weight-black"> Total Pasivo + Patrimonio</td>
                                 <td class="font-weight-black"> ${{ ( parseFloat(pasivoCorrienteTotal)+parseFloat(pasivoNoCorrienteTotal)+parseFloat(patrimonioTotal) ).toFixed(2) }} </td>
                             </tr>
+                            <tr>
+                                <td colspan="3" class="text-center font-weight-black"> EL ACTIVO {{ match ? '' : 'NO' }} ES IGUAL A ( PASIVO + PATRIMONIO ) </td>
+                            </tr>
                         </tbody>
                         </template>
                     </v-simple-table>
@@ -152,6 +154,9 @@ export default{
         console.log("done");
     },
     computed:{
+        match(){
+            return 
+        },
         activoCorrienteTotal(){
             if(this.dataset){
                 var activosCorrientes = this.dataset.totales.filter( ( results,index )=> this.registros[index].id_clasificacion == 1 );
