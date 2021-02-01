@@ -91,6 +91,7 @@ public function extractRegistros( $asientos,&$parsedRubros )
         if($date == null)
         {
             $date = Carbon::now()->toDate()->format("Y-m");
+            dd($date);
         }else{
             $date = $anually ? Carbon::createFromFormat("Y-m-d",$date)->format("Y")  : Carbon::createFromFormat("Y-m-d",$date)->format("Y-m");
         }
