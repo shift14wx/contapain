@@ -40,7 +40,7 @@ return [
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME','cpltcplt2020@gmail.com'),
-            'password' => env('MAIL_PASSWORD','contapain2020'),
+            'password' => env('MAIL_PASSWORD','jwphjipxyxkxpagb'),
             'timeout' => null,
             'auth_mode' => null,
         ],
