@@ -1,0 +1,99 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: contapainuser
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+      target: prod
+    image: contapain-image
+    ports:
+      - 9007:9000
+    expose:
+      - 9003
+    container_name: contapain-app-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    tty: true
+    environment:
+      PHP_IDE_CONFIG:
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./docker-compose/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+    networks:
+      - contapain-app
+
+  #node:
+  #  build:
+  #    context: ./
+  #    dockerfile: docker-compose/node/Dockerfile
+  #    target: dev
+  #  container_name: contapain-app-node
+  #  volumes:
+  #    - ./:/home/node/app
+
+  node:
+    image: node:10
+    container_name: contapain-app-node
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: bash -c "npm install && npm run watch"
+
+
+  nginx:
+    image: nginx:alpine
+    container_name: contapain-app-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - contapain-app
+
+  postgres:
+    container_name: contapain-app-postgres
+    image: postgres:15-alpine3.18
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+      - contapain-postgres:/data/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - contapain-app
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: contapain-app-pgadmin
+    image: dpage/pgadmin4:8.4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - contapain-pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - contapain-app
+    restart: unless-stopped
+
+networks:
+  contapain-app:
+  #driver: bridge
+
+
+volumes:
+  contapain-dbdata:
+  contapain-postgres:
+  contapain-pgadmin:
+

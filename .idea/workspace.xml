@@ -23,7 +23,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e532fee8-2eed-4795-a090-e0b769d1bc3e" name="Default Changelist" comment=":sparkles: proyecto libre de problemas">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose/nginx/contapain.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose/php/conf.d/error_reporting.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose/php/conf.d/xdebug.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme-assets/images/01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme-assets/images/02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme-assets/images/03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme-assets/images/04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme-assets/images/05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +65,7 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="app">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
@@ -178,6 +194,7 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/vendor/reliese/laravel" />
+      <path value="$PROJECT_DIR$/vendor/laravel-lang/lang" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -185,6 +202,9 @@
       <option value="15" />
     </hideBySeverity>
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="1iCtFHwZyshWlMul6n7bOT6Wn3n" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -193,25 +213,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../admitra_main/admitra_backend" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;PHPUnit.CompanyApiTest.executor&quot;: &quot;Run&quot;,
+    &quot;PHPUnit.ExampleTest.executor&quot;: &quot;Run&quot;,
+    &quot;PHPUnit.insertarCatalogoTest.executor&quot;: &quot;Run&quot;,
+    &quot;PHPUnit.insertarCatalogoTest.testExample.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm&quot;: &quot;Docker Compose&quot;,
+    &quot;credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm&quot;: &quot;Docker Compose&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/g14wx/tgs/stocktaking/test_projects/contapain&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\images" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\css" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\images\tivo" />
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\js\tivo" />
-      <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\public\css\tivo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\resources\js\Pages\Contapain" />
@@ -221,11 +254,48 @@
       <recent name="\\wsl$\Ubuntu-20.04\home\ac-04\Documents\contapain\app\documentos\baseDeDatos" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.ExampleTest">
+    <configuration name="CompanyApiTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\APIs\CompanyApiTest" configuration_file="/var/www/phpunit.xml" file="$PROJECT_DIR$/tests/APIs/CompanyApiTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ExampleTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\ExampleTest" configuration_file="/var/www/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/ExampleTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="insertarCatalogoTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="app" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="Tests\Feature\insertarCatalogoTest" configuration_file="/var/www/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/insertarCatalogoTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="insertarCatalogoTest.testExample" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\insertarCatalogoTest" configuration_file="/var/www/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/insertarCatalogoTest.php" method="testExample" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.ExampleTest" />
+        <item itemvalue="PHPUnit.CompanyApiTest" />
+        <item itemvalue="PHPUnit.insertarCatalogoTest.testExample" />
+        <item itemvalue="PHPUnit.insertarCatalogoTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PS-241.14494.237" />
+        <option value="bundled-php-predefined-ba97393d7c68-8f0632a2a215-com.jetbrains.php.sharedIndexes-PS-241.14494.237" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -250,6 +320,11 @@
       <workItem from="1601752029459" duration="22515000" />
       <workItem from="1601831769133" duration="12976000" />
       <workItem from="1601940966813" duration="387000" />
+      <workItem from="1713552538117" duration="9539000" />
+      <workItem from="1713723516312" duration="82000" />
+      <workItem from="1713752407251" duration="1478000" />
+      <workItem from="1713886160324" duration="5892000" />
+      <workItem from="1713896368619" duration="1874000" />
     </task>
     <task id="LOCAL-00001" summary=":sparkles: proyecto libre de problemas">
       <created>1601483136518</created>
@@ -263,6 +338,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -284,53 +362,10 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value=":sparkles: proyecto libre de problemas" />
     <option name="LAST_COMMIT_MESSAGE" value=":sparkles: proyecto libre de problemas" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="439" y="184" key="#Notifications" timestamp="1601702251596">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="439" y="184" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1601702251595" />
-    <state x="275" y="5" key="#Plugins" timestamp="1601424294161">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="5" key="#Plugins/0.0.1366.728@0.0.1366.728" timestamp="1601424294161" />
-    <state x="425" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601486145878">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="425" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1601486145878" />
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1601838378610">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1601838378610" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1601941377960">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1601941377960" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1601432158409">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1601432158409" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1601832846887">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601832846887" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601430000157">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1601430000157" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1601526376988">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601526376988" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601845843061">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601845843061" />
   </component>
 </project>
